@@ -45,8 +45,6 @@ Issues = "https://github.com/twardoch/twat/issues"
 Source = "https://github.com/twardoch/twat"
 
 
-[tool.hatch.build.hooks.vcs]
-version-file = "_version.py"
 
 
 
@@ -55,6 +53,9 @@ source = "vcs"
 
 [tool.hatch.version.raw-options]
 version_scheme = "post-release"
+
+[tool.hatch.build.hooks.vcs]
+version-file = "_version.py"
 
 
 
