@@ -1,8 +1,15 @@
 # twat Package
 
-twat metapackage: host for plugins
+Plugin for twat
 
-Not used directly, but used to host plugins for other packages.
+## Features
+
+- Plugin system for Python packages
+- Dynamic plugin loading and discovery
+- Modern Python packaging with PEP 621 compliance
+- Type hints and runtime type checking
+- Comprehensive test suite and documentation
+- CI/CD ready configuration
 
 ## Installation
 
