@@ -55,8 +55,10 @@ source = "vcs"
 version_scheme = "post-release"
 
 [tool.hatch.build.hooks.vcs]
-version-file = "_version.py"
+version-file = "src/twat/__version__.py"
 
+[tool.hatch.build.targets.wheel]
+packages = ["src/twat_hatch"]
 
 
 [tool.hatch.envs.default]
@@ -82,7 +84,6 @@ python = ["3.10", "3.11", "3.12"]
 [tool.hatch.envs.lint]
 detached = true
 dependencies = [
-    "black>=23.1.0",
     "mypy>=1.0.0",
     "ruff>=0.1.0",
 ]
