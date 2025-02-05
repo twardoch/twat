@@ -1,4 +1,4 @@
-"""Plugin for twat"""
+""""""
 
 import sys
 from importlib import metadata
