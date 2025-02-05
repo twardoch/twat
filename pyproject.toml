@@ -28,12 +28,8 @@ dependencies = [
     "importlib-metadata>=6.0.0",
     "importlib-resources>=5.0.0",
     "typing-extensions>=4.0.0; python_version < '3.10'",
-    "fire>=0.5.0",
-    "rich>=13.7.0",
+    "twat",
     "pydantic>=2.0.0",
-    "tomli>=2.0.0; python_version < '3.11'",
-    "typing-extensions>=4.0.0; python_version < '3.10'",
-    "jinja2>=3.1.0",
 ]
 
 
@@ -67,6 +63,10 @@ dependencies = [
     "pytest-cov",
     "mypy>=1.0.0",
     "ruff>=0.1.0",
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0.0",
 ]
 
 
@@ -170,4 +170,52 @@ exclude_lines = [
     "no cov",
     "if __name__ == .__main__.:",
     "if TYPE_CHECKING:",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "pytest-xdist>=3.5.0",  # For parallel test execution
+    "pytest-benchmark[histogram]>=4.0.0",  # For performance testing
+]
+
+dev = [
+    "pre-commit>=3.6.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0.0",
+]
+
+[tool.hatch.envs.test]
+dependencies = [".[test]"]
+
+[tool.hatch.envs.test.scripts]
+test = "python -m pytest -n auto {args:tests}"
+test-cov = "python -m pytest -n auto --cov-report=term-missing --cov-config=pyproject.toml --cov=src/twat --cov=tests {args:tests}"
+bench = "python -m pytest -v -p no:briefcase tests/test_benchmark.py --benchmark-only"
+bench-save = "python -m pytest -v -p no:briefcase tests/test_benchmark.py --benchmark-only --benchmark-json=benchmark/results.json"
+
+[tool.pytest.ini_options]
+markers = ["benchmark: marks tests as benchmarks (select with '-m benchmark')"]
+addopts = "-v -p no:briefcase"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+filterwarnings = ["ignore::DeprecationWarning", "ignore::UserWarning"]
+asyncio_mode = "auto"
+
+[tool.pytest-benchmark]
+min_rounds = 100
+min_time = 0.1
+histogram = true
+storage = "file"
+save-data = true
+compare = [
+    "min",    # Minimum time
+    "max",    # Maximum time
+    "mean",   # Mean time
+    "stddev", # Standard deviation
+    "median", # Median time
+    "iqr",    # Inter-quartile range
+    "ops",    # Operations per second
+    "rounds", # Number of rounds
 ] 
