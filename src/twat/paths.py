@@ -10,7 +10,7 @@ It handles path resolution, validation, and creation of directories as needed.
 
 import os
 from pathlib import Path
-from typing import Any, Dict, Optional, Self, Union
+from typing import Self
 
 import platformdirs
 import tomli
@@ -25,12 +25,12 @@ class PathConfig(BaseModel):
     """Base configuration for path settings."""
 
     base_dir: Path
-    package_dir: Optional[Path] = None
+    package_dir: Path | None = None
     create_if_missing: bool = True
 
     @field_validator("base_dir", "package_dir")
     @classmethod
-    def expand_path(cls, v: Optional[Union[str, Path]]) -> Optional[Path]:
+    def expand_path(cls, v: str | Path | None) -> Path | None:
         """Expand user and environment variables in paths."""
         if v is None:
             return None
@@ -119,8 +119,8 @@ class PathManager:
 
     def __init__(
         self,
-        package_name: Optional[str] = None,
-        config_file: Optional[Union[str, Path]] = None,
+        package_name: str | None = None,
+        config_file: str | Path | None = None,
         create_dirs: bool = True,
     ) -> None:
         """Initialize path manager.
@@ -137,7 +137,8 @@ class PathManager:
         if config_file:
             config_path = Path(config_file)
             if not config_path.exists():
-                raise FileNotFoundError(f"Config file not found: {config_file}")
+                msg = f"Config file not found: {config_file}"
+                raise FileNotFoundError(msg)
             self.config = tomli.loads(config_path.read_text())
         else:
             self.config = DEFAULT_PATHS
@@ -149,7 +150,7 @@ class PathManager:
         """Initialize all path configurations."""
 
         # Helper to format package-specific paths
-        def format_path(path_str: str) -> Optional[Path]:
+        def format_path(path_str: str) -> Path | None:
             if not self.package_name:
                 return None
             expanded = os.path.expandvars(os.path.expanduser(path_str))
@@ -212,7 +213,7 @@ class PathManager:
 
     @classmethod
     def for_package(
-        cls, package_name: str, config_file: Optional[Union[str, Path]] = None
+        cls, package_name: str, config_file: str | Path | None = None
     ) -> "PathManager":
         """Create a PathManager instance for a specific package.
 
