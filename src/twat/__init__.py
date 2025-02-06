@@ -4,6 +4,8 @@ import sys
 from importlib import metadata
 from typing import Any
 
+from . import paths
+
 __version__ = metadata.version(__name__)
 
 # Enable package-style imports for plugins
