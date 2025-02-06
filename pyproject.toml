@@ -30,7 +30,6 @@ dependencies = [
     "importlib-metadata>=6.0.0",
     "importlib-resources>=5.0.0",
     "typing-extensions>=4.0.0; python_version < '3.10'",
-    "twat",
     "pydantic>=2.0.0",
 ]
 
@@ -189,7 +188,22 @@ dev = [
     "mypy>=1.0.0",
 ]
 
+cache = ["twat-cache>=1.0.0"]
+genai = ["twat-genai>=1.0.0"]
+hatch = ["twat-hatch>=1.0.0"]
+image = ["twat-image>=1.0.0"]
+labs = ["twat-labs>=1.0.0"]
+mp = ["twat-mp>=1.0.0"]
+task = ["twat-task>=1.0.0"]
+
 all = [
+    "twat-cache>=1.0.0",
+    "twat-genai>=1.0.0",
+    "twat-hatch>=1.0.0",
+    "twat-image>=1.0.0",
+    "twat-labs>=1.0.0",
+    "twat-mp>=1.0.0",
+    "twat-task>=1.0.0",
     "pre-commit>=3.6.0",
     "ruff>=0.1.0",
     "mypy>=1.0.0",
