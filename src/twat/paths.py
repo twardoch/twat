@@ -7,6 +7,7 @@
 This module provides a centralized way to manage paths for various twat packages.
 It handles path resolution, validation, and creation of directories as needed.
 """
+from __future__ import annotations
 
 import os
 from pathlib import Path
@@ -214,7 +215,7 @@ class PathManager:
     @classmethod
     def for_package(
         cls, package_name: str, config_file: str | Path | None = None
-    ) -> "PathManager":
+    ) -> PathManager:
         """Create a PathManager instance for a specific package.
 
         Args:
