@@ -194,20 +194,20 @@ dev = [
     "mypy>=1.0.0",
 ]
 
-ez = ["twat-ez>=1.0.0"]
-fs = ["twat-fs>=1.0.0"]
-genai = ["twat-genai>=1.0.0"]
-image = ["twat-image>=1.0.0"]
-mp = ["twat-mp>=1.0.0"]
-task = ["twat-task>=1.0.0"]
+ez = ["twat-ez>=1.7.5"]
+fs = ["twat-fs>=1.7.5"]
+genai = ["twat-genai>=1.7.5"]
+image = ["twat-image>=1.7.5"]
+mp = ["twat-mp>=1.7.5"]
+task = ["twat-task>=1.7.5"]
 
 all = [
-    "twat-ez>=1.0.0",
-    "twat-fs>=1.0.0",
-    "twat-genai>=1.0.0",
-    "twat-image>=1.0.0",
-    "twat-mp>=1.0.0",
-    "twat-task>=1.0.0",
+    "twat-ez>=1.7.5",
+    "twat-fs>=1.7.5",
+    "twat-genai>=1.7.5",
+    "twat-image>=1.7.5",
+    "twat-mp>=1.7.5",
+    "twat-task>=1.7.5",
     "pre-commit>=3.6.0",
     "ruff>=0.1.0",
     "mypy>=1.0.0",
