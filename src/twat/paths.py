@@ -7,6 +7,7 @@
 This module provides a centralized way to manage paths for various twat packages.
 It handles path resolution, validation, and creation of directories as needed.
 """
+
 from __future__ import annotations
 
 import os
