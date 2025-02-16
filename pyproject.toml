@@ -25,15 +25,15 @@ classifiers = [
 ]
 
 dependencies = [
-    "importlib-metadata>=6.0.0",
-    "importlib-resources>=5.0.0",
+    "importlib-metadata>=8.6.1",
+    "importlib-resources>=6.5.2",
     "typing-extensions>=4.0.0; python_version < '3.10'",
-    "pydantic>=2.0.0",
-    "tomli>=2.0.0",
-    "loguru>=0.7.0",
-    "fire>=0.5.0",
-    "python-dotenv>=1.0.0",
-    "rich>=13.7.0",
+    "pydantic>=2.10.6",
+    "tomli>=2.2.1",
+    "loguru>=0.7.3",
+    "fire>=0.7.0",
+    "python-dotenv>=1.0.1",
+    "rich>=13.9.4",
 
 ]
 
@@ -65,12 +65,12 @@ version-file = "src/twat/__version__.py"
 dependencies = [
     "pytest",
     "pytest-cov",
-    "mypy>=1.0.0",
-    "ruff>=0.1.0",
-    "pytest>=7.0.0",
-    "pytest-cov>=4.0.0",
-    "ruff>=0.1.0",
-    "mypy>=1.0.0",
+    "mypy>=1.15.0",
+    "ruff>=0.9.6",
+    "pytest>=8.3.4",
+    "pytest-cov>=6.0.0",
+    "ruff>=0.9.6",
+    "mypy>=1.15.0",
 ]
 
 
@@ -170,10 +170,10 @@ exclude_lines = ["no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:"]
 
 [project.optional-dependencies]
 test = [
-    "pytest>=8.0.0",
+    "pytest>=8.3.4",
     "pytest-cov>=6.0.0",
-    "pytest-xdist>=3.5.0",                # For parallel test execution
-    "pytest-benchmark[histogram]>=5.0.0", # For performance testing
+    "pytest-xdist>=3.6.1",                # For parallel test execution
+    "pytest-benchmark[histogram]>=5.1.0", # For performance testing
 ]
 
 dev = ["pre-commit>=4.0.0", "ruff>=0.1.0", "mypy>=1.0.0"]
@@ -195,30 +195,30 @@ text = ["twat-text[all]>=0.0.1"]
 video = ["twat-video[all]>=0.0.1"]
 
 all = [
-    "twat-audio[all]>=0.0.1",
-    "twat-cache[all]>=1.7.5",
-    "twat-ez[all]>=1.7.5",
-    "twat-fs[all]>=1.7.5",
-    "twat-genai[all]>=1.7.5",
-    "twat-hatch[all]>=1.7.5",
-    "twat-image[all]>=1.7.5",
-    "twat-labs[all]>=1.7.5",
-    "twat-llm[all]>=0.0.1",
-    "twat-mp[all]>=1.7.5",
-    "twat-search[all]>=0.0.1",
-    "twat-speech[all]>=0.0.1",
-    "twat-task[all]>=1.7.5",
-    "twat-text[all]>=0.0.1",
-    "twat-video[all]>=0.0.1",
-    "importlib-metadata>=6.0.0",
-    "importlib-resources>=5.0.0",
+    "twat-audio[all]>=1.8.1",
+    "twat-cache[all]>=1.8.1",
+    "twat-ez[all]>=1.8.1",
+    "twat-fs[all]>=1.8.1",
+    "twat-genai[all]>=1.8.1",
+    "twat-hatch[all]>=1.8.1",
+    "twat-image[all]>=1.8.1",
+    "twat-labs[all]>=1.8.1",
+    "twat-llm[all]>=1.8.1",
+    "twat-mp[all]>=1.8.1",
+    "twat-search[all]>=1.8.1",
+    "twat-speech[all]>=1.8.1",
+    "twat-task[all]>=1.8.1",
+    "twat-text[all]>=1.8.1",
+    "twat-video[all]>=1.8.1",
+    "importlib-metadata>=8.6.1",
+    "importlib-resources>=6.5.2",
     "typing-extensions>=4.0.0; python_version < '3.10'",
-    "pydantic>=2.0.0",
-    "tomli>=2.0.0",
-    "loguru>=0.7.0",
-    "fire>=0.5.0",
-    "python-dotenv>=1.0.0",
-    "rich>=13.7.0",
+    "pydantic>=2.10.6",
+    "tomli>=2.2.1",
+    "loguru>=0.7.3",
+    "fire>=0.7.0",
+    "python-dotenv>=1.0.1",
+    "rich>=13.9.4",
 
 ]
 
