@@ -2,7 +2,7 @@
 description: File tree of the project
 globs: 
 ---
-[ 832]  .
+[ 864]  .
 ├── [  64]  .benchmarks
 ├── [  96]  .cursor
 │   └── [ 224]  rules
@@ -15,16 +15,23 @@ globs:
 │       ├── [2.7K]  push.yml
 │       └── [1.4K]  release.yml
 ├── [3.6K]  .gitignore
-├── [ 532]  .pre-commit-config.yaml
+├── [ 470]  .pre-commit-config.yaml
+├── [ 987]  CLEANUP.txt
 ├── [1.0K]  LICENSE
 ├── [2.7K]  LOG.md
 ├── [4.2K]  README.md
 ├── [3.9K]  TODO-ALL.md
 ├── [   7]  VERSION.txt
-├── [ 11K]  cleanup.py
+├── [ 13K]  cleanup.py
 ├── [ 160]  dist
-├── [ 128]  plugins
-├── [5.9K]  pyproject.toml
+├── [ 192]  plugins
+│   ├── [  64]  .benchmarks
+│   └── [ 128]  repos_dev
+│       └── [  96]  .specstory
+│           └── [ 128]  history
+│               ├── [2.0K]  .what-is-this.md
+│               └── [ 17K]  porting-configuration-files-from-@twat-fs-to-@twat-coding.md
+├── [6.3K]  pyproject.toml
 ├── [ 128]  src
 │   └── [ 192]  twat
 │       └── [2.1K]  __init__.py
@@ -32,4 +39,4 @@ globs:
     ├── [   8]  VERSION.txt
     └── [ 136]  test_twat.py
 
-11 directories, 18 files
+15 directories, 21 files

@@ -1,0 +1,190 @@
+2025-03-04 07:18:13 - 
+=== PROJECT STATEMENT ===
+2025-03-04 07:18:13 - ---
+description: About this project
+globs:
+---
+# About this project
+
+`twat-fs` is a file system utility library focused on robust and extensible file upload capabilities with multiple provider support. It provides:
+
+- Multi-provider upload system with smart fallback (catbox.moe default, plus Dropbox, S3, etc.)
+- Automatic retry for temporary failures, fallback for permanent ones
+- URL validation and clean developer experience with type hints
+- Simple CLI: `python -m twat_fs upload_file path/to/file.txt`
+- Easy installation: `uv pip install twat-fs` (basic) or `uv pip install 'twat-fs[all,dev]'` (all features)
+
+## Development Notes
+- Uses `uv` for Python package management
+- Quality tools: ruff, mypy, pytest
+- Clear provider protocol for adding new storage backends
+- Strong typing and runtime checks throughout
+
+2025-03-04 07:18:13 - 
+=== Current Status ===
+2025-03-04 07:18:13 - Error: TODO.md is missing
+2025-03-04 07:18:13 - [ 864]  .
+├── [  64]  .benchmarks
+├── [  96]  .cursor
+│   └── [ 224]  rules
+│       ├── [ 821]  0project.mdc
+│       ├── [ 516]  cleanup.mdc
+│       ├── [1000]  filetree.mdc
+│       └── [2.0K]  quality.mdc
+├── [  96]  .github
+│   └── [ 128]  workflows
+│       ├── [2.7K]  push.yml
+│       └── [1.4K]  release.yml
+├── [3.6K]  .gitignore
+├── [ 470]  .pre-commit-config.yaml
+├── [ 987]  CLEANUP.txt
+├── [1.0K]  LICENSE
+├── [2.7K]  LOG.md
+├── [4.2K]  README.md
+├── [3.9K]  TODO-ALL.md
+├── [   7]  VERSION.txt
+├── [ 13K]  cleanup.py
+├── [ 160]  dist
+├── [ 192]  plugins
+│   ├── [  64]  .benchmarks
+│   └── [ 128]  repos_dev
+│       └── [  96]  .specstory
+│           └── [ 128]  history
+│               ├── [2.0K]  .what-is-this.md
+│               └── [ 17K]  porting-configuration-files-from-@twat-fs-to-@twat-coding.md
+├── [6.3K]  pyproject.toml
+├── [ 128]  src
+│   └── [ 192]  twat
+│       └── [2.1K]  __init__.py
+└── [ 192]  tests
+    ├── [   8]  VERSION.txt
+    └── [ 136]  test_twat.py
+
+15 directories, 21 files
+
+2025-03-04 07:18:13 - 
+Project structure:
+2025-03-04 07:18:13 - [ 864]  .
+├── [  64]  .benchmarks
+├── [  96]  .cursor
+│   └── [ 224]  rules
+│       ├── [ 821]  0project.mdc
+│       ├── [ 516]  cleanup.mdc
+│       ├── [1000]  filetree.mdc
+│       └── [2.0K]  quality.mdc
+├── [  96]  .github
+│   └── [ 128]  workflows
+│       ├── [2.7K]  push.yml
+│       └── [1.4K]  release.yml
+├── [3.6K]  .gitignore
+├── [ 470]  .pre-commit-config.yaml
+├── [ 987]  CLEANUP.txt
+├── [1.0K]  LICENSE
+├── [2.7K]  LOG.md
+├── [4.2K]  README.md
+├── [3.9K]  TODO-ALL.md
+├── [   7]  VERSION.txt
+├── [ 13K]  cleanup.py
+├── [ 160]  dist
+├── [ 192]  plugins
+│   ├── [  64]  .benchmarks
+│   └── [ 128]  repos_dev
+│       └── [  96]  .specstory
+│           └── [ 128]  history
+│               ├── [2.0K]  .what-is-this.md
+│               └── [ 17K]  porting-configuration-files-from-@twat-fs-to-@twat-coding.md
+├── [6.3K]  pyproject.toml
+├── [ 128]  src
+│   └── [ 192]  twat
+│       └── [2.1K]  __init__.py
+└── [ 192]  tests
+    ├── [   8]  VERSION.txt
+    └── [ 136]  test_twat.py
+
+15 directories, 21 files
+
+2025-03-04 07:18:13 - On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   .pre-commit-config.yaml
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   .cursor/rules/filetree.mdc
+	modified:   cleanup.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	CLEANUP.txt
+
+
+2025-03-04 07:18:13 - On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   .pre-commit-config.yaml
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   .cursor/rules/filetree.mdc
+	modified:   cleanup.py
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	CLEANUP.txt
+
+
+2025-03-04 07:18:13 - 
+=== Environment Status ===
+2025-03-04 07:18:13 - Setting up virtual environment
+2025-03-04 07:18:18 - Virtual environment created and activated
+2025-03-04 07:18:18 - Installing package with all extras
+2025-03-04 07:18:18 - Setting up virtual environment
+2025-03-04 07:18:18 - Virtual environment created and activated
+2025-03-04 07:18:33 - Package installed successfully
+2025-03-04 07:18:33 - Running code quality checks
+2025-03-04 07:18:33 - >>> Running code fixes...
+2025-03-04 07:18:34 - src/twat/__init__.py:16:1: A001 Variable `__package__` is shadowing a Python builtin
+   |
+14 | # Enable package-style imports for plugins
+15 | __path__ = []
+16 | __package__ = "twat"
+   | ^^^^^^^^^^^ A001
+   |
+
+Found 1 error.
+
+2025-03-04 07:18:34 - 2 files left unchanged
+
+2025-03-04 07:18:34 - >>>Running type checks...
+2025-03-04 07:18:48 - src/twat/__init__.py:29: error: Returning Any from function declared to return Module | None  [no-any-return]
+tests/test_twat.py:4: error: Function is missing a return type annotation  [no-untyped-def]
+tests/test_twat.py:4: note: Use "-> None" if function does not return a value
+Found 2 errors in 2 files (checked 3 source files)
+
+2025-03-04 07:18:48 - >>> Running tests...
+2025-03-04 07:18:54 - ============================= test session starts ==============================
+platform darwin -- Python 3.12.8, pytest-8.3.5, pluggy-1.5.0 -- /Users/adam/Developer/vcs/github.twardoch/pub/twat-packages/_good/twat/.venv/bin/python
+cachedir: .pytest_cache
+benchmark: 5.1.0 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: /Users/adam/Developer/vcs/github.twardoch/pub/twat-packages/_good/twat
+configfile: pyproject.toml
+plugins: cov-6.0.0, benchmark-5.1.0, xdist-3.6.1
+collecting ... collected 1 item
+
+tests/test_twat.py::test_version PASSED                                  [100%]
+
+============================== 1 passed in 0.11s ===============================
+
+2025-03-04 07:18:54 - All checks completed
+2025-03-04 07:18:54 -  M .cursor/rules/filetree.mdc
+M  .pre-commit-config.yaml
+ M cleanup.py
+?? CLEANUP.txt
+
+2025-03-04 07:18:54 - Changes detected in repository
