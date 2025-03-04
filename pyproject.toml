@@ -69,8 +69,6 @@ dependencies = [
     "ruff>=0.9.7",
     "pytest>=8.3.4",
     "pytest-cov>=6.0.0",
-    "ruff>=0.9.7",
-    "mypy>=1.15.0",
 ]
 
 
@@ -202,39 +200,40 @@ test = [
 dev = ["pre-commit>=4.0.0", "ruff>=0.1.0", "mypy>=1.0.0"]
 
 audio = ["twat-audio[all]>=0.0.1"]
-cache = ["twat-cache[all]>=1.7.5"]
+cache = ["twat-cache[all]>=2.6.7"]
 coding = ["twat-coding[all]>=0.0.1"]
-ez = ["twat-ez[all]>=1.7.5"]
-fs = ["twat-fs[all]>=1.7.5"]
-genai = ["twat-genai[all]>=1.7.5"]
-hatch = ["twat-hatch[all]>=1.7.5"]
-image = ["twat-image[all]>=1.7.5"]
+ez = ["twat-ez[all]>=2.6.2"]
+fs = ["twat-fs[all]>=2.6.2"]
+genai = ["twat-genai[all]>=2.6.2"]
+hatch = ["twat-hatch[all]>=2.6.2"]
+image = ["twat-image[all]>=2.6.2"]
 labs = ["twat-labs[all]>=1.7.5"]
-llm = ["twat-llm[all]>=0.0.1"]
-mp = ["twat-mp[all]>=1.7.5"]
-search = ["twat-search[all]>=0.0.1"]
-speech = ["twat-speech[all]>=0.0.1"]
-task = ["twat-task[all]>=1.7.5"]
-text = ["twat-text[all]>=0.0.1"]
-video = ["twat-video[all]>=0.0.1"]
+llm = ["twat-llm[all]>=2.6.2"]
+mp = ["twat-mp[all]>=2.6.2"]
+os = ["twat-os[all]>=2.6.2"]
+search = ["twat-search[all]>=2.6.2"]
+speech = ["twat-speech[all]>=2.6.2"]
+task = ["twat-task[all]>=2.6.2"]
+text = ["twat-text[all]>=2.6.2"]
+video = ["twat-video[all]>=2.6.2"]
 
 all = [
     "twat-audio[all]>=2.1.3",
-    "twat-cache[all]>=1.8.1",
-    "twat-coding[all]>=0.0.1",
-    "twat-ez[all]>=2.1.3",
-    "twat-fs[all]>=1.8.1",
-    "twat-genai[all]>=2.1.3",
-    "twat-hatch[all]>=2.1.3",
-    "twat-image[all]>=2.1.3",
-    "twat-labs[all]>=2.1.3",
-    "twat-llm[all]>=2.1.3",
-    "twat-mp[all]>=2.1.3",
-    "twat-search[all]>=2.1.3",
-    "twat-speech[all]>=2.1.3",
-    "twat-task[all]>=2.1.3",
-    "twat-text[all]>=2.1.3",
-    "twat-video[all]>=2.1.3",
+    "twat-cache[all]>=2.6.7",
+    #"twat-coding[all]>=0.0.1",
+    "twat-ez[all]>=2.6.2",
+    "twat-fs[all]>=2.6.2",
+    "twat-genai[all]>=2.6.2",
+    "twat-hatch[all]>=2.6.2",
+    "twat-image[all]>=2.6.2",
+    "twat-labs[all]>=2.6.2",
+    "twat-llm[all]>=2.6.2",
+    "twat-mp[all]>=2.6.2",
+    "twat-search[all]>=2.6.2",
+    "twat-speech[all]>=2.6.2",
+    "twat-task[all]>=2.6.2",
+    "twat-text[all]>=2.6.2",
+    "twat-video[all]>=2.6.2",
     "importlib-metadata>=8.6.1",
     "importlib-resources>=6.5.2",
     "typing-extensions>=4.0.0; python_version < '3.10'",
