@@ -5,7 +5,8 @@ A plugin-based Python package system that provides a unified interface for vario
 ## Features
 
 - Plugin system for Python packages with standardized interfaces
-- Dynamic plugin loading and discovery
+- Dynamic plugin loading and discovery via `import twat.your_plugin_name`
+- Command-line dispatcher to run plugins (`twat your_plugin_name --args`)
 - Modern Python packaging with PEP 621 compliance
 - Type hints and runtime type checking
 - Comprehensive test suite and documentation
@@ -25,11 +26,11 @@ pip install twat
 import twat
 
 # Load a plugin
-fs = twat.fs  # Loads the twat-fs plugin
+fs = twat.fs  # Loads the twat-fs plugin (raises AttributeError if not found)
 
 # List available plugins
 from importlib.metadata import entry_points
-plugins = entry_points(group="twat.plugins")
+plugins = entry_points(group="twat.plugins") # Gets a list of EntryPoint objects
 ```
 
 ### Command Line
