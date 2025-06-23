@@ -145,7 +145,13 @@ def main() -> NoReturn:
     `sys.argv[0]` to `twat.plugin_name`.
     """
     if len(sys.argv) < 2:
-        print("Usage: twat <plugin_name> [args...]", file=sys.stderr)
+        print(
+            "Usage: twat <plugin_name> [args...]\n"
+            "Error: No plugin name provided.\n"
+            "To list available plugins, run: twat --list\n"
+            "For help, run: twat --help",
+            file=sys.stderr
+        )
         sys.exit(1)
 
     plugin_name = sys.argv[1]
