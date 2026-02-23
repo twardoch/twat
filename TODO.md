@@ -191,15 +191,15 @@ Actionable task list derived from the [modernization specs](issues/). Each task 
 
 ### 3.1 twat_cache: Engine Interface Refactoring (spec 21)
 
-- [ ] Slim `BaseCacheEngine` to 3 abstract methods: `is_available()`, `cache()`, `clear()` (ref: [21](issues/21.md))
-- [ ] Remove path management code from `BaseCacheEngine.__init__` (ref: [21](issues/21.md))
-- [ ] Delete duplicate `CacheEngine` ABC from `type_defs.py` (lines 139-190) (ref: [21](issues/21.md))
-- [ ] Move path setup into `DiskCacheEngine.__init__` (ref: [21](issues/21.md))
-- [ ] Move path setup into `JoblibEngine.__init__` (ref: [21](issues/21.md))
-- [ ] Move path setup into `KleptoEngine.__init__` (ref: [21](issues/21.md))
-- [ ] Remove unused abstract method stubs from `cachebox.py`, `cachetools.py`, `functools_engine.py` (ref: [21](issues/21.md))
-- [ ] Extract stats tracking into a `StatsTracker` mixin (ref: [21](issues/21.md))
-- [ ] Remove `validate_config()` from base class (Pydantic handles it) (ref: [21](issues/21.md))
+- [x] Slim `BaseCacheEngine` to 3 abstract methods: `is_available()`, `cache()`, `clear()` (ref: [21](issues/21.md))
+- [x] Remove path management code from `BaseCacheEngine.__init__` (ref: [21](issues/21.md))
+- [x] Delete duplicate `CacheEngine` ABC from `type_defs.py` (lines 139-190) (ref: [21](issues/21.md))
+- [x] Move path setup into `DiskCacheEngine.__init__` (ref: [21](issues/21.md))
+- [x] Move path setup into `JoblibEngine.__init__` (ref: [21](issues/21.md))
+- [x] Move path setup into `KleptoEngine.__init__` (ref: [21](issues/21.md))
+- [x] Remove unused abstract method stubs from `cachebox.py`, `cachetools.py`, `functools_engine.py` (ref: [21](issues/21.md))
+- [x] Extract stats tracking into a `StatsTracker` mixin (ref: [21](issues/21.md))
+- [x] Remove `validate_config()` from base class (Pydantic handles it) (ref: [21](issues/21.md))
 
 ### 3.2 twat_cache: Decorator API Simplification (spec 22)
 
