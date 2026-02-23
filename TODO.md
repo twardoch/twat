@@ -201,12 +201,12 @@ Actionable task list derived from the [modernization specs](issues/). Each task 
 - [x] Extract stats tracking into a `StatsTracker` mixin (ref: [21](issues/21.md))
 - [x] Remove `validate_config()` from base class (Pydantic handles it) (ref: [21](issues/21.md))
 
-### 3.2 twat_cache: Decorator API Simplification (spec 22)
+### 3.2 twat_cache: Decorator API Simplification (spec 22) ✅
 
-- [ ] Remove `mcache`, `bcache`, `fcache` from `decorators.py`, add deprecation shims (ref: [22](issues/22.md))
- [x] Remove `use_sql` parameter from all public APIs (ref: [22](issues/22.md))
-- [ ] Consolidate `_select_best_backend` and `_create_engine` into `_resolve_engine()` (ref: [22](issues/22.md))
-- [ ] Update README to show only `ucache` and `acache` examples (ref: [22](issues/22.md))
+- [x] Remove `mcache`, `bcache`, `fcache` from `decorators.py`, add deprecation shims (ref: [22](issues/22.md))
+- [x] Remove `use_sql` parameter from all public APIs (ref: [22](issues/22.md))
+- [x] Consolidate `_select_best_backend` and `_create_engine` into `_resolve_engine()` (ref: [22](issues/22.md))
+- [x] Update README to show only `ucache` and `acache` examples (ref: [22](issues/22.md))
 
 ### 3.3 twat_cache: Remove AioCache and Redis (spec 23)
 
