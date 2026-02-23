@@ -210,13 +210,13 @@ Actionable task list derived from the [modernization specs](issues/). Each task 
 
 ### 3.3 twat_cache: Remove AioCache and Redis (spec 23)
 
-- [ ] Delete `plugins/repos/twat_cache/src/twat_cache/engines/aiocache.py` (ref: [23](issues/23.md))
-- [ ] Remove Redis engine import from `manager.py` (lines 70-76) (ref: [23](issues/23.md))
-- [ ] Remove `aiocache` registration from `manager.py` (ref: [23](issues/23.md))
-- [ ] Rewrite `acache` decorator to wrap sync engines with async (ref: [23](issues/23.md))
-- [ ] Remove `aiocache` and `redis` from `pyproject.toml` optional deps (ref: [23](issues/23.md))
-- [ ] Remove `HAS_AIOCACHE` checks from `decorators.py` (ref: [23](issues/23.md))
-- [ ] Remove `"aiocache"` from `BackendType` literal in `type_defs.py` (ref: [23](issues/23.md))
+- [x] Delete `plugins/repos/twat_cache/src/twat_cache/engines/aiocache.py` (ref: [23](issues/23.md))
+- [x] Remove Redis engine import from `manager.py` (lines 70-76) (ref: [23](issues/23.md))
+- [x] Remove `aiocache` registration from `manager.py` (ref: [23](issues/23.md))
+- [x] Rewrite `acache` decorator to wrap sync engines with async (ref: [23](issues/23.md))
+- [x] Remove `aiocache` and `redis` from `pyproject.toml` optional deps (ref: [23](issues/23.md))
+- [x] Remove `HAS_AIOCACHE` checks from `decorators.py` (ref: [23](issues/23.md))
+- [x] Remove `"aiocache"` from `BackendType` literal in `type_defs.py` (ref: [23](issues/23.md))
 
 ### 3.4 twat_cache: CacheConfig Consolidation (spec 24)
 
