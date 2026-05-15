@@ -210,47 +210,49 @@ exclude_lines = ["no cov", "if __name__ == .__main__.:", "if TYPE_CHECKING:"]
 test = [
     "pytest>=8.3.4",
     "pytest-cov>=6.0.0",
-    "pytest-xdist>=3.6.1",                # For parallel test execution
-    "pytest-benchmark[histogram]>=5.1.0", # For performance testing
+    "pytest-xdist>=3.6.1",
+    "pytest-benchmark[histogram]>=5.1.0",
 ]
-
 dev = ["pre-commit>=4.0.0", "ruff>=0.1.0", "mypy>=1.0.0"]
 
-audio = ["twat-audio[all]>=0.0.1"]
+audio = ["twat-audio[all]>=2.7.7"]
 cache = ["twat-cache[all]>=2.6.7"]
-coding = ["twat-coding[all]>=0.0.1"]
-ez = ["twat-ez[all]>=2.6.2"]
-fs = ["twat-fs[all]>=2.6.2"]
-genai = ["twat-genai[all]>=2.6.2"]
-hatch = ["twat-hatch[all]>=2.6.2"]
-image = ["twat-image[all]>=2.6.2"]
-labs = ["twat-labs[all]>=1.7.5"]
-llm = ["twat-llm[all]>=2.6.2"]
-mp = ["twat-mp[all]>=2.6.2"]
-os = ["twat-os[all]>=2.6.2"]
-search = ["twat-search[all]>=2.6.2"]
-speech = ["twat-speech[all]>=2.6.2"]
-task = ["twat-task[all]>=2.6.2"]
-text = ["twat-text[all]>=2.6.2"]
-video = ["twat-video[all]>=2.6.2"]
+coding = ["twat-coding[all]>=2.7.7"]
+ez = ["twat-ez[all]>=2.7.7"]
+font = ["twat-font[all]>=2.7.7"]
+fs = ["twat-fs[all]>=2.7.7"]
+genai = ["twat-genai[all]>=2.7.7"]
+hatch = ["twat-hatch[all]>=2.7.7"]
+image = ["twat-image[all]>=2.7.7"]
+labs = ["twat-labs[all]>=2.7.7"]
+llm = ["twat-llm[all]>=2.7.7"]
+mp = ["twat-mp[all]>=2.6.4"]
+os = ["twat-os[all]>=2.7.7"]
+search = ["twat-search[all]>=2.7.7"]
+speech = ["twat-speech[all]>=2.7.7"]
+task = ["twat-task[all]>=2.7.7"]
+text = ["twat-text[all]>=2.7.7"]
+video = ["twat-video[all]>=2.1.7"]
 
 all = [
-    "twat-audio[all]>=2.1.3",
+    "twat-audio[all]>=2.7.7",
     "twat-cache[all]>=2.6.7",
-    #"twat-coding[all]>=0.0.1",
-    "twat-ez[all]>=2.6.2",
-    "twat-fs[all]>=2.6.2",
-    "twat-genai[all]>=2.6.2",
-    "twat-hatch[all]>=2.6.2",
-    "twat-image[all]>=2.6.2",
-    "twat-labs[all]>=2.6.2",
-    "twat-llm[all]>=2.6.2",
-    "twat-mp[all]>=2.6.2",
-    "twat-search[all]>=2.6.2",
-    "twat-speech[all]>=2.6.2",
-    "twat-task[all]>=2.6.2",
-    "twat-text[all]>=2.6.2",
-    "twat-video[all]>=2.6.2",
+    "twat-coding[all]>=2.7.7",
+    "twat-ez[all]>=2.7.7",
+    "twat-font[all]>=2.7.7",
+    "twat-fs[all]>=2.7.7",
+    "twat-genai[all]>=2.7.7",
+    "twat-hatch[all]>=2.7.7",
+    "twat-image[all]>=2.7.7",
+    "twat-labs[all]>=2.7.7",
+    "twat-llm[all]>=2.7.7",
+    "twat-mp[all]>=2.6.4",
+    "twat-os[all]>=2.7.7",
+    "twat-search[all]>=2.7.7",
+    "twat-speech[all]>=2.7.7",
+    "twat-task[all]>=2.7.7",
+    "twat-text[all]>=2.7.7",
+    "twat-video[all]>=2.1.7",
     "importlib-metadata>=8.6.1",
     "importlib-resources>=6.5.2",
     "typing-extensions>=4.0.0; python_version < '3.10'",
@@ -261,7 +263,6 @@ all = [
     "python-dotenv>=1.0.1",
     "rich>=13.9.4",
 ]
-
 [tool.hatch.envs.test]
 dependencies = [".[test]"]
 
