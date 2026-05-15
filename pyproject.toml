@@ -6,6 +6,22 @@ build-backend = "hatchling.build"
 packages = ["src/twat"]
 include = ["src/twat/**/*.py"]
 
+[tool.hatch.build.targets.sdist]
+include = [
+    "src/twat",
+    "pyproject.toml",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+]
+exclude = [
+    "reference",
+    "plugins",
+    "dist",
+    "build",
+    "*.egg-info",
+]
+
 [project]
 name = "twat"
 dynamic = ["version"]
