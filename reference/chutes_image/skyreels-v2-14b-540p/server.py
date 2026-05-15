@@ -24,8 +24,8 @@ if os.getenv("CHUTES_EXECUTION_CONTEXT") == "REMOTE":
     for _ in range(3):
         try:
             snapshot_download(
-               repo_id="Skywork/SkyReels-V2-DF-14B-540P",
-               local_dir=T2V_540_PATH,
+                repo_id="Skywork/SkyReels-V2-DF-14B-540P",
+                local_dir=T2V_540_PATH,
             )
             break
         except Exception as exc:
@@ -76,14 +76,14 @@ class Resolution(str, Enum):
 
 class ImageGenInput(BaseModel):
     prompt: str
-    negative_prompt: Optional[str] = (
+    negative_prompt: str | None = (
         "色调艳丽，过曝，静态，细节模糊不清，字幕，风格，作品，画作，画面，静止，整体发灰，最差质量，低质量，JPEG压缩残留，丑陋的，残缺的，多余的手指，画得不好的手部，画得不好的脸部，畸形的，毁容的，形态畸形的肢体，手指融合，静止不动的画面，杂乱的背景，三条腿，背景人很多，倒着走"
     )
-    resolution: Optional[Resolution] = Resolution.WIDESCREEN
-    guidance_scale: Optional[float] = Field(6.0, ge=1.0, le=7.5)
-    seed: Optional[int] = 42
-    img_b64_first: Optional[str] = None
-    img_b64_last: Optional[str] = None
+    resolution: Resolution | None = Resolution.WIDESCREEN
+    guidance_scale: float | None = Field(6.0, ge=1.0, le=7.5)
+    seed: int | None = 42
+    img_b64_first: str | None = None
+    img_b64_last: str | None = None
 
 
 class VideoGenInput(ImageGenInput):
@@ -91,10 +91,10 @@ class VideoGenInput(ImageGenInput):
     inference_steps: int = Field(30, ge=10, le=50)
     fps: int = Field(24, ge=16, le=60)
     shift: float = Field(8.0, ge=1.0, le=10.0)
-    num_frames: Optional[int] = Field(97, ge=97, le=10000)
+    num_frames: int | None = Field(97, ge=97, le=10000)
     overlap_history: int = Field(17, le=10000)
     addnoise_condition: int = Field(20, ge=0, le=50)
-    base_num_frames: Optional[int] = Field(97, ge=97, le=10000)
+    base_num_frames: int | None = Field(97, ge=97, le=10000)
     causal_block_size: int = Field(1, ge=0, le=50)
 
 
@@ -102,21 +102,23 @@ class VideoGenInput(ImageGenInput):
 async def initialize(self):
     from skyreels_v2_infer import DiffusionForcingPipeline
     import torch
+
     """
     Initialize distributed execution of the models.
     """
     self.pipe = DiffusionForcingPipeline(
-            T2V_540_PATH,
-            dit_path=T2V_540_PATH,
-            device=torch.device("cuda"),
-            weight_dtype=torch.bfloat16,
-            use_usp=False,
-            offload=True,
-        )
+        T2V_540_PATH,
+        dit_path=T2V_540_PATH,
+        device=torch.device("cuda"),
+        weight_dtype=torch.bfloat16,
+        use_usp=False,
+        offload=True,
+    )
 
 
-def _infer(self, image: None, end_image: None, prompt: str, 
-            negative_prompt: str, resolution: str = "540P", **prompt_args):
+def _infer(
+    self, image: None, end_image: None, prompt: str, negative_prompt: str, resolution: str = "540P", **prompt_args
+):
     """
     Inference helper for either model and any task type.
     """
@@ -124,7 +126,6 @@ def _infer(self, image: None, end_image: None, prompt: str,
     import imageio
     from diffusers.utils import load_image
     from skyreels_v2_infer.pipelines.image2video_pipeline import resizecrop
-
 
     height = 544
     width = 960
@@ -134,7 +135,6 @@ def _infer(self, image: None, end_image: None, prompt: str,
     elif resolution == "720P":
         height = 720
         width = 1280
-
 
     local_rank = 0
 
@@ -151,7 +151,7 @@ def _infer(self, image: None, end_image: None, prompt: str,
     image = image.convert("RGB") if image else None
     end_image = end_image.convert("RGB") if end_image else None
 
-    fps=prompt_args.get("fps", 24)
+    fps = prompt_args.get("fps", 24)
 
     with torch.cuda.amp.autocast(dtype=self.pipe.transformer.dtype), torch.no_grad():
         video_frames = self.pipe(
@@ -164,8 +164,8 @@ def _infer(self, image: None, end_image: None, prompt: str,
             **prompt_args,
         )[0]
     if local_rank == 0:
-        output_dir = f'/tmp'
-        file_name = f'{uuid.uuid4()}.mp4'
+        output_dir = "/tmp"
+        file_name = f"{uuid.uuid4()}.mp4"
         output_file = os.path.join(output_dir, file_name)
         imageio.mimwrite(output_file, video_frames, fps=float(fps), quality=8, output_params=["-loglevel", "error"])
 
@@ -176,9 +176,7 @@ def _infer(self, image: None, end_image: None, prompt: str,
         return Response(
             content=buffer.getvalue(),
             media_type="video/mp4",
-            headers={
-                "Content-Disposition": f'attachment; filename="{uuid.uuid4()}.mp4"'
-            },
+            headers={"Content-Disposition": f'attachment; filename="{uuid.uuid4()}.mp4"'},
         )
 
 
@@ -203,7 +201,6 @@ async def image_to_video(self, args: VideoGenInput):
         random.seed(time.time())
         seed = int(random.randrange(4294967294))
 
-
     img_b64_first = None
     if args.img_b64_first:
         img_b64_first = Image.open(BytesIO(base64.b64decode(args.img_b64_first)))
@@ -212,22 +209,30 @@ async def image_to_video(self, args: VideoGenInput):
     if args.img_b64_last:
         img_b64_last = Image.open(BytesIO(base64.b64decode(args.img_b64_last)))
 
-
     prompt_args = {
-            "num_frames": args.num_frames,
-            "num_inference_steps": args.inference_steps,
-            "shift": args.shift,
-            "guidance_scale": args.guidance_scale,
-            "generator": torch.Generator(device="cuda").manual_seed(seed),
-            "overlap_history": args.overlap_history,
-            "addnoise_condition": args.addnoise_condition,
-            "base_num_frames": args.base_num_frames,
-            "ar_step": args.ar_step,
-            "causal_block_size": args.causal_block_size,
-            "fps": args.fps
+        "num_frames": args.num_frames,
+        "num_inference_steps": args.inference_steps,
+        "shift": args.shift,
+        "guidance_scale": args.guidance_scale,
+        "generator": torch.Generator(device="cuda").manual_seed(seed),
+        "overlap_history": args.overlap_history,
+        "addnoise_condition": args.addnoise_condition,
+        "base_num_frames": args.base_num_frames,
+        "ar_step": args.ar_step,
+        "causal_block_size": args.causal_block_size,
+        "fps": args.fps,
     }
     logger.info("Waiting up text-to-video ...")
-    return _infer(self, image=img_b64_first, end_image=img_b64_last, prompt=args.prompt, negative_prompt=args.negative_prompt, resolution=args.resolution, **prompt_args)
+    return _infer(
+        self,
+        image=img_b64_first,
+        end_image=img_b64_last,
+        prompt=args.prompt,
+        negative_prompt=args.negative_prompt,
+        resolution=args.resolution,
+        **prompt_args,
+    )
+
 
 @chute.cord(
     public_api_path="/text2video",
@@ -247,19 +252,26 @@ async def text_to_video(self, args: VideoGenInput):
         random.seed(time.time())
         seed = int(random.randrange(4294967294))
 
-
     prompt_args = {
-            "num_frames": args.num_frames,
-            "num_inference_steps": args.inference_steps,
-            "shift": args.shift,
-            "guidance_scale": args.guidance_scale,
-            "generator": torch.Generator(device="cuda").manual_seed(seed),
-            "overlap_history": args.overlap_history,
-            "addnoise_condition": args.addnoise_condition,
-            "base_num_frames": args.base_num_frames,
-            "ar_step": args.ar_step,
-            "causal_block_size": args.causal_block_size,
-            "fps": args.fps
+        "num_frames": args.num_frames,
+        "num_inference_steps": args.inference_steps,
+        "shift": args.shift,
+        "guidance_scale": args.guidance_scale,
+        "generator": torch.Generator(device="cuda").manual_seed(seed),
+        "overlap_history": args.overlap_history,
+        "addnoise_condition": args.addnoise_condition,
+        "base_num_frames": args.base_num_frames,
+        "ar_step": args.ar_step,
+        "causal_block_size": args.causal_block_size,
+        "fps": args.fps,
     }
     logger.info("Waiting up text-to-video ...")
-    return _infer(self, image=None, end_image=None, prompt=args.prompt, negative_prompt=args.negative_prompt, resolution=args.resolution, **prompt_args)
+    return _infer(
+        self,
+        image=None,
+        end_image=None,
+        prompt=args.prompt,
+        negative_prompt=args.negative_prompt,
+        resolution=args.resolution,
+        **prompt_args,
+    )

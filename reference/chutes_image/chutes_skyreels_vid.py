@@ -65,36 +65,22 @@ class SkyreelsVideoRequest(BaseModel):
     model_config = {"populate_by_name": True, "use_enum_values": True}
 
     # Core parameters
-    prompt: str = Field(
-        ..., min_length=1, description="Text prompt for video generation"
-    )
+    prompt: str = Field(..., min_length=1, description="Text prompt for video generation")
     negative_prompt: str = Field(
         "色调艳丽，过曝，静态，细节模糊不清，字幕，风格，作品，画作，画面，静止，整体发灰，最差质量，低质量，JPEG压缩残留，丑陋的，残缺的，多余的手指，画得不好的手部，画得不好的脸部，畸形的，毁容的，形态畸形的肢体，手指融合，静止不动的画面，杂乱的背景，三条腿，背景人很多，倒着走",
         description="Negative prompt (what to avoid)",
     )
 
     # Video parameters
-    resolution: SkyreelsResolution = Field(
-        SkyreelsResolution.SD_540P, description="Video resolution"
-    )
+    resolution: SkyreelsResolution = Field(SkyreelsResolution.SD_540P, description="Video resolution")
     fps: int = Field(24, ge=16, le=60, description="Frames per second")
-    num_frames: int = Field(
-        97, ge=97, le=10000, description="Number of frames to generate"
-    )
-    base_num_frames: int = Field(
-        97, ge=97, le=10000, description="Base number of frames"
-    )
+    num_frames: int = Field(97, ge=97, le=10000, description="Number of frames to generate")
+    base_num_frames: int = Field(97, ge=97, le=10000, description="Base number of frames")
 
     # Generation control
-    guidance_scale: float = Field(
-        6.0, ge=1.0, le=7.5, description="Guidance scale for generation"
-    )
-    inference_steps: int = Field(
-        30, ge=10, le=50, description="Number of inference steps"
-    )
-    seed: int | None = Field(
-        42, ge=0, le=4294967295, description="Random seed for generation"
-    )
+    guidance_scale: float = Field(6.0, ge=1.0, le=7.5, description="Guidance scale for generation")
+    inference_steps: int = Field(30, ge=10, le=50, description="Number of inference steps")
+    seed: int | None = Field(42, ge=0, le=4294967295, description="Random seed for generation")
 
     # Advanced parameters
     shift: float = Field(8.0, ge=1.0, le=10.0, description="Shift parameter")
@@ -104,12 +90,8 @@ class SkyreelsVideoRequest(BaseModel):
     causal_block_size: int = Field(1, ge=0, le=50, description="Causal block size")
 
     # Image inputs (for image-to-video)
-    img_b64_first: str | None = Field(
-        None, description="Base64 encoded first frame image"
-    )
-    img_b64_last: str | None = Field(
-        None, description="Base64 encoded last frame image"
-    )
+    img_b64_first: str | None = Field(None, description="Base64 encoded first frame image")
+    img_b64_last: str | None = Field(None, description="Base64 encoded last frame image")
 
 
 class SkyreelsVideoResponse(BaseModel):
@@ -120,12 +102,8 @@ class SkyreelsVideoResponse(BaseModel):
     video_url: str | None = Field(None, description="Generated video URL")
     video_data: bytes | None = Field(None, description="Binary video data")
     error_message: str | None = Field(None, description="Error message if failed")
-    generation_time: float | None = Field(
-        None, description="Time taken to generate in seconds"
-    )
-    metadata: dict[str, Any] = Field(
-        default_factory=dict, description="Additional metadata"
-    )
+    generation_time: float | None = Field(None, description="Time taken to generate in seconds")
+    metadata: dict[str, Any] = Field(default_factory=dict, description="Additional metadata")
 
 
 class SkyreelsError(Exception):
@@ -196,9 +174,7 @@ SKYREELS_RESOLUTION_DIMENSIONS = {
 }
 
 
-def resize_image_to_resolution(
-    image: Image.Image, target_resolution: str
-) -> Image.Image:
+def resize_image_to_resolution(image: Image.Image, target_resolution: str) -> Image.Image:
     """
     Resize image to match target resolution by scaling to longer dimension and cropping centrally.
 
@@ -269,17 +245,13 @@ def create_color_image(color_hex: str, target_resolution: str) -> BytesIO:
     # Clean and validate hex color
     hex_color = color_hex.strip().lstrip("#")
     if not re.match(r"^[0-9a-fA-F]{6}$", hex_color):
-        raise ValueError(
-            f"Invalid hex color format: {color_hex}. Expected format: #rrggbb or rrggbb"
-        )
+        raise ValueError(f"Invalid hex color format: {color_hex}. Expected format: #rrggbb or rrggbb")
 
     # Parse target resolution
     try:
         target_width, target_height = map(int, target_resolution.split("*"))
     except ValueError:
-        raise ValueError(
-            f"Invalid resolution format: {target_resolution}. Expected format: width*height"
-        )
+        raise ValueError(f"Invalid resolution format: {target_resolution}. Expected format: width*height")
 
     # Convert hex to RGB
     try:
@@ -290,9 +262,7 @@ def create_color_image(color_hex: str, target_resolution: str) -> BytesIO:
     except ValueError:
         raise ValueError(f"Invalid hex color values in: {color_hex}")
 
-    logger.debug(
-        f"Creating {target_width}x{target_height} solid color image with RGB{rgb_color}"
-    )
+    logger.debug(f"Creating {target_width}x{target_height} solid color image with RGB{rgb_color}")
 
     # Create the image
     image = Image.new("RGB", (target_width, target_height), rgb_color)
@@ -320,9 +290,7 @@ def is_color_hex_string(image_path: str | Path | BytesIO) -> bool:
     return False
 
 
-def encode_image_to_base64(
-    image_path: str | Path | BytesIO, target_resolution: str | None = None
-) -> str:
+def encode_image_to_base64(image_path: str | Path | BytesIO, target_resolution: str | None = None) -> str:
     """
     Convert image to base64 string, optionally resizing to target resolution.
     Supports both regular images and hex color strings (e.g., "#ff0000").
@@ -341,9 +309,7 @@ def encode_image_to_base64(
         # Check if this is a hex color string
         if is_color_hex_string(image_path):
             if not target_resolution:
-                raise ValueError(
-                    "target_resolution is required when using hex color strings"
-                )
+                raise ValueError("target_resolution is required when using hex color strings")
             # Create solid color image
             color_buffer = create_color_image(str(image_path), target_resolution)
             image = Image.open(color_buffer)
@@ -355,9 +321,7 @@ def encode_image_to_base64(
             elif isinstance(image_path, BytesIO):
                 image = Image.open(image_path)
             else:
-                raise ValueError(
-                    "image_path must be a file path, BytesIO object, or hex color string"
-                )
+                raise ValueError("image_path must be a file path, BytesIO object, or hex color string")
 
             # Resize if target resolution is specified
             if target_resolution:
@@ -374,7 +338,7 @@ def encode_image_to_base64(
 
         return base64.b64encode(image_bytes).decode("utf-8")
     except Exception as e:
-        raise ValueError(f"Failed to encode image to base64: {str(e)}") from e
+        raise ValueError(f"Failed to encode image to base64: {e!s}") from e
 
 
 def detect_video_format(video_data: bytes) -> str:
@@ -388,9 +352,7 @@ def detect_video_format(video_data: bytes) -> str:
         Video format extension (e.g., 'mp4', 'avi')
     """
     # Check for common video file signatures
-    if video_data.startswith(b"\x00\x00\x00\x14ftypmp4") or video_data.startswith(
-        b"\x00\x00\x00\x18ftypmp4"
-    ):
+    if video_data.startswith(b"\x00\x00\x00\x14ftypmp4") or video_data.startswith(b"\x00\x00\x00\x18ftypmp4"):
         return "mp4"
     elif video_data.startswith(b"RIFF") and b"AVI " in video_data[:12]:
         return "avi"
@@ -418,9 +380,7 @@ class SkyreelsClient:
         """
         self.api_key = api_key or DEFAULT_API_KEY
         if not self.api_key:
-            raise ValueError(
-                "API key required. Set CHUTES_API_KEY environment variable or pass api_key parameter"
-            )
+            raise ValueError("API key required. Set CHUTES_API_KEY environment variable or pass api_key parameter")
 
         self.timeout = timeout
         self.headers = {
@@ -464,9 +424,7 @@ class SkyreelsClient:
             logger.debug(f"Request headers: {self.headers}")
             logger.debug(f"Request payload keys: {list(data.keys())}")
 
-            response = requests.post(
-                url, headers=self.headers, json=data, timeout=self.timeout
-            )
+            response = requests.post(url, headers=self.headers, json=data, timeout=self.timeout)
 
             logger.debug(f"Response status: {response.status_code}")
             logger.debug(f"Response headers: {dict(response.headers)}")
@@ -478,9 +436,7 @@ class SkyreelsClient:
             logger.debug(f"Response content type: {content_type}")
 
             if "video/" in content_type or "application/octet-stream" in content_type:
-                logger.debug(
-                    f"Received video response (size: {len(response.content)} bytes)"
-                )
+                logger.debug(f"Received video response (size: {len(response.content)} bytes)")
                 return response.content
             else:
                 # Unexpected content type
@@ -491,18 +447,16 @@ class SkyreelsClient:
                     error_msg = error_data.get("error", "Unknown error from API")
                     raise SkyreelsError(f"API error: {error_msg}")
                 except json.JSONDecodeError:
-                    raise SkyreelsError(
-                        f"Unexpected response format. Content type: {content_type}"
-                    )
+                    raise SkyreelsError(f"Unexpected response format. Content type: {content_type}")
 
         except requests.exceptions.RequestException as e:
-            error_msg = f"Request failed: {str(e)}"
+            error_msg = f"Request failed: {e!s}"
             logger.error(error_msg)
             logger.error(f"Request URL: {url}")
             logger.error(f"Request timeout: {self.timeout}s")
             raise SkyreelsError(error_msg) from e
         except Exception as e:
-            error_msg = f"Unexpected error: {str(e)}"
+            error_msg = f"Unexpected error: {e!s}"
             logger.error(error_msg)
             raise SkyreelsError(error_msg) from e
 
@@ -527,9 +481,7 @@ class SkyreelsClient:
 
             timeout = aiohttp.ClientTimeout(total=self.timeout)
             async with aiohttp.ClientSession(timeout=timeout) as session:
-                async with session.post(
-                    url, headers=self.headers, json=data
-                ) as response:
+                async with session.post(url, headers=self.headers, json=data) as response:
                     logger.debug(f"Response status: {response.status}")
                     logger.debug(f"Response headers: {dict(response.headers)}")
 
@@ -540,19 +492,17 @@ class SkyreelsClient:
                     logger.debug(f"Response content type: {content_type}")
 
                     video_data = await response.read()
-                    logger.debug(
-                        f"Received video response (size: {len(video_data)} bytes)"
-                    )
+                    logger.debug(f"Received video response (size: {len(video_data)} bytes)")
                     return video_data
 
         except aiohttp.ClientError as e:
-            error_msg = f"Async request failed: {str(e)}"
+            error_msg = f"Async request failed: {e!s}"
             logger.error(error_msg)
             logger.error(f"Request URL: {url}")
             logger.error(f"Request timeout: {self.timeout}s")
             raise SkyreelsError(error_msg) from e
         except Exception as e:
-            error_msg = f"Unexpected error: {str(e)}"
+            error_msg = f"Unexpected error: {e!s}"
             logger.error(error_msg)
             raise SkyreelsError(error_msg) from e
 
@@ -587,8 +537,7 @@ class SkyreelsClient:
         """
         request_data = SkyreelsVideoRequest(
             prompt=prompt,
-            negative_prompt=negative_prompt
-            or SkyreelsVideoRequest.model_fields["negative_prompt"].default,
+            negative_prompt=negative_prompt or SkyreelsVideoRequest.model_fields["negative_prompt"].default,
             resolution=resolution,
             fps=fps,
             num_frames=num_frames,
@@ -604,7 +553,7 @@ class SkyreelsClient:
         )
 
         logger.info(
-            f"Generating SkyReels text-to-video",
+            "Generating SkyReels text-to-video",
             extra={
                 "prompt": prompt[:100] + "..." if len(prompt) > 100 else prompt,
                 "resolution": resolution,
@@ -617,9 +566,7 @@ class SkyreelsClient:
 
         try:
             start_time = time.time()
-            video_data = self._make_request_sync(
-                SKYREELS_T2V_URL, request_data.model_dump(by_alias=True)
-            )
+            video_data = self._make_request_sync(SKYREELS_T2V_URL, request_data.model_dump(by_alias=True))
             generation_time = time.time() - start_time
 
             return SkyreelsVideoResponse(
@@ -629,7 +576,7 @@ class SkyreelsClient:
                 metadata={"request_params": request_data.model_dump(by_alias=True)},
             )
         except Exception as e:
-            error_msg = f"SkyReels text-to-video generation failed: {str(e)}"
+            error_msg = f"SkyReels text-to-video generation failed: {e!s}"
             logger.error(error_msg)
             return SkyreelsVideoResponse(
                 success=False,
@@ -675,36 +622,27 @@ class SkyreelsClient:
         img_b64_last = None
 
         # Get target resolution dimensions
-        resolution_dimensions = SKYREELS_RESOLUTION_DIMENSIONS.get(
-            resolution.value, None
-        )
+        resolution_dimensions = SKYREELS_RESOLUTION_DIMENSIONS.get(resolution.value, None)
 
         try:
             if first_frame is not None:
-                img_b64_first = encode_image_to_base64(
-                    first_frame, resolution_dimensions
-                )
-                logger.debug(
-                    f"Encoded and resized first frame image to {resolution_dimensions or 'original size'}"
-                )
+                img_b64_first = encode_image_to_base64(first_frame, resolution_dimensions)
+                logger.debug(f"Encoded and resized first frame image to {resolution_dimensions or 'original size'}")
 
             if last_frame is not None:
                 img_b64_last = encode_image_to_base64(last_frame, resolution_dimensions)
-                logger.debug(
-                    f"Encoded and resized last frame image to {resolution_dimensions or 'original size'}"
-                )
+                logger.debug(f"Encoded and resized last frame image to {resolution_dimensions or 'original size'}")
         except Exception as e:
-            logger.error(f"Failed to process input images: {str(e)}")
+            logger.error(f"Failed to process input images: {e!s}")
             return SkyreelsVideoResponse(
                 success=False,
                 model_used="skyreels-v2-14b-540p",
-                error_message=f"Image processing failed: {str(e)}",
+                error_message=f"Image processing failed: {e!s}",
             )
 
         request_data = SkyreelsVideoRequest(
             prompt=prompt,
-            negative_prompt=negative_prompt
-            or SkyreelsVideoRequest.model_fields["negative_prompt"].default,
+            negative_prompt=negative_prompt or SkyreelsVideoRequest.model_fields["negative_prompt"].default,
             resolution=resolution,
             fps=fps,
             num_frames=num_frames,
@@ -722,7 +660,7 @@ class SkyreelsClient:
         )
 
         logger.info(
-            f"Generating SkyReels image-to-video",
+            "Generating SkyReels image-to-video",
             extra={
                 "prompt": prompt[:100] + "..." if len(prompt) > 100 else prompt,
                 "resolution": resolution,
@@ -737,9 +675,7 @@ class SkyreelsClient:
 
         try:
             start_time = time.time()
-            video_data = self._make_request_sync(
-                SKYREELS_I2V_URL, request_data.model_dump(by_alias=True)
-            )
+            video_data = self._make_request_sync(SKYREELS_I2V_URL, request_data.model_dump(by_alias=True))
             generation_time = time.time() - start_time
 
             return SkyreelsVideoResponse(
@@ -749,7 +685,7 @@ class SkyreelsClient:
                 metadata={"request_params": request_data.model_dump(by_alias=True)},
             )
         except Exception as e:
-            error_msg = f"SkyReels image-to-video generation failed: {str(e)}"
+            error_msg = f"SkyReels image-to-video generation failed: {e!s}"
             logger.error(error_msg)
             return SkyreelsVideoResponse(
                 success=False,
@@ -797,8 +733,7 @@ class SkyreelsClient:
         """
         request_data = SkyreelsVideoRequest(
             prompt=prompt,
-            negative_prompt=negative_prompt
-            or SkyreelsVideoRequest.model_fields["negative_prompt"].default,
+            negative_prompt=negative_prompt or SkyreelsVideoRequest.model_fields["negative_prompt"].default,
             resolution=resolution,
             fps=fps,
             num_frames=num_frames,
@@ -814,7 +749,7 @@ class SkyreelsClient:
         )
 
         logger.info(
-            f"Generating SkyReels text-to-video async",
+            "Generating SkyReels text-to-video async",
             extra={
                 "prompt": prompt[:100] + "..." if len(prompt) > 100 else prompt,
                 "resolution": resolution,
@@ -827,9 +762,7 @@ class SkyreelsClient:
 
         try:
             start_time = time.time()
-            video_data = await self._make_request_async(
-                SKYREELS_T2V_URL, request_data.model_dump(by_alias=True)
-            )
+            video_data = await self._make_request_async(SKYREELS_T2V_URL, request_data.model_dump(by_alias=True))
             generation_time = time.time() - start_time
 
             return SkyreelsVideoResponse(
@@ -839,7 +772,7 @@ class SkyreelsClient:
                 metadata={"request_params": request_data.model_dump(by_alias=True)},
             )
         except Exception as e:
-            error_msg = f"SkyReels async text-to-video generation failed: {str(e)}"
+            error_msg = f"SkyReels async text-to-video generation failed: {e!s}"
             logger.error(error_msg)
             return SkyreelsVideoResponse(
                 success=False,
@@ -885,36 +818,27 @@ class SkyreelsClient:
         img_b64_last = None
 
         # Get target resolution dimensions
-        resolution_dimensions = SKYREELS_RESOLUTION_DIMENSIONS.get(
-            resolution.value, None
-        )
+        resolution_dimensions = SKYREELS_RESOLUTION_DIMENSIONS.get(resolution.value, None)
 
         try:
             if first_frame is not None:
-                img_b64_first = encode_image_to_base64(
-                    first_frame, resolution_dimensions
-                )
-                logger.debug(
-                    f"Encoded and resized first frame image to {resolution_dimensions or 'original size'}"
-                )
+                img_b64_first = encode_image_to_base64(first_frame, resolution_dimensions)
+                logger.debug(f"Encoded and resized first frame image to {resolution_dimensions or 'original size'}")
 
             if last_frame is not None:
                 img_b64_last = encode_image_to_base64(last_frame, resolution_dimensions)
-                logger.debug(
-                    f"Encoded and resized last frame image to {resolution_dimensions or 'original size'}"
-                )
+                logger.debug(f"Encoded and resized last frame image to {resolution_dimensions or 'original size'}")
         except Exception as e:
-            logger.error(f"Failed to process input images: {str(e)}")
+            logger.error(f"Failed to process input images: {e!s}")
             return SkyreelsVideoResponse(
                 success=False,
                 model_used="skyreels-v2-14b-540p",
-                error_message=f"Image processing failed: {str(e)}",
+                error_message=f"Image processing failed: {e!s}",
             )
 
         request_data = SkyreelsVideoRequest(
             prompt=prompt,
-            negative_prompt=negative_prompt
-            or SkyreelsVideoRequest.model_fields["negative_prompt"].default,
+            negative_prompt=negative_prompt or SkyreelsVideoRequest.model_fields["negative_prompt"].default,
             resolution=resolution,
             fps=fps,
             num_frames=num_frames,
@@ -932,7 +856,7 @@ class SkyreelsClient:
         )
 
         logger.info(
-            f"Generating SkyReels image-to-video async",
+            "Generating SkyReels image-to-video async",
             extra={
                 "prompt": prompt[:100] + "..." if len(prompt) > 100 else prompt,
                 "resolution": resolution,
@@ -947,9 +871,7 @@ class SkyreelsClient:
 
         try:
             start_time = time.time()
-            video_data = await self._make_request_async(
-                SKYREELS_I2V_URL, request_data.model_dump(by_alias=True)
-            )
+            video_data = await self._make_request_async(SKYREELS_I2V_URL, request_data.model_dump(by_alias=True))
             generation_time = time.time() - start_time
 
             return SkyreelsVideoResponse(
@@ -959,7 +881,7 @@ class SkyreelsClient:
                 metadata={"request_params": request_data.model_dump(by_alias=True)},
             )
         except Exception as e:
-            error_msg = f"SkyReels async image-to-video generation failed: {str(e)}"
+            error_msg = f"SkyReels async image-to-video generation failed: {e!s}"
             logger.error(error_msg)
             return SkyreelsVideoResponse(
                 success=False,
@@ -1058,9 +980,7 @@ class SkyreelsCLI:
                 # Validate hex color format
                 try:
                     # This will raise ValueError if invalid
-                    create_color_image(
-                        frame_input, "1*1"
-                    )  # Just test format validation
+                    create_color_image(frame_input, "1*1")  # Just test format validation
                     print(f"✅ {frame_name} frame: Using hex color {frame_input}")
                     return True
                 except ValueError as e:
@@ -1070,12 +990,8 @@ class SkyreelsCLI:
                 print(f"✅ {frame_name} frame: Using image file {frame_input}")
                 return True
             else:
-                print(
-                    f"❌ Error: {frame_name} frame not found and not a valid hex color: {frame_input}"
-                )
-                print(
-                    f"💡 Use either an existing image file path or hex color format like '#ff0000'"
-                )
+                print(f"❌ Error: {frame_name} frame not found and not a valid hex color: {frame_input}")
+                print("💡 Use either an existing image file path or hex color format like '#ff0000'")
                 return False
 
         if not validate_frame_input(first_frame, "First"):
@@ -1124,7 +1040,7 @@ class SkyreelsCLI:
             )
 
         if response.success:
-            print(f"✅ Video generation successful!")
+            print("✅ Video generation successful!")
             if response.generation_time:
                 print(f"⏱️  Generation time: {response.generation_time:.2f}s")
 
@@ -1153,31 +1069,23 @@ class SkyreelsCLI:
     def info(self):
         """Show information about SkyReels video generation capabilities."""
         print("SkyReels Video Generation Info:")
-        print(f"Model: skyreels-v2-14b-540p")
+        print("Model: skyreels-v2-14b-540p")
         print(f"API Base URL: {SKYREELS_BASE_URL}")
         print()
         print("Frame Input Options:")
         print("  • Image Files: Any standard image format (JPEG, PNG, etc.)")
-        print(
-            "  • Hex Colors: Solid color frames using hex format (e.g., '#ff0000', '#0000ff')"
-        )
+        print("  • Hex Colors: Solid color frames using hex format (e.g., '#ff0000', '#0000ff')")
         print("  • Mixed: Combine image files with hex colors")
         print()
         print("Examples:")
         print("  # Image to image")
-        print(
-            "  python chutes_skyreels_vid.py video 'transition' --first_frame start.jpg --last_frame end.jpg"
-        )
+        print("  python chutes_skyreels_vid.py video 'transition' --first_frame start.jpg --last_frame end.jpg")
         print()
         print("  # Color to color")
-        print(
-            "  python chutes_skyreels_vid.py video 'red to blue fade' --first_frame '#ff0000' --last_frame '#0000ff'"
-        )
+        print("  python chutes_skyreels_vid.py video 'red to blue fade' --first_frame '#ff0000' --last_frame '#0000ff'")
         print()
         print("  # Image to color")
-        print(
-            "  python chutes_skyreels_vid.py video 'fade to black' --first_frame photo.jpg --last_frame '#000000'"
-        )
+        print("  python chutes_skyreels_vid.py video 'fade to black' --first_frame photo.jpg --last_frame '#000000'")
         print()
         print("Available Resolutions:")
         print("  • 720P (1280x720) - HD quality")
@@ -1223,7 +1131,7 @@ class SkyreelsCLI:
             else:
                 print(f"❌ API test failed: {response.error_message}")
         except Exception as e:
-            print(f"❌ Test failed with exception: {str(e)}")
+            print(f"❌ Test failed with exception: {e!s}")
             print("💡 Check your API key and network connection")
 
 

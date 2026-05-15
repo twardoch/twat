@@ -1,10 +1,10 @@
 import inspect
 import uuid
-from functools import lru_cache
+from functools import lru_cache, cache
 from pathlib import Path
 
 
-@lru_cache(maxsize=None)
+@cache
 def get_cache_path(folder_name: str | None = None) -> Path:
     def generate_uuid() -> str:
         """Generate a UUID based on the file of the caller."""
@@ -45,7 +45,7 @@ except ImportError:
     JOBLIB_MEMORY = None
 
 
-@lru_cache(maxsize=None)
+@cache
 def ucache(folder_name: str | None = None, use_sql: bool = False):
     """A decorator for caching function results."""
 
@@ -55,11 +55,7 @@ def ucache(folder_name: str | None = None, use_sql: bool = False):
             return DISK_CACHE.memoize()(func)
 
     elif JOBLIB_MEMORY:
-        memory = (
-            JOBLIB_MEMORY
-            if folder_name is None
-            else Memory(get_cache_path(folder_name), verbose=0)
-        )
+        memory = JOBLIB_MEMORY if folder_name is None else Memory(get_cache_path(folder_name), verbose=0)
 
         def decorator(func):
             return memory.cache(func)

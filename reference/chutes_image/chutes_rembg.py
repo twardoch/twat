@@ -49,25 +49,17 @@ MAX_RETRIES = 3
 class RemoveRequest(BaseModel):
     """Request model for background removal"""
 
-    image_b64: str = Field(
-        ..., min_length=1, description="Base64 encoded image to remove background from"
-    )
+    image_b64: str = Field(..., min_length=1, description="Base64 encoded image to remove background from")
 
 
 class RemoveResponse(BaseModel):
     """Response model for background removal"""
 
     success: bool = Field(default=True)
-    image_data: str | None = Field(
-        None, description="Base64 encoded image with background removed"
-    )
+    image_data: str | None = Field(None, description="Base64 encoded image with background removed")
     error_message: str | None = Field(None, description="Error message if failed")
-    processing_time: float | None = Field(
-        None, description="Time taken to process in seconds"
-    )
-    metadata: dict[str, Any] = Field(
-        default_factory=dict, description="Additional metadata"
-    )
+    processing_time: float | None = Field(None, description="Time taken to process in seconds")
+    metadata: dict[str, Any] = Field(default_factory=dict, description="Additional metadata")
 
 
 class RemBGError(Exception):
@@ -211,9 +203,7 @@ class RemBGClient:
             logger.debug(f"Making sync request to {REMBG_URL}")
             logger.debug(f"Request headers: {self.headers}")
 
-            response = requests.post(
-                REMBG_URL, headers=self.headers, json=data, timeout=self.timeout
-            )
+            response = requests.post(REMBG_URL, headers=self.headers, json=data, timeout=self.timeout)
 
             logger.debug(f"Response status: {response.status_code}")
             logger.debug(f"Response headers: {dict(response.headers)}")
@@ -233,13 +223,13 @@ class RemBGClient:
                 raise ValueError(f"Invalid JSON response: {json_err}")
 
         except requests.exceptions.RequestException as e:
-            error_msg = f"Request failed: {str(e)}"
+            error_msg = f"Request failed: {e!s}"
             logger.error(error_msg)
             logger.error(f"Request URL: {REMBG_URL}")
             logger.error(f"Request timeout: {self.timeout}s")
             raise RemBGError(error_msg) from e
         except ValueError as e:
-            error_msg = f"Response parsing failed: {str(e)}"
+            error_msg = f"Response parsing failed: {e!s}"
             logger.error(error_msg)
             raise RemBGError(error_msg) from e
 
@@ -262,9 +252,7 @@ class RemBGClient:
 
             timeout = aiohttp.ClientTimeout(total=self.timeout)
             async with aiohttp.ClientSession(timeout=timeout) as session:
-                async with session.post(
-                    REMBG_URL, headers=self.headers, json=data
-                ) as response:
+                async with session.post(REMBG_URL, headers=self.headers, json=data) as response:
                     logger.debug(f"Response status: {response.status}")
                     logger.debug(f"Response headers: {dict(response.headers)}")
 
@@ -284,13 +272,13 @@ class RemBGClient:
                         raise ValueError(f"Invalid JSON response: {json_err}")
 
         except aiohttp.ClientError as e:
-            error_msg = f"Async request failed: {str(e)}"
+            error_msg = f"Async request failed: {e!s}"
             logger.error(error_msg)
             logger.error(f"Request URL: {REMBG_URL}")
             logger.error(f"Request timeout: {self.timeout}s")
             raise RemBGError(error_msg) from e
         except ValueError as e:
-            error_msg = f"Response parsing failed: {str(e)}"
+            error_msg = f"Response parsing failed: {e!s}"
             logger.error(error_msg)
             raise RemBGError(error_msg) from e
 
@@ -340,7 +328,7 @@ class RemBGClient:
             )
 
         except Exception as e:
-            error_msg = f"Background removal failed: {str(e)}"
+            error_msg = f"Background removal failed: {e!s}"
             logger.error(error_msg)
             return RemoveResponse(
                 success=False,
@@ -348,9 +336,7 @@ class RemBGClient:
                 metadata={"error_type": type(e).__name__},
             )
 
-    async def remove_async(
-        self, image_data: bytes, ensure_png: bool = True
-    ) -> RemoveResponse:
+    async def remove_async(self, image_data: bytes, ensure_png: bool = True) -> RemoveResponse:
         """
         Remove background from image asynchronously.
 
@@ -396,7 +382,7 @@ class RemBGClient:
             )
 
         except Exception as e:
-            error_msg = f"Async background removal failed: {str(e)}"
+            error_msg = f"Async background removal failed: {e!s}"
             logger.error(error_msg)
             return RemoveResponse(
                 success=False,
@@ -409,9 +395,7 @@ class RemBGClient:
         try:
             return self.remove_sync(**kwargs)
         except Exception as e:
-            error_msg = (
-                f"Background removal failed after {MAX_RETRIES} attempts: {str(e)}"
-            )
+            error_msg = f"Background removal failed after {MAX_RETRIES} attempts: {e!s}"
             logger.error(
                 error_msg,
                 extra={
@@ -483,9 +467,7 @@ class RemBGCLI:
             else:
                 # Read from stdin
                 if sys.stdin.isatty():
-                    print(
-                        "❌ No input file specified and stdin is empty", file=sys.stderr
-                    )
+                    print("❌ No input file specified and stdin is empty", file=sys.stderr)
                     print(
                         "Usage: python chutes_rembg.py remove --input=image.jpg --output=result.png",
                         file=sys.stderr,
@@ -504,7 +486,7 @@ class RemBGCLI:
 
             if response.success:
                 if verbose:
-                    print(f"✅ Background removal successful!", file=sys.stderr)
+                    print("✅ Background removal successful!", file=sys.stderr)
                     if response.processing_time:
                         print(
                             f"⏱️  Processing time: {response.processing_time:.2f}s",
@@ -538,7 +520,7 @@ class RemBGCLI:
                 sys.exit(1)
 
         except Exception as e:
-            print(f"❌ Error: {str(e)}", file=sys.stderr)
+            print(f"❌ Error: {e!s}", file=sys.stderr)
             sys.exit(1)
 
     def test(self, image_path: str, output_dir: str = ".", verbose: bool = False):

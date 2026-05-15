@@ -26,9 +26,9 @@ if os.getenv("CHUTES_EXECUTION_CONTEXT") == "REMOTE":
     for _ in range(3):
         try:
             snapshot_download(
-               repo_id="Wan-AI/Wan2.1-FLF2V-14B-720P",
-               revision="c8db168d95d3ebeb63430b3b6d264885cb8a0df3",
-               local_dir=I2V_720_PATH,
+                repo_id="Wan-AI/Wan2.1-FLF2V-14B-720P",
+                revision="c8db168d95d3ebeb63430b3b6d264885cb8a0df3",
+                local_dir=I2V_720_PATH,
             )
             break
         except Exception as exc:
@@ -69,9 +69,7 @@ chute = Chute(
     tagline="Text-to-video, image-to-video, text-to-image with Wan2.1 14B",
     readme="Text-to-video, image-to-video, text-to-image with Wan2.1 14B",
     image=image,
-    node_selector=NodeSelector(
-        gpu_count=8, include=["h100", "h800", "h100_nvl", "h100_sxm", "h200"]
-    ),
+    node_selector=NodeSelector(gpu_count=8, include=["h100", "h800", "h100_nvl", "h100_sxm", "h200"]),
 )
 
 
@@ -90,23 +88,23 @@ class Resolution(str, Enum):
 
 class I2VInput(BaseModel):
     prompt: str
-    negative_prompt: Optional[str] = (
+    negative_prompt: str | None = (
         "Vibrant colors, overexposed, static, blurry details, subtitles, style, artwork, "
         "painting, picture, still, overall grayish, worst quality, low quality, JPEG compression artifacts, "
         "ugly, incomplete, extra fingers, poorly drawn hands, poorly drawn face, deformed, disfigured, "
         "malformed limbs, fused fingers, motionless image, cluttered background, three legs, "
         "many people in the background, walking backwards, slow motion"
     )
-    sample_shift: Optional[float] = Field(None, ge=1.0, le=7.0)
-    guidance_scale: Optional[float] = Field(5.0, ge=1.0, le=7.5)
-    resolution: Optional[Resolution] = Resolution.NINE_SIXTEEN
-    seed: Optional[int] = 42
+    sample_shift: float | None = Field(None, ge=1.0, le=7.0)
+    guidance_scale: float | None = Field(5.0, ge=1.0, le=7.5)
+    resolution: Resolution | None = Resolution.NINE_SIXTEEN
+    seed: int | None = 42
     first_image_b64: str
     last_image_b64: str
     steps: int = Field(25, ge=20, le=50)
     fps: int = Field(16, ge=16, le=60)
-    frames: Optional[int] = Field(81, ge=81, le=241)
-    single_frame: Optional[bool] = False
+    frames: int | None = Field(81, ge=81, le=241)
+    single_frame: bool | None = False
 
 
 def initialize_model(rank, world_size, task_queue):
@@ -127,9 +125,7 @@ def initialize_model(rank, world_size, task_queue):
     device = local_rank
     torch.cuda.set_device(local_rank)
     logger.info(f"Initializing distributed inference on {rank=}...")
-    dist.init_process_group(
-        backend="nccl", init_method="tcp://127.0.0.1:29501", rank=rank, world_size=world_size
-    )
+    dist.init_process_group(backend="nccl", init_method="tcp://127.0.0.1:29501", rank=rank, world_size=world_size)
 
     init_distributed_environment(rank=dist.get_rank(), world_size=dist.get_world_size())
     initialize_model_parallel(
@@ -142,19 +138,18 @@ def initialize_model(rank, world_size, task_queue):
     base_seed = [42] if rank == 0 else [None]
     dist.broadcast_object_list(base_seed, src=0)
 
-
     # Initialize the image-to-video model.
     cfg = WAN_CONFIGS["flf2v-14B"]
     logger.info(f"Loading 720P image-to-video model on {rank=}")
     wan_i2v_720 = wan.WanFLF2V(
-       config=cfg,
-       checkpoint_dir=I2V_720_PATH,
-       device_id=device,
-       rank=rank,
-       t5_fsdp=True,
-       dit_fsdp=True,
-       use_usp=True,
-       t5_cpu=False,
+        config=cfg,
+        checkpoint_dir=I2V_720_PATH,
+        device_id=device,
+        rank=rank,
+        t5_fsdp=True,
+        dit_fsdp=True,
+        use_usp=True,
+        t5_cpu=False,
     )
     logger.info("Compiling 720P image-to-video model...")
     wan_i2v_720.text_encoder = torch.compile(wan_i2v_720.text_encoder)
@@ -174,8 +169,8 @@ def initialize_model(rank, world_size, task_queue):
             #     _ = wan_t2v.generate(prompt, **args)
             # elif task.get("type") == "I2V_480":
             else:
-               logger.info(f"Process {rank} executing I2V 720P task...")
-               _ = wan_i2v_720.generate(prompt, task["image_first"], task["image_last"], **args)
+                logger.info(f"Process {rank} executing I2V 720P task...")
+                _ = wan_i2v_720.generate(prompt, task["image_first"], task["image_last"], **args)
             dist.barrier()
 
 
@@ -227,7 +222,15 @@ async def initialize(self):
         "offload_model": False,
     }
     logger.info("Warming up image-to-video model...")
-    _infer(self, "Shifting gradient.", image_first=warmup_image, image_last=warmup_image, single_frame=False, fps=16 , **prompt_args)
+    _infer(
+        self,
+        "Shifting gradient.",
+        image_first=warmup_image,
+        image_last=warmup_image,
+        single_frame=False,
+        fps=16,
+        **prompt_args,
+    )
 
 
 def _infer(self, prompt, image_first=None, image_last=None, single_frame=False, fps: int = 16, **prompt_args):
@@ -243,7 +246,13 @@ def _infer(self, prompt, image_first=None, image_last=None, single_frame=False, 
         task_type += f"_{height}"
     for _ in range(self.world_size - 1):
         self.task_queue.put(
-            {"type": task_type, "prompt": prompt, "image_first": image_first, "image_last": image_last, "args": prompt_args}
+            {
+                "type": task_type,
+                "prompt": prompt,
+                "image_first": image_first,
+                "image_last": image_last,
+                "args": prompt_args,
+            }
         )
     model = getattr(self, f"wan_{task_type.lower()}")
     video = None
@@ -283,9 +292,7 @@ def _infer(self, prompt, image_first=None, image_last=None, single_frame=False, 
             return Response(
                 content=buffer.getvalue(),
                 media_type="video/mp4" if not single_frame else "image/png",
-                headers={
-                    "Content-Disposition": f'attachment; filename="{uuid.uuid4()}.{extension}"'
-                },
+                headers={"Content-Disposition": f'attachment; filename="{uuid.uuid4()}.{extension}"'},
             )
         finally:
             if output_file and os.path.exists(output_file):
@@ -352,4 +359,12 @@ async def image_to_video(self, args: I2VInput):
         "seed": args.seed,
         "offload_model": False,
     }
-    return _infer(self, args.prompt, image_first=input_first_image, image_last=input_last_image, single_frame=False, fps = args.fps, **prompt_args)
+    return _infer(
+        self,
+        args.prompt,
+        image_first=input_first_image,
+        image_last=input_last_image,
+        single_frame=False,
+        fps=args.fps,
+        **prompt_args,
+    )

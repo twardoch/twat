@@ -10,7 +10,7 @@ become available as `twat.fs` or `twat.cache` at runtime.
 """
 
 from __future__ import annotations
-from .__version__ import __version__  # noqa: F401
+from .__version__ import __version__
 
 import sys
 from collections.abc import Iterable

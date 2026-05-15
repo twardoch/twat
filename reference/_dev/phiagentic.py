@@ -31,6 +31,4 @@ web_agent = Agent(
     show_tool_calls=True,
     markdown=True,
 )
-web_agent.print_response(
-    "Write Python code that will create a simple PythonQt dialog box", stream=True
-)
+web_agent.print_response("Write Python code that will create a simple PythonQt dialog box", stream=True)

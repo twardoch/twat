@@ -84,15 +84,9 @@ class WanVideoRequest(BaseModel):
     model_config = {"populate_by_name": True, "use_enum_values": True}
 
     # Required parameters
-    prompt: str = Field(
-        ..., min_length=1, description="Text prompt for video generation"
-    )
-    first_image_b64: str = Field(
-        ..., min_length=1, description="Base64 encoded first frame image (required)"
-    )
-    last_image_b64: str = Field(
-        ..., min_length=1, description="Base64 encoded last frame image (required)"
-    )
+    prompt: str = Field(..., min_length=1, description="Text prompt for video generation")
+    first_image_b64: str = Field(..., min_length=1, description="Base64 encoded first frame image (required)")
+    last_image_b64: str = Field(..., min_length=1, description="Base64 encoded last frame image (required)")
 
     # Optional parameters with defaults
     negative_prompt: str = Field(
@@ -101,30 +95,18 @@ class WanVideoRequest(BaseModel):
     )
 
     # Video parameters
-    resolution: WanResolution = Field(
-        WanResolution.LANDSCAPE_WIDE, description="Video resolution"
-    )
+    resolution: WanResolution = Field(WanResolution.LANDSCAPE_WIDE, description="Video resolution")
     fps: int = Field(16, ge=16, le=60, description="Frames per second")
-    frames: int = Field(
-        81, ge=81, le=241, description="Number of frames to generate (must be 4n+1)"
-    )
+    frames: int = Field(81, ge=81, le=241, description="Number of frames to generate (must be 4n+1)")
 
     # Generation control
-    guidance_scale: float = Field(
-        5.0, ge=1.0, le=7.5, description="Guidance scale for generation"
-    )
+    guidance_scale: float = Field(5.0, ge=1.0, le=7.5, description="Guidance scale for generation")
     steps: int = Field(25, ge=20, le=50, description="Number of sampling steps")
-    seed: int | None = Field(
-        42, ge=0, le=4294967295, description="Random seed for generation"
-    )
+    seed: int | None = Field(42, ge=0, le=4294967295, description="Random seed for generation")
 
     # Advanced parameters
-    sample_shift: float | None = Field(
-        None, ge=1.0, le=7.0, description="Sample shift parameter (default: 3.0)"
-    )
-    single_frame: bool = Field(
-        False, description="Output single frame instead of video"
-    )
+    sample_shift: float | None = Field(None, ge=1.0, le=7.0, description="Sample shift parameter (default: 3.0)")
+    single_frame: bool = Field(False, description="Output single frame instead of video")
 
     @field_validator("frames")
     @classmethod
@@ -145,16 +127,10 @@ class WanVideoResponse(BaseModel):
     model_used: str = Field(..., description="Model that was used")
     video_url: str | None = Field(None, description="Generated video URL")
     video_data: bytes | None = Field(None, description="Binary video data")
-    image_data: bytes | None = Field(
-        None, description="Binary image data (if single_frame=True)"
-    )
+    image_data: bytes | None = Field(None, description="Binary image data (if single_frame=True)")
     error_message: str | None = Field(None, description="Error message if failed")
-    generation_time: float | None = Field(
-        None, description="Time taken to generate in seconds"
-    )
-    metadata: dict[str, Any] = Field(
-        default_factory=dict, description="Additional metadata"
-    )
+    generation_time: float | None = Field(None, description="Time taken to generate in seconds")
+    metadata: dict[str, Any] = Field(default_factory=dict, description="Additional metadata")
 
 
 class WanError(Exception):
@@ -218,9 +194,7 @@ def prompt_slug(prompt: str, max_words: int = 6) -> str:
     return safe_filename(" ".join(words))
 
 
-def resize_image_to_resolution(
-    image: Image.Image, target_resolution: str
-) -> Image.Image:
+def resize_image_to_resolution(image: Image.Image, target_resolution: str) -> Image.Image:
     """
     Resize image to match target resolution by scaling to longer dimension and cropping centrally.
 
@@ -291,17 +265,13 @@ def create_color_image(color_hex: str, target_resolution: str) -> BytesIO:
     # Clean and validate hex color
     hex_color = color_hex.strip().lstrip("#")
     if not re.match(r"^[0-9a-fA-F]{6}$", hex_color):
-        raise ValueError(
-            f"Invalid hex color format: {color_hex}. Expected format: #rrggbb or rrggbb"
-        )
+        raise ValueError(f"Invalid hex color format: {color_hex}. Expected format: #rrggbb or rrggbb")
 
     # Parse target resolution
     try:
         target_width, target_height = map(int, target_resolution.split("*"))
     except ValueError:
-        raise ValueError(
-            f"Invalid resolution format: {target_resolution}. Expected format: width*height"
-        )
+        raise ValueError(f"Invalid resolution format: {target_resolution}. Expected format: width*height")
 
     # Convert hex to RGB
     try:
@@ -312,9 +282,7 @@ def create_color_image(color_hex: str, target_resolution: str) -> BytesIO:
     except ValueError:
         raise ValueError(f"Invalid hex color values in: {color_hex}")
 
-    logger.debug(
-        f"Creating {target_width}x{target_height} solid color image with RGB{rgb_color}"
-    )
+    logger.debug(f"Creating {target_width}x{target_height} solid color image with RGB{rgb_color}")
 
     # Create the image
     image = Image.new("RGB", (target_width, target_height), rgb_color)
@@ -342,9 +310,7 @@ def is_color_hex_string(image_path: str | Path | BytesIO) -> bool:
     return False
 
 
-def encode_image_to_base64(
-    image_path: str | Path | BytesIO, target_resolution: str | None = None
-) -> str:
+def encode_image_to_base64(image_path: str | Path | BytesIO, target_resolution: str | None = None) -> str:
     """
     Convert image to base64 string, optionally resizing to target resolution.
     Supports both regular images and hex color strings (e.g., "#ff0000").
@@ -363,9 +329,7 @@ def encode_image_to_base64(
         # Check if this is a hex color string
         if is_color_hex_string(image_path):
             if not target_resolution:
-                raise ValueError(
-                    "target_resolution is required when using hex color strings"
-                )
+                raise ValueError("target_resolution is required when using hex color strings")
             # Create solid color image
             color_buffer = create_color_image(str(image_path), target_resolution)
             image = Image.open(color_buffer)
@@ -377,9 +341,7 @@ def encode_image_to_base64(
             elif isinstance(image_path, BytesIO):
                 image = Image.open(image_path)
             else:
-                raise ValueError(
-                    "image_path must be a file path, BytesIO object, or hex color string"
-                )
+                raise ValueError("image_path must be a file path, BytesIO object, or hex color string")
 
             # Resize if target resolution is specified
             if target_resolution:
@@ -396,7 +358,7 @@ def encode_image_to_base64(
 
         return base64.b64encode(image_bytes).decode("utf-8")
     except Exception as e:
-        raise ValueError(f"Failed to encode image to base64: {str(e)}") from e
+        raise ValueError(f"Failed to encode image to base64: {e!s}") from e
 
 
 def detect_content_format(content_data: bytes) -> str:
@@ -410,9 +372,7 @@ def detect_content_format(content_data: bytes) -> str:
         Content format extension (e.g., 'mp4', 'png')
     """
     # Check for video formats first
-    if content_data.startswith(b"\x00\x00\x00\x14ftypmp4") or content_data.startswith(
-        b"\x00\x00\x00\x18ftypmp4"
-    ):
+    if content_data.startswith(b"\x00\x00\x00\x14ftypmp4") or content_data.startswith(b"\x00\x00\x00\x18ftypmp4"):
         return "mp4"
     elif content_data.startswith(b"RIFF") and b"AVI " in content_data[:12]:
         return "avi"
@@ -450,9 +410,7 @@ def resolve_resolution(resolution_input: str) -> WanResolution:
         return WanResolution(resolution_input)
     else:
         valid_options = list(RESOLUTION_NAMES.keys())
-        raise ValueError(
-            f"Invalid resolution '{resolution_input}'. Valid options: {valid_options}"
-        )
+        raise ValueError(f"Invalid resolution '{resolution_input}'. Valid options: {valid_options}")
 
 
 class WanClient:
@@ -473,9 +431,7 @@ class WanClient:
         """
         self.api_key = api_key or DEFAULT_API_KEY
         if not self.api_key:
-            raise ValueError(
-                "API key required. Set CHUTES_API_KEY environment variable or pass api_key parameter"
-            )
+            raise ValueError("API key required. Set CHUTES_API_KEY environment variable or pass api_key parameter")
 
         self.timeout = timeout
         self.headers = {
@@ -487,9 +443,7 @@ class WanClient:
 
     @retry(
         stop=stop_after_attempt(10),  # More attempts for instance availability
-        wait=wait_exponential(
-            multiplier=2, min=15, max=120
-        ),  # Longer delays for instance startup
+        wait=wait_exponential(multiplier=2, min=15, max=120),  # Longer delays for instance startup
         retry=retry_if_exception_type(
             (
                 requests.ConnectionError,
@@ -520,9 +474,7 @@ class WanClient:
             logger.debug(f"Request headers: {self.headers}")
             logger.debug(f"Request payload keys: {list(data.keys())}")
 
-            response = requests.post(
-                url, headers=self.headers, json=data, timeout=self.timeout
-            )
+            response = requests.post(url, headers=self.headers, json=data, timeout=self.timeout)
 
             logger.debug(f"Response status: {response.status_code}")
             logger.debug(f"Response headers: {dict(response.headers)}")
@@ -535,9 +487,7 @@ class WanClient:
                         logger.debug(f"Error response body: {response.text}")
                         logger.warning("No compute instances available, retrying...")
                         # Convert to RequestException to trigger retry logic
-                        raise requests.RequestException(
-                            f"503 No instances available: {error_data.get('detail')}"
-                        )
+                        raise requests.RequestException(f"503 No instances available: {error_data.get('detail')}")
                 except json.JSONDecodeError:
                     # If we can't parse JSON, fall through to standard error handling
                     pass
@@ -556,14 +506,8 @@ class WanClient:
             content_type = response.headers.get("content-type", "").lower()
             logger.debug(f"Response content type: {content_type}")
 
-            if (
-                "video/" in content_type
-                or "image/" in content_type
-                or "application/octet-stream" in content_type
-            ):
-                logger.debug(
-                    f"Received binary response (size: {len(response.content)} bytes)"
-                )
+            if "video/" in content_type or "image/" in content_type or "application/octet-stream" in content_type:
+                logger.debug(f"Received binary response (size: {len(response.content)} bytes)")
                 return response.content
             else:
                 # Unexpected content type
@@ -574,9 +518,7 @@ class WanClient:
                     error_msg = error_data.get("error", "Unknown error from API")
                     raise WanError(f"API error: {error_msg}")
                 except json.JSONDecodeError:
-                    raise WanError(
-                        f"Unexpected response format. Content type: {content_type}"
-                    )
+                    raise WanError(f"Unexpected response format. Content type: {content_type}")
 
         except requests.exceptions.RequestException as e:
             # Check if this is our retry RequestException - if so, re-raise it as-is
@@ -584,13 +526,13 @@ class WanClient:
                 # This is our retry exception, re-raise it to trigger retry logic
                 raise e
 
-            error_msg = f"Request failed: {str(e)}"
+            error_msg = f"Request failed: {e!s}"
             logger.error(error_msg)
             logger.error(f"Request URL: {url}")
             logger.error(f"Request timeout: {self.timeout}s")
             raise WanError(error_msg) from e
         except Exception as e:
-            error_msg = f"Unexpected error: {str(e)}"
+            error_msg = f"Unexpected error: {e!s}"
             logger.error(error_msg)
             raise WanError(error_msg) from e
 
@@ -615,9 +557,7 @@ class WanClient:
 
             timeout = aiohttp.ClientTimeout(total=self.timeout)
             async with aiohttp.ClientSession(timeout=timeout) as session:
-                async with session.post(
-                    url, headers=self.headers, json=data
-                ) as response:
+                async with session.post(url, headers=self.headers, json=data) as response:
                     logger.debug(f"Response status: {response.status}")
                     logger.debug(f"Response headers: {dict(response.headers)}")
 
@@ -628,19 +568,17 @@ class WanClient:
                     logger.debug(f"Response content type: {content_type}")
 
                     content_data = await response.read()
-                    logger.debug(
-                        f"Received binary response (size: {len(content_data)} bytes)"
-                    )
+                    logger.debug(f"Received binary response (size: {len(content_data)} bytes)")
                     return content_data
 
         except aiohttp.ClientError as e:
-            error_msg = f"Async request failed: {str(e)}"
+            error_msg = f"Async request failed: {e!s}"
             logger.error(error_msg)
             logger.error(f"Request URL: {url}")
             logger.error(f"Request timeout: {self.timeout}s")
             raise WanError(error_msg) from e
         except Exception as e:
-            error_msg = f"Unexpected error: {str(e)}"
+            error_msg = f"Unexpected error: {e!s}"
             logger.error(error_msg)
             raise WanError(error_msg) from e
 
@@ -681,9 +619,7 @@ class WanClient:
         """
         # Validate required inputs
         if first_frame is None or last_frame is None:
-            raise ValueError(
-                "Both first_frame and last_frame are required for WAN video generation"
-            )
+            raise ValueError("Both first_frame and last_frame are required for WAN video generation")
 
         # Resolve resolution if string
         if isinstance(resolution, str):
@@ -699,30 +635,23 @@ class WanClient:
 
         # Convert images to base64 with proper resizing
         try:
-            resolution_str = (
-                resolution.value
-                if isinstance(resolution, WanResolution)
-                else resolution
-            )
+            resolution_str = resolution.value if isinstance(resolution, WanResolution) else resolution
             first_image_b64 = encode_image_to_base64(first_frame, resolution_str)
             last_image_b64 = encode_image_to_base64(last_frame, resolution_str)
-            logger.debug(
-                f"Encoded and resized first and last frame images to {resolution_str}"
-            )
+            logger.debug(f"Encoded and resized first and last frame images to {resolution_str}")
         except Exception as e:
-            logger.error(f"Failed to process input images: {str(e)}")
+            logger.error(f"Failed to process input images: {e!s}")
             return WanVideoResponse(
                 success=False,
                 model_used="wan-2.1-flf2v",
-                error_message=f"Image processing failed: {str(e)}",
+                error_message=f"Image processing failed: {e!s}",
             )
 
         request_data = WanVideoRequest(
             prompt=prompt,
             first_image_b64=first_image_b64,
             last_image_b64=last_image_b64,
-            negative_prompt=negative_prompt
-            or WanVideoRequest.model_fields["negative_prompt"].default,
+            negative_prompt=negative_prompt or WanVideoRequest.model_fields["negative_prompt"].default,
             resolution=resolution,
             fps=fps,
             frames=frames,
@@ -734,7 +663,7 @@ class WanClient:
         )
 
         logger.info(
-            f"Generating WAN image-to-video",
+            "Generating WAN image-to-video",
             extra={
                 "prompt": prompt[:100] + "..." if len(prompt) > 100 else prompt,
                 "resolution": resolution,
@@ -748,9 +677,7 @@ class WanClient:
 
         try:
             start_time = time.time()
-            content_data = self._make_request_sync(
-                WAN_FLF2V_URL, request_data.model_dump(by_alias=True)
-            )
+            content_data = self._make_request_sync(WAN_FLF2V_URL, request_data.model_dump(by_alias=True))
             generation_time = time.time() - start_time
 
             # Determine if we got video or image data
@@ -769,11 +696,9 @@ class WanClient:
                     metadata={"request_params": request_data.model_dump(by_alias=True)},
                 )
         except Exception as e:
-            error_msg = f"WAN image-to-video generation failed: {str(e)}"
+            error_msg = f"WAN image-to-video generation failed: {e!s}"
             logger.error(error_msg)
-            return WanVideoResponse(
-                success=False, model_used="wan-2.1-flf2v", error_message=error_msg
-            )
+            return WanVideoResponse(success=False, model_used="wan-2.1-flf2v", error_message=error_msg)
 
     # Keep backward compatibility alias
     def generate_image_to_video(self, *args, **kwargs) -> WanVideoResponse:
@@ -817,9 +742,7 @@ class WanClient:
         """
         # Validate required inputs
         if first_frame is None or last_frame is None:
-            raise ValueError(
-                "Both first_frame and last_frame are required for WAN video generation"
-            )
+            raise ValueError("Both first_frame and last_frame are required for WAN video generation")
 
         # Resolve resolution if string
         if isinstance(resolution, str):
@@ -835,30 +758,23 @@ class WanClient:
 
         # Convert images to base64 with proper resizing
         try:
-            resolution_str = (
-                resolution.value
-                if isinstance(resolution, WanResolution)
-                else resolution
-            )
+            resolution_str = resolution.value if isinstance(resolution, WanResolution) else resolution
             first_image_b64 = encode_image_to_base64(first_frame, resolution_str)
             last_image_b64 = encode_image_to_base64(last_frame, resolution_str)
-            logger.debug(
-                f"Encoded and resized first and last frame images to {resolution_str}"
-            )
+            logger.debug(f"Encoded and resized first and last frame images to {resolution_str}")
         except Exception as e:
-            logger.error(f"Failed to process input images: {str(e)}")
+            logger.error(f"Failed to process input images: {e!s}")
             return WanVideoResponse(
                 success=False,
                 model_used="wan-2.1-flf2v",
-                error_message=f"Image processing failed: {str(e)}",
+                error_message=f"Image processing failed: {e!s}",
             )
 
         request_data = WanVideoRequest(
             prompt=prompt,
             first_image_b64=first_image_b64,
             last_image_b64=last_image_b64,
-            negative_prompt=negative_prompt
-            or WanVideoRequest.model_fields["negative_prompt"].default,
+            negative_prompt=negative_prompt or WanVideoRequest.model_fields["negative_prompt"].default,
             resolution=resolution,
             fps=fps,
             frames=frames,
@@ -870,7 +786,7 @@ class WanClient:
         )
 
         logger.info(
-            f"Generating WAN image-to-video async",
+            "Generating WAN image-to-video async",
             extra={
                 "prompt": prompt[:100] + "..." if len(prompt) > 100 else prompt,
                 "resolution": resolution,
@@ -884,9 +800,7 @@ class WanClient:
 
         try:
             start_time = time.time()
-            content_data = await self._make_request_async(
-                WAN_FLF2V_URL, request_data.model_dump(by_alias=True)
-            )
+            content_data = await self._make_request_async(WAN_FLF2V_URL, request_data.model_dump(by_alias=True))
             generation_time = time.time() - start_time
 
             # Determine if we got video or image data
@@ -905,11 +819,9 @@ class WanClient:
                     metadata={"request_params": request_data.model_dump(by_alias=True)},
                 )
         except Exception as e:
-            error_msg = f"WAN async image-to-video generation failed: {str(e)}"
+            error_msg = f"WAN async image-to-video generation failed: {e!s}"
             logger.error(error_msg)
-            return WanVideoResponse(
-                success=False, model_used="wan-2.1-flf2v", error_message=error_msg
-            )
+            return WanVideoResponse(success=False, model_used="wan-2.1-flf2v", error_message=error_msg)
 
 
 class WanCLI:
@@ -983,9 +895,7 @@ class WanCLI:
 
         # Validate required image inputs
         if not first_frame or not last_frame:
-            print(
-                "❌ Error: Both --first_frame and --last_frame are required for WAN video generation"
-            )
+            print("❌ Error: Both --first_frame and --last_frame are required for WAN video generation")
             print(
                 "💡 Usage: python chutes_wan_vid.py video 'prompt text' --first_frame image1.jpg --last_frame image2.jpg"
             )
@@ -997,9 +907,7 @@ class WanCLI:
                 # Validate hex color format
                 try:
                     # This will raise ValueError if invalid
-                    create_color_image(
-                        frame_input, "1*1"
-                    )  # Just test format validation
+                    create_color_image(frame_input, "1*1")  # Just test format validation
                     print(f"✅ {frame_name} frame: Using hex color {frame_input}")
                     return True
                 except ValueError as e:
@@ -1009,12 +917,8 @@ class WanCLI:
                 print(f"✅ {frame_name} frame: Using image file {frame_input}")
                 return True
             else:
-                print(
-                    f"❌ Error: {frame_name} frame not found and not a valid hex color: {frame_input}"
-                )
-                print(
-                    f"💡 Use either an existing image file path or hex color format like '#ff0000'"
-                )
+                print(f"❌ Error: {frame_name} frame not found and not a valid hex color: {frame_input}")
+                print("💡 Use either an existing image file path or hex color format like '#ff0000'")
                 return False
 
         if not validate_frame_input(str(first_frame), "First"):
@@ -1075,33 +979,25 @@ class WanCLI:
     def info(self):
         """Show information about WAN video generation capabilities."""
         print("WAN FLF2V (First Last Frame to Video) Info:")
-        print(f"Model: wan-2.1-flf2v")
+        print("Model: wan-2.1-flf2v")
         print(f"API Base URL: {WAN_BASE_URL}")
         print()
         print("🔴 IMPORTANT: Both first and last frame images are REQUIRED")
         print()
         print("Frame Input Options:")
         print("  • Image Files: Any standard image format (JPEG, PNG, etc.)")
-        print(
-            "  • Hex Colors: Solid color frames using hex format (e.g., '#ff0000', '#0000ff')"
-        )
+        print("  • Hex Colors: Solid color frames using hex format (e.g., '#ff0000', '#0000ff')")
         print("  • Mixed: Combine image files with hex colors")
         print()
         print("Examples:")
         print("  # Image to image")
-        print(
-            "  python chutes_wan_vid.py video 'transition' --first_frame start.jpg --last_frame end.jpg"
-        )
+        print("  python chutes_wan_vid.py video 'transition' --first_frame start.jpg --last_frame end.jpg")
         print()
         print("  # Color to color")
-        print(
-            "  python chutes_wan_vid.py video 'red to blue fade' --first_frame '#ff0000' --last_frame '#0000ff'"
-        )
+        print("  python chutes_wan_vid.py video 'red to blue fade' --first_frame '#ff0000' --last_frame '#0000ff'")
         print()
         print("  # Image to color")
-        print(
-            "  python chutes_wan_vid.py video 'fade to black' --first_frame photo.jpg --last_frame '#000000'"
-        )
+        print("  python chutes_wan_vid.py video 'fade to black' --first_frame photo.jpg --last_frame '#000000'")
         print()
         print("Available Resolutions:")
         print("  • landscape_hd (1280*720) - 16:9 landscape HD")
@@ -1136,9 +1032,7 @@ class WanCLI:
         ]
 
         for friendly_name, format_name, aspect, description in resolutions:
-            print(
-                f"  • {friendly_name:<15} → {format_name:<10} ({aspect:<15}) - {description}"
-            )
+            print(f"  • {friendly_name:<15} → {format_name:<10} ({aspect:<15}) - {description}")
         print()
         print("Usage:")
         print("  --resolution landscape_hd    (friendly name)")
@@ -1186,14 +1080,12 @@ class WanCLI:
                 if response.generation_time:
                     print(f"⏱️  Test generation time: {response.generation_time:.2f}s")
                 if response.image_data:
-                    print(
-                        f"📊 Generated content size: {len(response.image_data)} bytes"
-                    )
+                    print(f"📊 Generated content size: {len(response.image_data)} bytes")
                 print("🎉 WAN client is working correctly!")
             else:
                 print(f"❌ API test failed: {response.error_message}")
         except Exception as e:
-            print(f"❌ Test failed with exception: {str(e)}")
+            print(f"❌ Test failed with exception: {e!s}")
             print("💡 Check your API key and network connection")
 
 

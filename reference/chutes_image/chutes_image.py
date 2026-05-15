@@ -53,21 +53,13 @@ class ImageGenerationRequest(BaseModel):
     """Request model for general image generation"""
 
     model: str = Field(..., min_length=1, description="Model identifier")
-    prompt: str = Field(
-        ..., min_length=1, description="Text prompt for image generation"
-    )
+    prompt: str = Field(..., min_length=1, description="Text prompt for image generation")
     negative_prompt: str | None = Field("", description="Negative prompt")
-    guidance_scale: float | None = Field(
-        7.5, ge=1, le=20, description="Guidance scale for generation"
-    )
+    guidance_scale: float | None = Field(7.5, ge=1, le=20, description="Guidance scale for generation")
     width: int | None = Field(1024, ge=128, le=2048, description="Image width")
     height: int | None = Field(1024, ge=128, le=2048, description="Image height")
-    inference_steps: int | None = Field(
-        30, ge=1, le=100, description="Number of inference steps"
-    )
-    seed: int | None = Field(
-        None, ge=0, le=4294967295, description="Random seed for generation"
-    )
+    inference_steps: int | None = Field(30, ge=1, le=100, description="Number of inference steps")
+    seed: int | None = Field(None, ge=0, le=4294967295, description="Random seed for generation")
 
 
 class ImageGenerationResponse(BaseModel):
@@ -77,13 +69,9 @@ class ImageGenerationResponse(BaseModel):
     model_used: str = Field(..., description="Model that was used")
     image_url: str | None = Field(None, description="Generated image URL")
     image_data: str | None = Field(None, description="Base64 encoded image data")
-    metadata: dict[str, Any] = Field(
-        default_factory=dict, description="Generation metadata"
-    )
+    metadata: dict[str, Any] = Field(default_factory=dict, description="Generation metadata")
     error_message: str | None = Field(None, description="Error message if failed")
-    generation_time: float | None = Field(
-        None, description="Time taken to generate in seconds"
-    )
+    generation_time: float | None = Field(None, description="Time taken to generate in seconds")
 
 
 class ModelInfo(BaseModel):
@@ -93,9 +81,7 @@ class ModelInfo(BaseModel):
     display_name: str = Field(..., description="Human-readable model name")
     description: str | None = Field("", description="Model description")
     category: str | None = Field("general", description="Model category")
-    supports_negative_prompt: bool = Field(
-        True, description="Whether model supports negative prompts"
-    )
+    supports_negative_prompt: bool = Field(True, description="Whether model supports negative prompts")
     max_width: int = Field(2048, description="Maximum image width")
     max_height: int = Field(2048, description="Maximum image height")
     default_steps: int = Field(25, description="Default inference steps")
@@ -177,25 +163,25 @@ def parse_resolution(res: str) -> tuple[int, int]:
     """
     if not res or not isinstance(res, str):
         raise ValueError("Resolution must be a non-empty string")
-    
+
     # Support both 'x' and 'X' as separators
     res = res.strip().lower()
-    if 'x' not in res:
+    if "x" not in res:
         raise ValueError("Resolution must be in format 'WIDTHxHEIGHT' (e.g., '1920x1080')")
-    
+
     try:
-        width_str, height_str = res.split('x', 1)
+        width_str, height_str = res.split("x", 1)
         width = int(width_str.strip())
         height = int(height_str.strip())
     except ValueError as e:
         raise ValueError(f"Invalid resolution format '{res}': width and height must be integers") from e
-    
+
     # Validate range (same as ImageGenerationRequest model)
     if not (128 <= width <= 2048):
         raise ValueError(f"Width {width} out of range (128-2048)")
     if not (128 <= height <= 2048):
         raise ValueError(f"Height {height} out of range (128-2048)")
-    
+
     return width, height
 
 
@@ -216,30 +202,30 @@ def parse_aspect_ratio(ar: str, max_width: int = 2048, max_height: int = 2048) -
     """
     if not ar or not isinstance(ar, str):
         raise ValueError("Aspect ratio must be a non-empty string")
-    
+
     ar = ar.strip()
-    if ':' not in ar:
+    if ":" not in ar:
         raise ValueError("Aspect ratio must be in format 'WIDTH:HEIGHT' (e.g., '16:9', '1:1')")
-    
+
     try:
-        ratio_width_str, ratio_height_str = ar.split(':', 1)
+        ratio_width_str, ratio_height_str = ar.split(":", 1)
         ratio_width = float(ratio_width_str.strip())
         ratio_height = float(ratio_height_str.strip())
     except ValueError as e:
         raise ValueError(f"Invalid aspect ratio format '{ar}': width and height must be numbers") from e
-    
+
     if ratio_width <= 0 or ratio_height <= 0:
         raise ValueError(f"Aspect ratio values must be positive: {ratio_width}:{ratio_height}")
-    
+
     # Calculate aspect ratio
     aspect = ratio_width / ratio_height
-    
+
     # Find largest possible resolution that fits within constraints
     if aspect >= 1.0:
         # Landscape or square - width is limiting factor
         width = min(max_width, 2048)
         height = int(width / aspect)
-        
+
         # Ensure height doesn't exceed limits
         if height > max_height or height > 2048:
             height = min(max_height, 2048)
@@ -248,20 +234,20 @@ def parse_aspect_ratio(ar: str, max_width: int = 2048, max_height: int = 2048) -
         # Portrait - height is limiting factor
         height = min(max_height, 2048)
         width = int(height * aspect)
-        
+
         # Ensure width doesn't exceed limits
         if width > max_width or width > 2048:
             width = min(max_width, 2048)
             height = int(width / aspect)
-    
+
     # Ensure minimum sizes
     width = max(128, width)
     height = max(128, height)
-    
+
     # Round to multiples of 8 for better model compatibility
     width = (width // 8) * 8
     height = (height // 8) * 8
-    
+
     return width, height
 
 
@@ -299,7 +285,6 @@ MODEL_REGISTRY = {
         max_height=2048,
         default_steps=30,
     ),
-    
     # General Models
     "FLUX.1-dev": ModelInfo(
         name="FLUX.1-dev",
@@ -351,7 +336,6 @@ MODEL_REGISTRY = {
         max_height=2048,
         default_steps=50,
     ),
-    
     # Anime Models
     "Animij": ModelInfo(
         name="Animij",
@@ -393,7 +377,6 @@ MODEL_REGISTRY = {
         max_height=2048,
         default_steps=50,
     ),
-    
     # Realistic Models
     "JuggernautXL": ModelInfo(
         name="JuggernautXL",
@@ -405,7 +388,6 @@ MODEL_REGISTRY = {
         max_height=2048,
         default_steps=50,
     ),
-    
     # Artistic Models
     "chroma": ModelInfo(
         name="chroma",
@@ -447,7 +429,6 @@ MODEL_REGISTRY = {
         max_height=2048,
         default_steps=50,
     ),
-    
     # Cartoon Models
     "nova-cartoon-xl": ModelInfo(
         name="nova-cartoon-xl",
@@ -459,7 +440,6 @@ MODEL_REGISTRY = {
         max_height=2048,
         default_steps=50,
     ),
-    
     # Furry Models
     "NovaFurryXL": ModelInfo(
         name="NovaFurryXL",
@@ -471,7 +451,6 @@ MODEL_REGISTRY = {
         max_height=2048,
         default_steps=50,
     ),
-    
     # Specialized Models
     "orphic-lora": ModelInfo(
         name="orphic-lora",
@@ -523,9 +502,7 @@ class ChutesImageClient:
         """
         self.api_key = api_key or DEFAULT_API_KEY
         if not self.api_key:
-            raise ValueError(
-                "API key required. Set CHUTES_API_KEY environment variable or pass api_key parameter"
-            )
+            raise ValueError("API key required. Set CHUTES_API_KEY environment variable or pass api_key parameter")
 
         self.timeout = timeout
         self.headers = {
@@ -699,9 +676,7 @@ class ChutesImageClient:
                                 chunk = chunk.decode("utf-8")
                             except UnicodeDecodeError:
                                 # If we can't decode, it might be binary data
-                                logger.warning(
-                                    "Received binary data in text response, treating as base64"
-                                )
+                                logger.warning("Received binary data in text response, treating as base64")
                                 import base64
 
                                 return ImageGenerationResponse(
@@ -709,9 +684,7 @@ class ChutesImageClient:
                                     model_used=model,
                                     image_data=base64.b64encode(chunk).decode("utf-8"),
                                     generation_time=time.time() - start_time,
-                                    metadata={
-                                        "request_params": request_data.model_dump()
-                                    },
+                                    metadata={"request_params": request_data.model_dump()},
                                 )
                         response_text += chunk
 
@@ -771,11 +744,11 @@ class ChutesImageClient:
                 "timeout": self.timeout,
             }
 
-            error_msg = f"Generation failed with {model}: {str(e)}"
-            
+            error_msg = f"Generation failed with {model}: {e!s}"
+
             # Log different error types differently
             if isinstance(e, requests.exceptions.HTTPError):
-                status_code = getattr(e.response, 'status_code', None)
+                status_code = getattr(e.response, "status_code", None)
                 if status_code in [503, 500, 502, 504]:
                     logger.warning(f"Server error ({status_code}) for {model}, will retry with longer delay")
                 elif status_code == 429:
@@ -808,8 +781,7 @@ class ChutesImageClient:
                     "inference_steps": kwargs.get("inference_steps", 30),
                     "seed": kwargs.get("seed"),
                     "negative_prompt": kwargs.get("negative_prompt", "")[:50] + "..."
-                    if kwargs.get("negative_prompt", "")
-                    and len(kwargs.get("negative_prompt", "")) > 50
+                    if kwargs.get("negative_prompt", "") and len(kwargs.get("negative_prompt", "")) > 50
                     else kwargs.get("negative_prompt", ""),
                 },
                 "attempts": MAX_RETRIES,
@@ -819,7 +791,7 @@ class ChutesImageClient:
             # Determine error type for better messaging
             error_type = "Unknown error"
             if isinstance(e, requests.exceptions.HTTPError):
-                status_code = getattr(e.response, 'status_code', None)
+                status_code = getattr(e.response, "status_code", None)
                 if status_code in [503, 500, 502, 504]:
                     error_type = f"Server error ({status_code}) - model may be temporarily unavailable"
                 elif status_code == 429:
@@ -916,9 +888,7 @@ class ChutesImageClient:
 
             timeout = aiohttp.ClientTimeout(total=self.timeout)
             async with aiohttp.ClientSession(timeout=timeout) as session:
-                async with session.post(
-                    CHUTES_IMAGE_URL, headers=self.headers, json=api_data
-                ) as response:
+                async with session.post(CHUTES_IMAGE_URL, headers=self.headers, json=api_data) as response:
                     response.raise_for_status()
 
                     # Collect streaming response
@@ -971,11 +941,9 @@ class ChutesImageClient:
             )
 
         except Exception as e:
-            error_msg = f"Async generation failed: {str(e)}"
+            error_msg = f"Async generation failed: {e!s}"
             logger.error(error_msg)
-            return ImageGenerationResponse(
-                success=False, model_used=model, error_message=error_msg
-            )
+            return ImageGenerationResponse(success=False, model_used=model, error_message=error_msg)
 
     async def generate_stream(
         self,
@@ -1024,9 +992,7 @@ class ChutesImageClient:
 
         timeout = aiohttp.ClientTimeout(total=self.timeout)
         async with aiohttp.ClientSession(timeout=timeout) as session:
-            async with session.post(
-                CHUTES_IMAGE_URL, headers=self.headers, json=api_data
-            ) as response:
+            async with session.post(CHUTES_IMAGE_URL, headers=self.headers, json=api_data) as response:
                 response.raise_for_status()
 
                 buffer = ""
@@ -1114,7 +1080,7 @@ class ChutesImageCLI:
             except ValueError as e:
                 print(f"❌ Invalid resolution format '{res}': {e}")
                 return
-        
+
         # Parse models - support both string (comma-separated) and list
         if isinstance(model, str):
             if model.strip() == "*":
@@ -1127,7 +1093,7 @@ class ChutesImageCLI:
             models = list(model)
         else:
             models = [str(model)]
-            
+
         # Validate models exist in registry
         valid_models = []
         for model_name in models:
@@ -1135,11 +1101,11 @@ class ChutesImageCLI:
                 valid_models.append(model_name)
             else:
                 print(f"⚠️  Model '{model_name}' not found in registry, skipping")
-        
+
         if not valid_models:
             print("❌ No valid models found")
             return
-            
+
         original_count = len(models)
         models = valid_models
         if len(models) != original_count:
@@ -1154,9 +1120,7 @@ class ChutesImageCLI:
 
         if output:
             output_path = Path(output)
-            if output_path.is_dir() or (
-                not output_path.suffix and not output_path.exists()
-            ):
+            if output_path.is_dir() or (not output_path.suffix and not output_path.exists()):
                 # Output is a directory
                 output_dir = output_path
                 output_dir.mkdir(parents=True, exist_ok=True)
@@ -1172,8 +1136,7 @@ class ChutesImageCLI:
                     stem = output_path.stem
                     suffix = output_path.suffix or ".png"
                     output_paths = [
-                        output_dir / f"{stem}--{safe_filename(model_name)}{suffix}"
-                        for model_name in models
+                        output_dir / f"{stem}--{safe_filename(model_name)}{suffix}" for model_name in models
                     ]
         else:
             # No output specified - use current directory with generated names
@@ -1198,11 +1161,11 @@ class ChutesImageCLI:
         # Use ThreadPoolExecutor for parallel generation (limited to prevent API overload)
         max_workers = min(len(models), MAX_CONCURRENT_MODELS) if len(models) > 5 else min(len(models), 4)
         logger.info(f"Starting parallel generation with {max_workers} workers for {len(models)} models")
-        
+
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
             futures = [
                 executor.submit(generate_single, model_name, output_path)
-                for model_name, output_path in zip(models, output_paths)
+                for model_name, output_path in zip(models, output_paths, strict=False)
             ]
 
             results = [future.result() for future in futures]
@@ -1256,9 +1219,7 @@ class ChutesImageCLI:
 
             else:
                 # Show detailed error information
-                print(
-                    f"❌ Generation failed with {model_name}: {response.error_message}"
-                )
+                print(f"❌ Generation failed with {model_name}: {response.error_message}")
                 if response.metadata:
                     if "error_context" in response.metadata:
                         error_context = response.metadata["error_context"]
@@ -1268,23 +1229,17 @@ class ChutesImageCLI:
                                 f"   ℹ️  Parameters: {params['resolution']}, guidance: {params['guidance_scale']}, steps: {params['inference_steps']}"
                             )
                     if "retry_attempts" in response.metadata:
-                        print(
-                            f"   🔄 Failed after {response.metadata['retry_attempts']} retry attempts"
-                        )
+                        print(f"   🔄 Failed after {response.metadata['retry_attempts']} retry attempts")
                     if "error_type" in response.metadata:
                         print(f"   ⚠️  Error type: {response.metadata['error_type']}")
 
         # Summary
         if len(models) > 1:
-            print(
-                f"\n📊 Summary: {successful_count}/{len(models)} generations successful"
-            )
+            print(f"\n📊 Summary: {successful_count}/{len(models)} generations successful")
             if successful_count > 0:
                 if total_time > 0:
                     print(f"⏱️  Total generation time: {total_time:.2f}s")
-                    print(
-                        f"⏱️  Average generation time: {total_time / successful_count:.2f}s"
-                    )
+                    print(f"⏱️  Average generation time: {total_time / successful_count:.2f}s")
             else:
                 print("❌ No successful generations")
                 print("💡 Suggestions:")

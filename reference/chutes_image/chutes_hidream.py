@@ -49,9 +49,7 @@ DEFAULT_TIMEOUT = 120
 MAX_RETRIES = 3
 
 # Resolution options for HiDream
-HIDREAM_RESOLUTIONS = Literal[
-    "1024x1024", "768x1360", "1360x768", "880x1168", "1168x880", "1248x832", "832x1248"
-]
+HIDREAM_RESOLUTIONS = Literal["1024x1024", "768x1360", "1360x768", "880x1168", "1168x880", "1248x832", "832x1248"]
 
 
 class ModelInfo(BaseModel):
@@ -61,9 +59,7 @@ class ModelInfo(BaseModel):
     display_name: str = Field(..., description="Human-readable model name")
     description: str | None = Field("", description="Model description")
     category: str | None = Field("hidream", description="Model category")
-    supports_editing: bool = Field(
-        True, description="Whether model supports image editing"
-    )
+    supports_editing: bool = Field(True, description="Whether model supports image editing")
     default_resolution: str = Field("1024x1024", description="Default res")
     default_steps: int = Field(50, description="Default inference steps")
     max_steps: int = Field(75, description="Maximum inference steps")
@@ -99,19 +95,13 @@ HIDREAM_MODEL_REGISTRY = {
 
 class HidreamGenerateRequest(BaseModel):
     """Request model for HiDream text-to-image generation"""
-    
+
     model_config = {"populate_by_name": True, "use_enum_values": True}
 
-    seed: int | None = Field(
-        None, ge=0, le=100000000, description="Random seed for generation"
-    )
-    prompt: str = Field(
-        ..., min_length=1, description="Text prompt for image generation"
-    )
+    seed: int | None = Field(None, ge=0, le=100000000, description="Random seed for generation")
+    prompt: str = Field(..., min_length=1, description="Text prompt for image generation")
     resolution: HIDREAM_RESOLUTIONS = Field("1024x1024", description="Image res")
-    guidance_scale: float | None = Field(
-        5, ge=0, le=10, description="Guidance scale for generation"
-    )
+    guidance_scale: float | None = Field(5, ge=0, le=10, description="Guidance scale for generation")
     inference_steps: int | None = Field(
         50, ge=5, le=75, description="Number of inference steps", alias="num_inference_steps"
     )
@@ -119,24 +109,18 @@ class HidreamGenerateRequest(BaseModel):
 
 class HidreamEditRequest(BaseModel):
     """Request model for HiDream image editing"""
-    
+
     model_config = {"populate_by_name": True, "use_enum_values": True}
 
-    seed: int | None = Field(
-        None, ge=0, le=100000000, description="Random seed for generation"
-    )
+    seed: int | None = Field(None, ge=0, le=100000000, description="Random seed for generation")
     prompt: str = Field(..., min_length=1, description="Text prompt for image editing")
     image_b64: str = Field(..., min_length=1, description="Base64 encoded input image")
-    guidance_scale: float | None = Field(
-        5, ge=0, le=10, description="Guidance scale for generation"
-    )
+    guidance_scale: float | None = Field(5, ge=0, le=10, description="Guidance scale for generation")
     negative_prompt: str | None = Field("low res, blur", description="Negative prompt")
     inference_steps: int | None = Field(
         28, ge=5, le=75, description="Number of inference steps", alias="num_inference_steps"
     )
-    image_guidance_scale: float | None = Field(
-        4, ge=0, le=10, description="Image guidance scale"
-    )
+    image_guidance_scale: float | None = Field(4, ge=0, le=10, description="Image guidance scale")
 
 
 class HidreamResponse(BaseModel):
@@ -147,12 +131,8 @@ class HidreamResponse(BaseModel):
     image_url: str | None = Field(None, description="Generated image URL")
     image_data: str | None = Field(None, description="Base64 encoded image data")
     error_message: str | None = Field(None, description="Error message if failed")
-    generation_time: float | None = Field(
-        None, description="Time taken to generate in seconds"
-    )
-    metadata: dict[str, Any] = Field(
-        default_factory=dict, description="Additional metadata"
-    )
+    generation_time: float | None = Field(None, description="Time taken to generate in seconds")
+    metadata: dict[str, Any] = Field(default_factory=dict, description="Additional metadata")
 
 
 class HidreamError(Exception):
@@ -231,47 +211,47 @@ def parse_aspect_ratio_hidream(ar: str) -> str:
     """
     if not ar or not isinstance(ar, str):
         raise ValueError("Aspect ratio must be a non-empty string")
-    
+
     ar = ar.strip()
-    if ':' not in ar:
+    if ":" not in ar:
         raise ValueError("Aspect ratio must be in format 'WIDTH:HEIGHT' (e.g., '16:9', '1:1')")
-    
+
     try:
-        ratio_width_str, ratio_height_str = ar.split(':', 1)
+        ratio_width_str, ratio_height_str = ar.split(":", 1)
         ratio_width = float(ratio_width_str.strip())
         ratio_height = float(ratio_height_str.strip())
     except ValueError as e:
         raise ValueError(f"Invalid aspect ratio format '{ar}': width and height must be numbers") from e
-    
+
     if ratio_width <= 0 or ratio_height <= 0:
         raise ValueError(f"Aspect ratio values must be positive: {ratio_width}:{ratio_height}")
-    
+
     # Calculate target aspect ratio
     target_aspect = ratio_width / ratio_height
-    
+
     # Available HiDream resolutions with their aspect ratios
     # NOTE: HiDream API format is HEIGHTxWIDTH, not WIDTHxHEIGHT
     # So "768x1360" means height=768, width=1360 → actual image is 1360×768 (landscape)
     resolutions = [
-        ("1024x1024", 1.0),          # Square (1024×1024)
-        ("1360x768", 768/1360),      # Portrait (768×1360) 
-        ("768x1360", 1360/768),      # Landscape (1360×768)
-        ("1168x880", 880/1168),      # Portrait (880×1168)
-        ("880x1168", 1168/880),      # Landscape (1168×880)
-        ("832x1248", 1248/832),      # Landscape (1248×832)
-        ("1248x832", 832/1248),      # Portrait (832×1248)
+        ("1024x1024", 1.0),  # Square (1024×1024)
+        ("1360x768", 768 / 1360),  # Portrait (768×1360)
+        ("768x1360", 1360 / 768),  # Landscape (1360×768)
+        ("1168x880", 880 / 1168),  # Portrait (880×1168)
+        ("880x1168", 1168 / 880),  # Landscape (1168×880)
+        ("832x1248", 1248 / 832),  # Landscape (1248×832)
+        ("1248x832", 832 / 1248),  # Portrait (832×1248)
     ]
-    
+
     # Find the resolution with closest aspect ratio
     best_resolution = "1024x1024"  # Default fallback
-    best_diff = float('inf')
-    
+    best_diff = float("inf")
+
     for resolution, aspect in resolutions:
         diff = abs(aspect - target_aspect)
         if diff < best_diff:
             best_diff = diff
             best_resolution = resolution
-    
+
     return best_resolution
 
 
@@ -313,9 +293,7 @@ class HidreamClient:
         """
         self.api_key = api_key or DEFAULT_API_KEY
         if not self.api_key:
-            raise ValueError(
-                "API key required. Set CHUTES_API_KEY environment variable or pass api_key parameter"
-            )
+            raise ValueError("API key required. Set CHUTES_API_KEY environment variable or pass api_key parameter")
 
         self.timeout = timeout
         self.headers = {
@@ -391,13 +369,10 @@ class HidreamClient:
             logger.debug(f"Request headers: {self.headers}")
             logger.debug(f"Request payload: {data}")
 
-            response = requests.post(
-                url, headers=self.headers, json=data, timeout=self.timeout
-            )
+            response = requests.post(url, headers=self.headers, json=data, timeout=self.timeout)
 
             logger.debug(f"Response status: {response.status_code}")
             logger.debug(f"Response headers: {dict(response.headers)}")
-
 
             response.raise_for_status()
 
@@ -415,9 +390,7 @@ class HidreamClient:
                     "image_url": None,
                     "content_type": content_type,
                 }
-                logger.debug(
-                    f"Created structured response from image data (size: {len(response.content)} bytes)"
-                )
+                logger.debug(f"Created structured response from image data (size: {len(response.content)} bytes)")
                 return result
             else:
                 # JSON response
@@ -432,24 +405,20 @@ class HidreamClient:
                     logger.error(f"JSON decode error: {json_err}")
                     logger.error(f"Response content type: {content_type}")
                     logger.error(f"Full response content: {raw_content}")
-                    raise ValueError(
-                        f"Invalid JSON response: {json_err}. Content: {raw_content[:200]}..."
-                    )
+                    raise ValueError(f"Invalid JSON response: {json_err}. Content: {raw_content[:200]}...")
 
         except requests.exceptions.RequestException as e:
-            error_msg = f"Request failed: {str(e)}"
+            error_msg = f"Request failed: {e!s}"
             logger.error(error_msg)
             logger.error(f"Request URL: {url}")
             logger.error(f"Request timeout: {self.timeout}s")
             raise HidreamError(error_msg) from e
         except ValueError as e:
-            error_msg = f"Response parsing failed: {str(e)}"
+            error_msg = f"Response parsing failed: {e!s}"
             logger.error(error_msg)
             raise HidreamError(error_msg) from e
 
-    async def _make_request_async(
-        self, url: str, data: dict[str, Any]
-    ) -> dict[str, Any]:
+    async def _make_request_async(self, url: str, data: dict[str, Any]) -> dict[str, Any]:
         """
         Make HTTP request asynchronously.
 
@@ -470,17 +439,13 @@ class HidreamClient:
 
             timeout = aiohttp.ClientTimeout(total=self.timeout)
             async with aiohttp.ClientSession(timeout=timeout) as session:
-                async with session.post(
-                    url, headers=self.headers, json=data
-                ) as response:
+                async with session.post(url, headers=self.headers, json=data) as response:
                     logger.debug(f"Response status: {response.status}")
                     logger.debug(f"Response headers: {dict(response.headers)}")
 
                     # Log raw response content for debugging
                     raw_content = await response.text()
-                    logger.debug(
-                        f"Raw response content: {raw_content[:500]}{'...' if len(raw_content) > 500 else ''}"
-                    )
+                    logger.debug(f"Raw response content: {raw_content[:500]}{'...' if len(raw_content) > 500 else ''}")
 
                     response.raise_for_status()
 
@@ -499,9 +464,7 @@ class HidreamClient:
                             "image_url": None,
                             "content_type": content_type,
                         }
-                        logger.debug(
-                            f"Created structured response from image data (size: {len(image_bytes)} bytes)"
-                        )
+                        logger.debug(f"Created structured response from image data (size: {len(image_bytes)} bytes)")
                         return result
                     else:
                         # JSON response
@@ -516,18 +479,16 @@ class HidreamClient:
                             logger.error(f"JSON decode error: {json_err}")
                             logger.error(f"Response content type: {content_type}")
                             logger.error(f"Full response content: {raw_content}")
-                            raise ValueError(
-                                f"Invalid JSON response: {json_err}. Content: {raw_content[:200]}..."
-                            )
+                            raise ValueError(f"Invalid JSON response: {json_err}. Content: {raw_content[:200]}...")
 
         except aiohttp.ClientError as e:
-            error_msg = f"Async request failed: {str(e)}"
+            error_msg = f"Async request failed: {e!s}"
             logger.error(error_msg)
             logger.error(f"Request URL: {url}")
             logger.error(f"Request timeout: {self.timeout}s")
             raise HidreamError(error_msg) from e
         except ValueError as e:
-            error_msg = f"Response parsing failed: {str(e)}"
+            error_msg = f"Response parsing failed: {e!s}"
             logger.error(error_msg)
             raise HidreamError(error_msg) from e
 
@@ -561,7 +522,7 @@ class HidreamClient:
         )
 
         logger.info(
-            f"Generating HiDream image",
+            "Generating HiDream image",
             extra={
                 "prompt": prompt[:100] + "..." if len(prompt) > 100 else prompt,
                 "res": res,
@@ -572,9 +533,7 @@ class HidreamClient:
 
         try:
             start_time = time.time()
-            response_data = self._make_request_sync(
-                HIDREAM_GENERATE_URL, request_data.model_dump(by_alias=True)
-            )
+            response_data = self._make_request_sync(HIDREAM_GENERATE_URL, request_data.model_dump(by_alias=True))
             generation_time = time.time() - start_time
 
             return HidreamResponse(
@@ -584,11 +543,9 @@ class HidreamClient:
                 **response_data,
             )
         except Exception as e:
-            error_msg = f"HiDream generation failed: {str(e)}"
+            error_msg = f"HiDream generation failed: {e!s}"
             logger.error(error_msg)
-            return HidreamResponse(
-                success=False, model_used="hidream-v1", error_message=error_msg
-            )
+            return HidreamResponse(success=False, model_used="hidream-v1", error_message=error_msg)
 
     # Keep generate for backward compatibility
     def generate(self, *args, **kwargs) -> HidreamResponse:
@@ -625,7 +582,7 @@ class HidreamClient:
         )
 
         logger.info(
-            f"Generating HiDream image async",
+            "Generating HiDream image async",
             extra={
                 "prompt": prompt[:100] + "..." if len(prompt) > 100 else prompt,
                 "res": res,
@@ -636,9 +593,7 @@ class HidreamClient:
 
         try:
             start_time = time.time()
-            response_data = await self._make_request_async(
-                HIDREAM_GENERATE_URL, request_data.model_dump(by_alias=True)
-            )
+            response_data = await self._make_request_async(HIDREAM_GENERATE_URL, request_data.model_dump(by_alias=True))
             generation_time = time.time() - start_time
 
             return HidreamResponse(
@@ -648,11 +603,9 @@ class HidreamClient:
                 **response_data,
             )
         except Exception as e:
-            error_msg = f"HiDream async generation failed: {str(e)}"
+            error_msg = f"HiDream async generation failed: {e!s}"
             logger.error(error_msg)
-            return HidreamResponse(
-                success=False, model_used="hidream-v1", error_message=error_msg
-            )
+            return HidreamResponse(success=False, model_used="hidream-v1", error_message=error_msg)
 
     def edit_sync(
         self,
@@ -691,11 +644,11 @@ class HidreamClient:
 
             image_b64 = base64.b64encode(image_bytes).decode("utf-8")
         except Exception as e:
-            logger.error(f"Failed to process input image: {str(e)}")
+            logger.error(f"Failed to process input image: {e!s}")
             return HidreamResponse(
                 success=False,
                 model_used="hidream-edit",
-                error_message=f"Image processing failed: {str(e)}",
+                error_message=f"Image processing failed: {e!s}",
             )
 
         request_data = HidreamEditRequest(
@@ -709,7 +662,7 @@ class HidreamClient:
         )
 
         logger.info(
-            f"Editing HiDream image",
+            "Editing HiDream image",
             extra={
                 "prompt": prompt[:100] + "..." if len(prompt) > 100 else prompt,
                 "guidance_scale": guidance_scale,
@@ -720,9 +673,7 @@ class HidreamClient:
 
         try:
             start_time = time.time()
-            response_data = self._make_request_sync(
-                HIDREAM_EDIT_URL, request_data.model_dump(by_alias=True)
-            )
+            response_data = self._make_request_sync(HIDREAM_EDIT_URL, request_data.model_dump(by_alias=True))
             generation_time = time.time() - start_time
 
             return HidreamResponse(
@@ -732,11 +683,9 @@ class HidreamClient:
                 **response_data,
             )
         except Exception as e:
-            error_msg = f"HiDream edit failed: {str(e)}"
+            error_msg = f"HiDream edit failed: {e!s}"
             logger.error(error_msg)
-            return HidreamResponse(
-                success=False, model_used="hidream-edit", error_message=error_msg
-            )
+            return HidreamResponse(success=False, model_used="hidream-edit", error_message=error_msg)
 
     # Keep edit for backward compatibility
     def edit(self, *args, **kwargs) -> HidreamResponse:
@@ -780,11 +729,11 @@ class HidreamClient:
 
             image_b64 = base64.b64encode(image_bytes).decode("utf-8")
         except Exception as e:
-            logger.error(f"Failed to process input image: {str(e)}")
+            logger.error(f"Failed to process input image: {e!s}")
             return HidreamResponse(
                 success=False,
                 model_used="hidream-edit",
-                error_message=f"Image processing failed: {str(e)}",
+                error_message=f"Image processing failed: {e!s}",
             )
 
         request_data = HidreamEditRequest(
@@ -798,7 +747,7 @@ class HidreamClient:
         )
 
         logger.info(
-            f"Editing HiDream image async",
+            "Editing HiDream image async",
             extra={
                 "prompt": prompt[:100] + "..." if len(prompt) > 100 else prompt,
                 "guidance_scale": guidance_scale,
@@ -809,9 +758,7 @@ class HidreamClient:
 
         try:
             start_time = time.time()
-            response_data = await self._make_request_async(
-                HIDREAM_EDIT_URL, request_data.model_dump(by_alias=True)
-            )
+            response_data = await self._make_request_async(HIDREAM_EDIT_URL, request_data.model_dump(by_alias=True))
             generation_time = time.time() - start_time
 
             return HidreamResponse(
@@ -821,11 +768,9 @@ class HidreamClient:
                 **response_data,
             )
         except Exception as e:
-            error_msg = f"HiDream async edit failed: {str(e)}"
+            error_msg = f"HiDream async edit failed: {e!s}"
             logger.error(error_msg)
-            return HidreamResponse(
-                success=False, model_used="hidream-edit", error_message=error_msg
-            )
+            return HidreamResponse(success=False, model_used="hidream-edit", error_message=error_msg)
 
     def _generate_with_retries(self, **kwargs) -> HidreamResponse:
         """Wrapper that handles final failure after retries are exhausted."""
@@ -848,9 +793,7 @@ class HidreamClient:
                 "api_url": HIDREAM_GENERATE_URL,
             }
 
-            error_msg = (
-                f"HiDream generation failed after {MAX_RETRIES} attempts: {str(e)}"
-            )
+            error_msg = f"HiDream generation failed after {MAX_RETRIES} attempts: {e!s}"
             logger.error(
                 error_msg,
                 extra={
@@ -891,7 +834,7 @@ class HidreamClient:
                 "api_url": HIDREAM_EDIT_URL,
             }
 
-            error_msg = f"HiDream edit failed after {MAX_RETRIES} attempts: {str(e)}"
+            error_msg = f"HiDream edit failed after {MAX_RETRIES} attempts: {e!s}"
             logger.error(
                 error_msg,
                 extra={
@@ -956,18 +899,20 @@ class HidreamCLI:
         if verbose:
             logger.remove()
             logger.add(lambda msg: print(msg, end=""), colorize=True, level="DEBUG")
-        
+
         # Handle aspect ratio parameter - overrides res if specified
         if ar is not None:
             try:
                 res = parse_aspect_ratio_hidream(ar)
                 # Extract actual dimensions from HiDream API format (HEIGHTxWIDTH)
-                height, width = res.split('x')
-                logger.info(f"Aspect ratio parameter '{ar}' mapped to HiDream resolution {res} → generates {width}×{height} image")
+                height, width = res.split("x")
+                logger.info(
+                    f"Aspect ratio parameter '{ar}' mapped to HiDream resolution {res} → generates {width}×{height} image"
+                )
             except ValueError as e:
                 print(f"❌ Invalid aspect ratio format '{ar}': {e}")
                 return
-        
+
         response = self.client.generate(
             prompt=prompt,
             seed=seed,
@@ -977,18 +922,18 @@ class HidreamCLI:
         )
 
         if response.success:
-            print(f"✅ Generation successful!")
+            print("✅ Generation successful!")
             if response.image_url:
                 print(f"📎 Image URL: {response.image_url}")
-            
+
             # Save image if we have image data
             if response.image_data:
                 import base64
-                
+
                 try:
                     image_bytes = base64.b64decode(response.image_data)
                     image_format = detect_image_format(image_bytes)
-                    
+
                     # Determine final output path
                     if output:
                         final_output_path = Path(output)
@@ -997,15 +942,15 @@ class HidreamCLI:
                         prompt_slug_name = prompt_slug(prompt)
                         filename = f"{prompt_slug_name}.{image_format}"
                         final_output_path = Path.cwd() / filename
-                    
+
                     # Ensure directory exists
                     final_output_path.parent.mkdir(parents=True, exist_ok=True)
-                    
+
                     # Save image
                     with open(final_output_path, "wb") as f:
                         f.write(image_bytes)
                     print(f"💾 Image saved to: {final_output_path}")
-                    
+
                 except Exception as e:
                     print(f"⚠️  Failed to save image: {e}")
         else:
@@ -1051,18 +996,18 @@ class HidreamCLI:
         )
 
         if response.success:
-            print(f"✅ Edit successful!")
+            print("✅ Edit successful!")
             if response.image_url:
                 print(f"📎 Image URL: {response.image_url}")
-            
+
             # Save image if we have image data
             if response.image_data:
                 import base64
-                
+
                 try:
                     image_bytes = base64.b64decode(response.image_data)
                     image_format = detect_image_format(image_bytes)
-                    
+
                     # Determine final output path
                     if output:
                         final_output_path = Path(output)
@@ -1071,15 +1016,15 @@ class HidreamCLI:
                         prompt_slug_name = prompt_slug(prompt)
                         filename = f"{prompt_slug_name}_edited.{image_format}"
                         final_output_path = Path.cwd() / filename
-                    
+
                     # Ensure directory exists
                     final_output_path.parent.mkdir(parents=True, exist_ok=True)
-                    
+
                     # Save image
                     with open(final_output_path, "wb") as f:
                         f.write(image_bytes)
                     print(f"💾 Image saved to: {final_output_path}")
-                    
+
                 except Exception as e:
                     print(f"⚠️  Failed to save image: {e}")
         else:
@@ -1142,9 +1087,7 @@ class HidreamCLI:
         categories = {model.category for model in HIDREAM_MODEL_REGISTRY.values()}
         print("Available HiDream categories:")
         for category in sorted(categories):
-            count = len(
-                [m for m in HIDREAM_MODEL_REGISTRY.values() if m.category == category]
-            )
+            count = len([m for m in HIDREAM_MODEL_REGISTRY.values() if m.category == category])
             print(f"  • {category} ({count} models)")
 
     def info(self, model: str):
