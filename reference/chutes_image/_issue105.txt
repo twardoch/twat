@@ -1,0 +1,53 @@
+```
+$ ./chutes_skyreels_vid.py video --first_frame muscular_basketball_player_bouncing_a_ball.jpg --last_frame "#ffffff" --prompt "muscular basketball player bouncing a ball, shot against pure minimalistic white background, ultra-sharp 8k stock footage, uniform lighting"
+2025-08-15 01:58:59.314 | INFO     | __main__:__init__:322 - SkyreelsClient initialized with timeout=300s
+2025-08-15 01:58:59.705 | DEBUG    | __main__:image_to_video_sync:567 - Encoded and resized first frame image to 960*544
+2025-08-15 01:58:59.705 | ERROR    | __main__:image_to_video_sync:573 - Failed to process input images: Failed to encode image to base64: [Errno 2] No such file or directory: '#ffffff'
+❌ Video generation failed: Image processing failed: Failed to encode image to base64: [Errno 2] No such file or directory: '#ffffff'
+~/Developer/vcs/github.twardoch/pub/twat-packages/_good/twat/plugins/repos/twat_genai/external/chutes_image
+[01:58:59] $ ./chutes_skyreels_vid.py video --first_frame muscular_basketball_player_bouncing_a_ball.jpg --last_frame "#ffffff" --prompt "muscular basketball player bouncing a ball, shot against pure minimalistic white background, ultra-sharp 8k stock footage, uniform lighting"
+2025-08-15 02:03:14.752 | INFO     | __main__:__init__:395 - SkyreelsClient initialized with timeout=300s
+✅ First frame: Using image file muscular_basketball_player_bouncing_a_ball.jpg
+2025-08-15 02:03:14.754 | DEBUG    | __main__:create_color_image:267 - Creating 1x1 solid color image with RGB(255, 255, 255)
+✅ Last frame: Using hex color #ffffff
+2025-08-15 02:03:14.822 | DEBUG    | __main__:image_to_video_sync:640 - Encoded and resized first frame image to 960*544
+2025-08-15 02:03:14.822 | DEBUG    | __main__:create_color_image:267 - Creating 960x544 solid color image with RGB(255, 255, 255)
+2025-08-15 02:03:14.829 | DEBUG    | __main__:encode_image_to_base64:318 - Created solid color image from hex: #ffffff
+2025-08-15 02:03:14.843 | DEBUG    | __main__:image_to_video_sync:644 - Encoded and resized last frame image to 960*544
+2025-08-15 02:03:14.843 | INFO     | __main__:image_to_video_sync:672 - Generating SkyReels image-to-video
+2025-08-15 02:03:14.843 | DEBUG    | __main__:_make_request_sync:427 - Making sync request to https://kikakkz-skyreels-v2-14b-540p.chutes.ai/image2video
+2025-08-15 02:03:14.843 | DEBUG    | __main__:_make_request_sync:428 - Request headers: {'Authorization': 'Bearer cpk_25d11186c1f54d7b93820f57a38e3529.c3f5409ea9535f9385a55f4785011038.B1vxekQJkiAhDTUwhaeeKKmDoddE8wDL', 'Content-Type': 'application/json'}
+2025-08-15 02:03:14.843 | DEBUG    | __main__:_make_request_sync:429 - Request payload keys: ['prompt', 'negative_prompt', 'resolution', 'fps', 'num_frames', 'base_num_frames', 'guidance_scale', 'inference_steps', 'seed', 'shift', 'ar_step', 'overlap_history', 'addnoise_condition', 'causal_block_size', 'img_b64_first', 'img_b64_last']
+2025-08-15 02:03:30.339 | DEBUG    | __main__:_make_request_sync:435 - Response status: 502
+2025-08-15 02:03:30.339 | DEBUG    | __main__:_make_request_sync:436 - Response headers: {'server': 'nginx', 'date': 'Fri, 15 Aug 2025 00:03:30 GMT', 'content-type': 'text/html', 'Content-Length': '150', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, OPTIONS, PUT, DELETE, PATCH', 'via': '1.1 google', 'Alt-Svc': 'clear'}
+2025-08-15 02:03:30.339 | ERROR    | __main__:_make_request_sync:460 - Request failed: 502 Server Error: Bad Gateway for url: https://kikakkz-skyreels-v2-14b-540p.chutes.ai/image2video
+2025-08-15 02:03:30.339 | ERROR    | __main__:_make_request_sync:461 - Request URL: https://kikakkz-skyreels-v2-14b-540p.chutes.ai/image2video
+2025-08-15 02:03:30.340 | ERROR    | __main__:_make_request_sync:462 - Request timeout: 300s
+2025-08-15 02:03:30.340 | ERROR    | __main__:image_to_video_sync:701 - SkyReels image-to-video generation failed: Request failed: 502 Server Error: Bad Gateway for url: https://kikakkz-skyreels-v2-14b-540p.chutes.ai/image2video
+❌ Video generation failed: SkyReels image-to-video generation failed: Request failed: 502 Server Error: Bad Gateway for url: https://kikakkz-skyreels-v2-14b-540p.chutes.ai/image2video
+~/Developer/vcs/github.twardoch/pub/twat-packages/_good/twat/plugins/repos/twat_genai/external/chutes_image
+[02:03:30] $ pbpaste > _issue105.txt
+~/Developer/vcs/github.twardoch/pub/twat-packages/_good/twat/plugins/repos/twat_genai/external/chutes_image
+[02:03:58] $ pbpaste > _issue105.txt
+~/Developer/vcs/github.twardoch/pub/twat-packages/_good/twat/plugins/repos/twat_genai/external/chutes_image
+[02:07:37] $ ./chutes_skyreels_vid.py video --first_frame muscular_basketball_player_bouncing_a_ball.jpg --last_frame "#ffffff" --prompt "muscular basketball player bouncing a ball, shot against pure minimalistic white background, ultra-sharp 8k stock footage, uniform lighting"
+2025-08-15 02:07:42.215 | INFO     | __main__:__init__:395 - SkyreelsClient initialized with timeout=300s
+✅ First frame: Using image file muscular_basketball_player_bouncing_a_ball.jpg
+2025-08-15 02:07:42.217 | DEBUG    | __main__:create_color_image:267 - Creating 1x1 solid color image with RGB(255, 255, 255)
+✅ Last frame: Using hex color #ffffff
+2025-08-15 02:07:42.299 | DEBUG    | __main__:image_to_video_sync:640 - Encoded and resized first frame image to 960*544
+2025-08-15 02:07:42.299 | DEBUG    | __main__:create_color_image:267 - Creating 960x544 solid color image with RGB(255, 255, 255)
+2025-08-15 02:07:42.309 | DEBUG    | __main__:encode_image_to_base64:318 - Created solid color image from hex: #ffffff
+2025-08-15 02:07:42.324 | DEBUG    | __main__:image_to_video_sync:644 - Encoded and resized last frame image to 960*544
+2025-08-15 02:07:42.324 | INFO     | __main__:image_to_video_sync:672 - Generating SkyReels image-to-video
+2025-08-15 02:07:42.325 | DEBUG    | __main__:_make_request_sync:427 - Making sync request to https://kikakkz-skyreels-v2-14b-540p.chutes.ai/image2video
+2025-08-15 02:07:42.325 | DEBUG    | __main__:_make_request_sync:428 - Request headers: {'Authorization': 'Bearer cpk_25d11186c1f54d7b93820f57a38e3529.c3f5409ea9535f9385a55f4785011038.B1vxekQJkiAhDTUwhaeeKKmDoddE8wDL', 'Content-Type': 'application/json'}
+2025-08-15 02:07:42.325 | DEBUG    | __main__:_make_request_sync:429 - Request payload keys: ['prompt', 'negative_prompt', 'resolution', 'fps', 'num_frames', 'base_num_frames', 'guidance_scale', 'inference_steps', 'seed', 'shift', 'ar_step', 'overlap_history', 'addnoise_condition', 'causal_block_size', 'img_b64_first', 'img_b64_last']
+2025-08-15 02:12:42.522 | ERROR    | __main__:_make_request_sync:460 - Request failed: HTTPSConnectionPool(host='kikakkz-skyreels-v2-14b-540p.chutes.ai', port=443): Read timed out. (read timeout=300)
+2025-08-15 02:12:42.522 | ERROR    | __main__:_make_request_sync:461 - Request URL: https://kikakkz-skyreels-v2-14b-540p.chutes.ai/image2video
+2025-08-15 02:12:42.522 | ERROR    | __main__:_make_request_sync:462 - Request timeout: 300s
+2025-08-15 02:12:42.522 | ERROR    | __main__:image_to_video_sync:701 - SkyReels image-to-video generation failed: Request failed: HTTPSConnectionPool(host='kikakkz-skyreels-v2-14b-540p.chutes.ai', port=443): Read timed out. (read timeout=300)
+❌ Video generation failed: SkyReels image-to-video generation failed: Request failed: HTTPSConnectionPool(host='kikakkz-skyreels-v2-14b-540p.chutes.ai', port=443): Read timed out. (read timeout=300)
+```
+
+In @chutes_skyreels_vid.py and in @chutes_wan_vid.py make sure that we use a very generous timeout. Like 20 minutes. 

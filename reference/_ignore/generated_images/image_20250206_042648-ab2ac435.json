@@ -1,0 +1,50 @@
+{
+  "request_id": "ab2ac435-4277-4391-96ce-f38a32f58b28",
+  "timestamp": "20250206_042648",
+  "result": {
+    "seed": 17122184841465413537,
+    "images": [
+      {
+        "url": "https://fal.media/files/penguin/0viGIT1DjAkNgJp-4wN6Z_51435d586f6649bb915b8b451e9848e3.jpg",
+        "width": 1536,
+        "height": 864,
+        "content_type": "image/jpeg"
+      }
+    ],
+    "prompt": "illustration of design software UI, dark mode interface with minimalistic tool icons, sleek dark gray background with white text and subtle gradients. The central canvas displays a detailed, realistic close-up of a human eye with intricate vector crosshatching lines overlaid, showcasing black curved strokes, circular gradients, and realistic reflections in the iris. On the left, a vertical layers panel with grouped layers, icons, and a preview section showing a black-and-white vector eye. The right sidebar features properties sliders, toggles, and vector editing options with clean typography. Symmetrical layout",
+    "timings": {
+      "inference": 8.664981197565794
+    },
+    "has_nsfw_concepts": [
+      false
+    ]
+  },
+  "image_info": {
+    "path": "generated_images/image_20250206_042648-ab2ac435.jpg",
+    "url": "https://fal.media/files/penguin/0viGIT1DjAkNgJp-4wN6Z_51435d586f6649bb915b8b451e9848e3.jpg",
+    "index": 0,
+    "suffix": null,
+    "metadata_path": "generated_images/image_20250206_042648-ab2ac435.json",
+    "original_prompt": "illustration of design software UI, dark mode interface with minimalistic tool icons, sleek dark gray background with white text and subtle gradients. The central canvas displays a detailed, realistic close-up of a human eye with intricate vector crosshatching lines overlaid, showcasing black curved strokes, circular gradients, and realistic reflections in the iris. On the left, a vertical layers panel with grouped layers, icons, and a preview section showing a black-and-white vector eye. The right sidebar features properties sliders, toggles, and vector editing options with clean typography. Symmetrical layout"
+  },
+  "image": null,
+  "original_prompt": "illustration of design software UI, dark mode interface with minimalistic tool icons, sleek dark gray background with white text and subtle gradients. The central canvas displays a detailed, realistic close-up of a human eye with intricate vector crosshatching lines overlaid, showcasing black curved strokes, circular gradients, and realistic reflections in the iris. On the left, a vertical layers panel with grouped layers, icons, and a preview section showing a black-and-white vector eye. The right sidebar features properties sliders, toggles, and vector editing options with clean typography. Symmetrical layout",
+  "job_params": {
+    "prompt": "illustration of design software UI, dark mode interface with minimalistic tool icons, sleek dark gray background with white text and subtle gradients. The central canvas displays a detailed, realistic close-up of a human eye with intricate vector crosshatching lines overlaid, showcasing black curved strokes, circular gradients, and realistic reflections in the iris. On the left, a vertical layers panel with grouped layers, icons, and a preview section showing a black-and-white vector eye. The right sidebar features properties sliders, toggles, and vector editing options with clean typography. Symmetrical layout",
+    "model": "fal-ai/flux-lora-depth",
+    "lora_spec": "strangerzonehf/2Color-Illustration",
+    "image_size": "landscape_16_9",
+    "guidance_scale": 0.85,
+    "num_inference_steps": 28,
+    "image_config": {
+      "model_type": "fal-ai/flux-lora-depth",
+      "input_image": {
+        "url": null,
+        "path": "screenshot.jpg",
+        "pil_image": null
+      },
+      "strength": 0.75,
+      "negative_prompt": "photorealistic"
+    }
+  }
+}

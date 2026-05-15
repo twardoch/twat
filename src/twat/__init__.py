@@ -1,160 +1,206 @@
 """
-Twat Plugin Host System.
+twat: A fast, modular plugin host system.
 
-This module provides the core functionality for the 'twat' plugin system.
-It allows for dynamic discovery and loading of plugins registered via entry points,
-and provides a command-line interface to execute plugin functionalities.
+This module is the core engine of the `twat` ecosystem. It finds plugins
+registered via Python entry points and loads them into the `twat` namespace.
+It also provides the CLI dispatcher to run them.
+
+Plugins are standalone packages (like `twat-fs` or `twat-cache`) that
+become available as `twat.fs` or `twat.cache` at runtime.
 """
 
 from __future__ import annotations
 
 import sys
+from collections.abc import Iterable
 from importlib import metadata
-from types import ModuleType  # Moved to top-level for runtime isinstance check
-from typing import TYPE_CHECKING, NoReturn
+from types import ModuleType
+from typing import NoReturn
 
-# if TYPE_CHECKING: # ModuleType is now imported globally
-#     pass
+from twat.common.exceptions import PluginError
 
 __version__ = metadata.version(__name__)
 
-# Enable package-style imports for plugins
-__path__ = []
-__package__ = "twat"  # noqa: A001 - Intentionally shadows builtin for plugin loading
+__package__ = "twat"
+
+
+def _plugin_entry_points() -> Iterable[metadata.EntryPoint]:
+    """Return twat plugin entry points without importing plugin modules."""
+    return metadata.entry_points(group="twat.plugins")
+
+
+def iter_plugins() -> tuple[str, ...]:
+    """Return sorted installed twat plugin names without importing plugins."""
+    return tuple(sorted({ep.name for ep in _plugin_entry_points()}))
+
+
+def _get_plugin_entry_point(name: str) -> metadata.EntryPoint | None:
+    """Find a plugin entry point by its short name without loading it."""
+    for ep in _plugin_entry_points():
+        if ep.name == name:
+            return ep
+    return None
+
+
+def _usage() -> str:
+    """Return CLI usage text for the host dispatcher."""
+    return (
+        "Usage: twat <plugin_name> [args...]\n"
+        "       twat --list\n"
+        "       twat --help\n\n"
+        "Options:\n"
+        "  --list     List installed twat plugin entry point names without importing them.\n"
+        "  --help     Show this help message.\n\n"
+        "Dispatch:\n"
+        "  twat <plugin_name> [args...] loads the matching entry point from the\n"
+        "  'twat.plugins' group, rewrites argv to 'twat.<plugin_name>', and calls\n"
+        "  the plugin module's callable main()."
+    )
 
 
 def _load_plugin(name: str) -> ModuleType | None:
     """
-    Load a plugin module by its registered name.
+    Find and load a twat plugin by name.
 
-    Searches for a plugin registered under the 'twat.plugins' entry point group
-    with the given name. If found and successfully loaded as a module, it's
-    registered in `sys.modules` as `twat.<name>` and the module object is returned.
+    Scans the `twat.plugins` entry point group. If a match is found,
+    loads the module and registers it in `sys.modules` so future imports
+    are fast.
 
     Args:
-        name: The registered name of the plugin.
+        name: The short name of the plugin (e.g., "fs" for "twat-fs").
 
     Returns:
-        The loaded plugin module, or None if the plugin cannot be found,
-        fails to load, or the loaded entry point is not a module.
+        The loaded module, or None if the plugin isn't installed or is invalid.
+
+    Raises:
+        PluginError: If the plugin exists but crashes during import.
     """
     try:
-        eps = metadata.entry_points(group="twat.plugins")
-        for ep in eps:
-            if ep.name == name:
-                loaded_object = ep.load()
-                if isinstance(loaded_object, ModuleType):
-                    # Register the plugin in sys.modules
-                    plugin_name = f"twat.{name}"
-                    sys.modules[plugin_name] = loaded_object
-                    return loaded_object
-                else:
-                    # Optionally, log that the loaded object was not a module
-                    # For now, conform to signature by returning None
-                    return None
-    except Exception:
-        # Optionally, log the exception
+        ep = _get_plugin_entry_point(name)
+        if ep is None:
+            return None
+
+        loaded_object = ep.load()
+        if isinstance(loaded_object, ModuleType):
+            # Register the plugin in sys.modules
+            plugin_name = f"twat.{name}"
+            sys.modules[plugin_name] = loaded_object
+            return loaded_object
         return None
-    return None
+    except PluginError:
+        raise
+    except Exception as exc:
+        msg = f"Failed to load plugin '{name}'"
+        raise PluginError(
+            msg,
+            context={"plugin_name": name},
+            cause=exc,
+        ) from exc
 
 
 def __getattr__(name: str) -> ModuleType:
     """
-    Dynamic attribute lookup for plugins.
+    Load plugins dynamically on attribute access.
 
-    This allows accessing registered 'twat' plugins as attributes of this module.
-    For example, `import twat; twat.myplugin` will attempt to load the plugin
-    named 'myplugin'.
+    This magic method powers the `twat.<plugin>` syntax. When you run:
+        import twat
+        twat.myplugin
+    This method looks for 'myplugin' in the `twat.plugins` entry points.
 
-    To register a plugin, add an entry point to its `pyproject.toml` under
-    the `twat.plugins` group:
+    To make your package a twat plugin, add this to your `pyproject.toml`:
 
     ```toml
     [project.entry-points."twat.plugins"]
-    myplugin = "your_package.module"  # Points to the plugin module
+    myplugin = "your_package.module"
     ```
 
     Args:
-        name: The name of the plugin to load (as used in the entry point).
+        name: The short plugin name.
 
     Returns:
-        The loaded plugin module.
+        The loaded module.
 
     Raises:
-        AttributeError: If the plugin cannot be found, fails to load, or the
-                        loaded entry point is not a valid module.
+        PluginError: If the plugin isn't installed or crashes on load.
     """
     plugin = _load_plugin(name)
     if plugin is not None:
         return plugin
 
     msg = f"module '{__name__}' has no attribute '{name}'"
-    raise AttributeError(msg)
+    raise PluginError(
+        msg,
+        context={"plugin_name": name},
+    )
 
 
 def run_plugin(plugin_name: str) -> NoReturn:
     """
-    Loads and runs the 'main()' function of a specified plugin.
+    Load and execute a plugin's `main()` function.
 
-    This function is primarily used by the `main` CLI entry point. It attempts
-    to load the plugin, and if successful and the plugin module has a callable
-    attribute named 'main', it calls it.
-
-    Note:
-        This function calls `sys.exit()` internally with 0 on successful plugin
-        execution, or 1 on failure (plugin not found, load error, no 'main'
-        attribute, or exception during plugin's main execution).
-        The `sys.argv` is expected to be set up by the caller for the plugin.
+    This powers the `twat <plugin>` CLI command. It finds the plugin,
+    checks if it has a callable `main`, and runs it.
 
     Args:
-        plugin_name: The name of the plugin to load and run.
+        plugin_name: The short name of the plugin to run.
+
+    Exits:
+        0: Plugin ran successfully.
+        1: Plugin not found, crashed, or has no `main()` function.
     """
     try:
-        eps = metadata.entry_points(group="twat.plugins")
-        for ep in eps:
-            if ep.name == plugin_name:
-                plugin = ep.load()  # TODO: Could use _load_plugin here for consistency?
-                # However, _load_plugin returns None on error, run_plugin exits.
-                # And _load_plugin checks isinstance(module, ModuleType)
-                if isinstance(plugin, ModuleType) and hasattr(plugin, "main") and callable(plugin.main):
-                    plugin.main()
-                    sys.exit(0)
-                else:
-                    # Error: plugin not a module, no main, or main not callable
-                    sys.exit(1)
-        # If loop finishes, plugin_name was not found in entry points
-        sys.exit(1)  # Plugin not found
-    except Exception:
-        # Error during ep.load() or other unexpected issue
+        ep = _get_plugin_entry_point(plugin_name)
+        if ep is not None:
+            plugin = ep.load()
+            main_func = getattr(plugin, "main", None)
+            if isinstance(plugin, ModuleType) and callable(main_func):
+                main_func()
+                sys.exit(0)
+            else:
+                print(
+                    f"Error: Plugin '{plugin_name}' has no callable main() function.",
+                    file=sys.stderr,
+                )
+                sys.exit(1)
+        # Plugin not found in entry points
+        print(
+            f"Error: Plugin '{plugin_name}' not found.",
+            file=sys.stderr,
+        )
         sys.exit(1)
-    # Should not be reached if plugin is found due to sys.exit calls.
-    # If plugin not found, loop finishes and exits.
-    # Adding explicit exit in case logic changes, to ensure NoReturn.
-    sys.exit(1)  # Fallback, though prior exits should cover all paths.
+    except SystemExit:
+        raise
+    except PluginError as exc:
+        print(f"Error loading plugin '{plugin_name}': {exc}", file=sys.stderr)
+        sys.exit(1)
+    except Exception as exc:
+        print(f"Error running plugin '{plugin_name}': {exc}", file=sys.stderr)
+        sys.exit(1)
 
 
 def main() -> NoReturn:
     """
-    Main command-line interface entry point for the twat plugin system.
+    The main CLI dispatcher for the twat ecosystem.
 
-    Parses `sys.argv` to determine the plugin to run and its arguments.
-    Usage: `python -m twat plugin_name [plugin_args...]`
-    or if installed: `twat plugin_name [plugin_args...]`
+    Usage: `twat <plugin_name> [args...]`
 
-    It modifies `sys.argv` for the target plugin before execution, setting
-    `sys.argv[0]` to `twat.plugin_name`.
+    This intercepts the CLI call, rewrites `sys.argv` so the target plugin
+    thinks it was called directly, and passes control to the plugin's `main()`.
     """
     if len(sys.argv) < 2:
-        print(
-            "Usage: twat <plugin_name> [args...]\n"
-            "Error: No plugin name provided.\n"
-            "To list available plugins, run: twat --list\n"
-            "For help, run: twat --help",
-            file=sys.stderr
-        )
+        print(_usage(), file=sys.stderr)
         sys.exit(1)
 
     plugin_name = sys.argv[1]
+    if plugin_name in {"--help", "-h"}:
+        print(_usage())
+        sys.exit(0)
+
+    if plugin_name == "--list":
+        for name in iter_plugins():
+            print(name)
+        sys.exit(0)
+
     # Prepare sys.argv for the plugin:
     # sys.argv[0] becomes "twat.plugin_name"
     # sys.argv[1:] becomes the original arguments to the plugin.

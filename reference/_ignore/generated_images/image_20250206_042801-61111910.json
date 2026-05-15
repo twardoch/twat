@@ -1,0 +1,50 @@
+{
+  "request_id": "61111910-f242-46d8-b4c4-4ab7ebe0b2b7",
+  "timestamp": "20250206_042801",
+  "result": {
+    "seed": 2929753882207558762,
+    "images": [
+      {
+        "url": "https://fal.media/files/monkey/qv2L5ykaACY7BHpnej9gj_81ad5f0766aa4b66944edf5b57ffbe0b.jpg",
+        "width": 1536,
+        "height": 864,
+        "content_type": "image/jpeg"
+      }
+    ],
+    "prompt": "shou_xin, Sketch Smudge, shou_xin, Sketch Smudge, monochrome rough pencil sketch of graphic design software UI, dark mode interface with minimalistic tool icons, sleek dark gray background with white text and subtle gradients. The central canvas displays a detailed, realistic close-up of a human eye with intricate vector crosshatching lines overlaid, showcasing black curved strokes, circular gradients, and realistic reflections in the iris. On the left, a vertical layers panel with grouped layers, icons, and a preview section showing a black-and-white vector eye. The right sidebar features properties sliders, toggles, and vector editing options with clean typography. Symmetrical layout, pencil sketch",
+    "timings": {
+      "inference": 10.381938759237528
+    },
+    "has_nsfw_concepts": [
+      false
+    ]
+  },
+  "image_info": {
+    "path": "generated_images/image_20250206_042801-61111910.jpg",
+    "url": "https://fal.media/files/monkey/qv2L5ykaACY7BHpnej9gj_81ad5f0766aa4b66944edf5b57ffbe0b.jpg",
+    "index": 0,
+    "suffix": null,
+    "metadata_path": "generated_images/image_20250206_042801-61111910.json",
+    "original_prompt": "monochrome rough pencil sketch of graphic design software UI, dark mode interface with minimalistic tool icons, sleek dark gray background with white text and subtle gradients. The central canvas displays a detailed, realistic close-up of a human eye with intricate vector crosshatching lines overlaid, showcasing black curved strokes, circular gradients, and realistic reflections in the iris. On the left, a vertical layers panel with grouped layers, icons, and a preview section showing a black-and-white vector eye. The right sidebar features properties sliders, toggles, and vector editing options with clean typography. Symmetrical layout, pencil sketch"
+  },
+  "image": null,
+  "original_prompt": "monochrome rough pencil sketch of graphic design software UI, dark mode interface with minimalistic tool icons, sleek dark gray background with white text and subtle gradients. The central canvas displays a detailed, realistic close-up of a human eye with intricate vector crosshatching lines overlaid, showcasing black curved strokes, circular gradients, and realistic reflections in the iris. On the left, a vertical layers panel with grouped layers, icons, and a preview section showing a black-and-white vector eye. The right sidebar features properties sliders, toggles, and vector editing options with clean typography. Symmetrical layout, pencil sketch",
+  "job_params": {
+    "prompt": "monochrome rough pencil sketch of graphic design software UI, dark mode interface with minimalistic tool icons, sleek dark gray background with white text and subtle gradients. The central canvas displays a detailed, realistic close-up of a human eye with intricate vector crosshatching lines overlaid, showcasing black curved strokes, circular gradients, and realistic reflections in the iris. On the left, a vertical layers panel with grouped layers, icons, and a preview section showing a black-and-white vector eye. The right sidebar features properties sliders, toggles, and vector editing options with clean typography. Symmetrical layout, pencil sketch",
+    "model": "fal-ai/flux-lora-depth",
+    "lora_spec": "shou_xin, Sketch Smudge",
+    "image_size": "landscape_16_9",
+    "guidance_scale": 0.85,
+    "num_inference_steps": 28,
+    "image_config": {
+      "model_type": "fal-ai/flux-lora-depth",
+      "input_image": {
+        "url": null,
+        "path": "screenshot.jpg",
+        "pil_image": null
+      },
+      "strength": 0.75,
+      "negative_prompt": "colorful; photorealistic"
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "request_id": "1da1cad2-b1ea-47d8-b8f6-160e23be0dca",
+  "timestamp": "20250205_152027",
+  "result": {
+    "seed": 4648162786506108986,
+    "images": [
+      {
+        "url": "https://fal.media/files/panda/UqfiIJ3Fe5X9uJfu7zMyo_9763eb50e5ed4a0594462c3c92d22ce5.jpg",
+        "width": 1024,
+        "height": 1024,
+        "content_type": "image/jpeg"
+      }
+    ],
+    "prompt": "shou_xin, Simple Pencil sketch, shou_xin, Simple Pencil sketch, monochrome rough pencil sketch of the word 'vexy' in chubby bold font, on white background",
+    "timings": {
+      "inference": 6.815156543627381
+    },
+    "has_nsfw_concepts": [
+      false
+    ]
+  },
+  "image_info": {
+    "path": "generated_images/monochrome-rough-20250205-152027-1da1cad2-shou-xin.jpg",
+    "url": "https://fal.media/files/panda/UqfiIJ3Fe5X9uJfu7zMyo_9763eb50e5ed4a0594462c3c92d22ce5.jpg",
+    "index": 0,
+    "suffix": "shou-xin",
+    "metadata_path": "generated_images/monochrome-rough-20250205-152027-1da1cad2-shou-xin.json",
+    "original_prompt": "monochrome rough pencil sketch of the word 'vexy' in chubby bold font, on white background"
+  },
+  "image": null,
+  "original_prompt": "monochrome rough pencil sketch of the word 'vexy' in chubby bold font, on white background",
+  "job_params": {
+    "prompt": "monochrome rough pencil sketch of the word 'vexy' in chubby bold font, on white background",
+    "original_prompt": "monochrome rough pencil sketch of the word 'vexy' in chubby bold font, on white background",
+    "model": "fal-ai/flux-lora-depth",
+    "lora_spec": "shou_xin, Simple Pencil sketch",
+    "image_size": "square_hd",
+    "guidance_scale": 3.5,
+    "num_inference_steps": 28
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "request_id": "351d8fc7-7554-4ded-a62d-0327a74c7e97",
+  "timestamp": "20250206_041500",
+  "result": {
+    "images": [
+      {
+        "url": "https://v3.fal.media/files/kangaroo/XccBCWE82uHPS50aHA5L2_d9bc95c3149b4b088cb9606fe29ad21c.jpg",
+        "width": 1536,
+        "height": 864,
+        "content_type": "image/jpeg"
+      }
+    ],
+    "timings": {
+      "inference": 5.931795760989189
+    },
+    "seed": 8573305504221400680,
+    "has_nsfw_concepts": [
+      false
+    ],
+    "prompt": "modern vector graphic design software UI, dark mode interface with minimalistic tool icons, sleek dark gray background with white text and subtle gradients. The central canvas displays a detailed, realistic close-up of a human eye with intricate vector crosshatching lines overlaid, showcasing black curved strokes, circular gradients, and realistic reflections in the iris. On the left, a vertical layers panel with grouped layers, icons, and a preview section showing a black-and-white vector eye. The right sidebar features properties sliders, toggles, and vector editing options with clean typography. Symmetrical layout, professional design, sharp focus, high resolution, UI screenshot style"
+  },
+  "image_info": {
+    "path": "generated_images/image_20250206_041500-351d8fc7.jpg",
+    "url": "https://v3.fal.media/files/kangaroo/XccBCWE82uHPS50aHA5L2_d9bc95c3149b4b088cb9606fe29ad21c.jpg",
+    "index": 0,
+    "suffix": null,
+    "metadata_path": "generated_images/image_20250206_041500-351d8fc7.json",
+    "original_prompt": "modern vector graphic design software UI, dark mode interface with minimalistic tool icons, sleek dark gray background with white text and subtle gradients. The central canvas displays a detailed, realistic close-up of a human eye with intricate vector crosshatching lines overlaid, showcasing black curved strokes, circular gradients, and realistic reflections in the iris. On the left, a vertical layers panel with grouped layers, icons, and a preview section showing a black-and-white vector eye. The right sidebar features properties sliders, toggles, and vector editing options with clean typography. Symmetrical layout, professional design, sharp focus, high resolution, UI screenshot style"
+  },
+  "image": null,
+  "original_prompt": "modern vector graphic design software UI, dark mode interface with minimalistic tool icons, sleek dark gray background with white text and subtle gradients. The central canvas displays a detailed, realistic close-up of a human eye with intricate vector crosshatching lines overlaid, showcasing black curved strokes, circular gradients, and realistic reflections in the iris. On the left, a vertical layers panel with grouped layers, icons, and a preview section showing a black-and-white vector eye. The right sidebar features properties sliders, toggles, and vector editing options with clean typography. Symmetrical layout, professional design, sharp focus, high resolution, UI screenshot style",
+  "job_params": {
+    "prompt": "modern vector graphic design software UI, dark mode interface with minimalistic tool icons, sleek dark gray background with white text and subtle gradients. The central canvas displays a detailed, realistic close-up of a human eye with intricate vector crosshatching lines overlaid, showcasing black curved strokes, circular gradients, and realistic reflections in the iris. On the left, a vertical layers panel with grouped layers, icons, and a preview section showing a black-and-white vector eye. The right sidebar features properties sliders, toggles, and vector editing options with clean typography. Symmetrical layout, professional design, sharp focus, high resolution, UI screenshot style",
+    "model": "fal-ai/flux-lora/image-to-image",
+    "lora_spec": null,
+    "image_size": "landscape_16_9",
+    "guidance_scale": 3.5,
+    "num_inference_steps": 28,
+    "image_config": {
+      "model_type": "fal-ai/flux-lora/image-to-image",
+      "input_image": {
+        "url": null,
+        "path": "screenshot.jpg",
+        "pil_image": null
+      },
+      "strength": 0.75,
+      "negative_prompt": ""
+    }
+  }
+}

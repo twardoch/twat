@@ -1,0 +1,50 @@
+{
+  "request_id": "ad9a844f-ba2a-4976-825f-45754cd60e67",
+  "timestamp": "20250206_042201",
+  "result": {
+    "images": [
+      {
+        "url": "https://v3.fal.media/files/koala/RNjxQ1FR5FVbfUz9Zq1LX_e32f709dcb394a3a89dacd11b3a58f07.jpg",
+        "width": 1536,
+        "height": 864,
+        "content_type": "image/jpeg"
+      }
+    ],
+    "timings": {
+      "inference": 10.917941604973748
+    },
+    "seed": 10563309385456198984,
+    "has_nsfw_concepts": [
+      false
+    ],
+    "prompt": "shou_xin, Sketch Smudge, shou_xin, Sketch Smudge, monochrome rough pencil sketch of graphic design software UI, dark mode interface with minimalistic tool icons, sleek dark gray background with white text and subtle gradients. The central canvas displays a detailed, realistic close-up of a human eye with intricate vector crosshatching lines overlaid, showcasing black curved strokes, circular gradients, and realistic reflections in the iris. On the left, a vertical layers panel with grouped layers, icons, and a preview section showing a black-and-white vector eye. The right sidebar features properties sliders, toggles, and vector editing options with clean typography. Symmetrical layout, pencil sketch"
+  },
+  "image_info": {
+    "path": "generated_images/image_20250206_042201-ad9a844f.jpg",
+    "url": "https://v3.fal.media/files/koala/RNjxQ1FR5FVbfUz9Zq1LX_e32f709dcb394a3a89dacd11b3a58f07.jpg",
+    "index": 0,
+    "suffix": null,
+    "metadata_path": "generated_images/image_20250206_042201-ad9a844f.json",
+    "original_prompt": "monochrome rough pencil sketch of graphic design software UI, dark mode interface with minimalistic tool icons, sleek dark gray background with white text and subtle gradients. The central canvas displays a detailed, realistic close-up of a human eye with intricate vector crosshatching lines overlaid, showcasing black curved strokes, circular gradients, and realistic reflections in the iris. On the left, a vertical layers panel with grouped layers, icons, and a preview section showing a black-and-white vector eye. The right sidebar features properties sliders, toggles, and vector editing options with clean typography. Symmetrical layout, pencil sketch"
+  },
+  "image": null,
+  "original_prompt": "monochrome rough pencil sketch of graphic design software UI, dark mode interface with minimalistic tool icons, sleek dark gray background with white text and subtle gradients. The central canvas displays a detailed, realistic close-up of a human eye with intricate vector crosshatching lines overlaid, showcasing black curved strokes, circular gradients, and realistic reflections in the iris. On the left, a vertical layers panel with grouped layers, icons, and a preview section showing a black-and-white vector eye. The right sidebar features properties sliders, toggles, and vector editing options with clean typography. Symmetrical layout, pencil sketch",
+  "job_params": {
+    "prompt": "monochrome rough pencil sketch of graphic design software UI, dark mode interface with minimalistic tool icons, sleek dark gray background with white text and subtle gradients. The central canvas displays a detailed, realistic close-up of a human eye with intricate vector crosshatching lines overlaid, showcasing black curved strokes, circular gradients, and realistic reflections in the iris. On the left, a vertical layers panel with grouped layers, icons, and a preview section showing a black-and-white vector eye. The right sidebar features properties sliders, toggles, and vector editing options with clean typography. Symmetrical layout, pencil sketch",
+    "model": "fal-ai/flux-lora/image-to-image",
+    "lora_spec": "shou_xin, Sketch Smudge",
+    "image_size": "landscape_16_9",
+    "guidance_scale": 0.95,
+    "num_inference_steps": 28,
+    "image_config": {
+      "model_type": "fal-ai/flux-lora/image-to-image",
+      "input_image": {
+        "url": null,
+        "path": "screenshot.jpg",
+        "pil_image": null
+      },
+      "strength": 0.75,
+      "negative_prompt": "colorful; photorealistic"
+    }
+  }
+}

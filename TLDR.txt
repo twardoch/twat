@@ -1,0 +1,2201 @@
+<directory>twatout2</directory>
+
+<source-tree>
+├── README.md
+├── VERSION.txt
+├── plugins
+│   ├── pyproject.toml
+│   └── repos
+│       ├── twat_audio
+│       │   ├── PLAN.md
+│       │   ├── README.md
+│       │   ├── TODO.md
+│       │   ├── VERSION.txt
+│       │   ├── cleanup.py
+│       │   ├── pyproject.toml
+│       │   ├── src
+│       │   │   └── twat_audio
+│       │   │       ├── __version__.py
+│       │   │       └── twat_audio.py
+│       │   └── tests
+│       │       └── test_twat_audio.py
+│       ├── twat_cache
+│       │   ├── NEXT.md
+│       │   ├── PROMPT.txt
+│       │   ├── README.md
+│       │   ├── TODO.md
+│       │   ├── VERSION.txt
+│       │   ├── WORKFLOW_SETUP.md
+│       │   ├── cleanup.py
+│       │   ├── docs
+│       │   │   ├── BUILD_AND_RELEASE.md
+│       │   │   └── context_management.md
+│       │   ├── examples
+│       │   │   └── backend_selection.py
+│       │   ├── pyproject.toml
+│       │   ├── scripts
+│       │   │   ├── README.md
+│       │   │   ├── build.py
+│       │   │   ├── release.py
+│       │   │   ├── setup-dev.sh
+│       │   │   └── version.py
+│       │   ├── src
+│       │   │   └── twat_cache
+│       │   │       ├── __init__.py
+│       │   │       ├── __main__.py
+│       │   │       ├── __version__.py
+│       │   │       ├── cache.py
+│       │   │       ├── config.py
+│       │   │       ├── context.py
+│       │   │       ├── decorators.py
+│       │   │       ├── engines
+│       │   │       │   ├── __init__.py
+│       │   │       │   ├── aiocache.py
+│       │   │       │   ├── base.py
+│       │   │       │   ├── cachebox.py
+│       │   │       │   ├── cachetools.py
+│       │   │       │   ├── common.py
+│       │   │       │   ├── diskcache.py
+│       │   │       │   ├── functools_engine.py
+│       │   │       │   ├── joblib.py
+│       │   │       │   ├── klepto.py
+│       │   │       │   ├── manager.py
+│       │   │       │   └── py.typed
+│       │   │       ├── exceptions.py
+│       │   │       ├── logging.py
+│       │   │       ├── paths.py
+│       │   │       ├── py.typed
+│       │   │       ├── type_defs.py
+│       │   │       ├── types
+│       │   │       └── utils.py
+│       │   └── tests
+│       │       ├── __init__.py
+│       │       ├── conftest.py
+│       │       ├── test_benchmark.py
+│       │       ├── test_cache.py
+│       │       ├── test_config.py
+│       │       ├── test_constants.py
+│       │       ├── test_context.py
+│       │       ├── test_context_simple.py
+│       │       ├── test_decorators.py
+│       │       ├── test_engines.py
+│       │       ├── test_exceptions.py
+│       │       ├── test_exceptions_simple.py
+│       │       ├── test_fallback.py
+│       │       ├── test_integration.py
+│       │       └── test_twat_cache.py
+│       ├── twat_coding
+│       │   ├── README.md
+│       │   ├── TODO.md
+│       │   ├── VERSION.txt
+│       │   ├── cleanup.py
+│       │   ├── pyproject.toml
+│       │   ├── repomix-output.txt
+│       │   ├── src
+│       │   │   └── twat_coding
+│       │   │       ├── __init__.py
+│       │   │       ├── __version__.py
+│       │   │       ├── _version.py
+│       │   │       ├── data
+│       │   │       ├── py.typed
+│       │   │       ├── pystubnik
+│       │   │       │   ├── README.md
+│       │   │       │   ├── __init__.py
+│       │   │       │   ├── backends
+│       │   │       │   │   ├── __init__.py
+│       │   │       │   │   ├── ast_backend.py
+│       │   │       │   │   ├── base.py
+│       │   │       │   │   └── mypy_backend.py
+│       │   │       │   ├── cli.py
+│       │   │       │   ├── config.py
+│       │   │       │   ├── core
+│       │   │       │   │   ├── __init__.py
+│       │   │       │   │   ├── config.py
+│       │   │       │   │   ├── conversion.py
+│       │   │       │   │   ├── shared_types.py
+│       │   │       │   │   ├── types.py
+│       │   │       │   │   └── utils.py
+│       │   │       │   ├── errors.py
+│       │   │       │   ├── processors
+│       │   │       │   │   ├── __init__.py
+│       │   │       │   │   ├── docstring.py
+│       │   │       │   │   ├── file_importance.py
+│       │   │       │   │   ├── importance.py
+│       │   │       │   │   ├── imports.py
+│       │   │       │   │   ├── stub_generation.py
+│       │   │       │   │   └── type_inference.py
+│       │   │       │   ├── read_imports.py
+│       │   │       │   ├── types
+│       │   │       │   │   ├── __init__.py
+│       │   │       │   │   ├── docstring.py
+│       │   │       │   │   └── type_system.py
+│       │   │       │   └── utils
+│       │   │       │       ├── __init__.py
+│       │   │       │       ├── ast_utils.py
+│       │   │       │       ├── display.py
+│       │   │       │       └── memory.py
+│       │   │       └── twat_coding.py
+│       │   └── tests
+│       │       ├── __init__.py
+│       │       └── test_package.py
+│       ├── twat_ez
+│       │   ├── LOG.md
+│       │   ├── README.md
+│       │   ├── VERSION.txt
+│       │   ├── cleanup.py
+│       │   ├── pyproject.toml
+│       │   ├── src
+│       │   │   └── twat_ez
+│       │   │       ├── __init__.py
+│       │   │       ├── __version__.py
+│       │   │       └── py_needs.py
+│       │   └── tests
+│       │       └── test_twat_ez.py
+│       ├── twat_fs
+│       │   ├── IDEAS.md
+│       │   ├── IMPLEMENTATION_SUMMARY.md
+│       │   ├── MANUAL_WORKFLOW_SETUP.md
+│       │   ├── PLAN.md
+│       │   ├── README.md
+│       │   ├── TODO.md
+│       │   ├── cleanup.py
+│       │   ├── examples
+│       │   │   └── upload_example.py
+│       │   ├── install.ps1
+│       │   ├── install.sh
+│       │   ├── pyproject.toml
+│       │   ├── scripts
+│       │   │   ├── build.py
+│       │   │   ├── build_binary.py
+│       │   │   ├── dev.py
+│       │   │   ├── lint.py
+│       │   │   ├── release.py
+│       │   │   └── test.py
+│       │   ├── src
+│       │   │   └── twat_fs
+│       │   │       ├── __init__.py
+│       │   │       ├── __main__.py
+│       │   │       ├── __version__.py
+│       │   │       ├── cli.py
+│       │   │       ├── data
+│       │   │       ├── paths.py
+│       │   │       ├── upload.py
+│       │   │       └── upload_providers
+│       │   │           ├── __init__.py
+│       │   │           ├── async_utils.py
+│       │   │           ├── bashupload.py
+│       │   │           ├── catbox.py
+│       │   │           ├── core.py
+│       │   │           ├── dropbox.py
+│       │   │           ├── factory.py
+│       │   │           ├── fal.py
+│       │   │           ├── filebin.py
+│       │   │           ├── litterbox.py
+│       │   │           ├── pixeldrain.py
+│       │   │           ├── protocols.py
+│       │   │           ├── s3.py
+│       │   │           ├── simple.py
+│       │   │           ├── types.py
+│       │   │           ├── uguu.py
+│       │   │           ├── utils.py
+│       │   │           └── www0x0.py
+│       │   ├── templates
+│       │   │   ├── authenticated_provider_template.py
+│       │   │   └── simple_provider_template.py
+│       │   ├── tests
+│       │   │   ├── __init__.py
+│       │   │   ├── data
+│       │   │   │   └── test.txt
+│       │   │   ├── test_async_utils.py
+│       │   │   ├── test_filebin_pixeldrain.py
+│       │   │   ├── test_integration.py
+│       │   │   ├── test_s3_advanced.py
+│       │   │   ├── test_twat_fs.py
+│       │   │   ├── test_upload.py
+│       │   │   └── test_utils.py
+│       │   └── update_providers.py
+│       ├── twat_genai
+│       │   ├── CHANGES.md
+│       │   ├── CLAUDE.md
+│       │   ├── PLAN.md
+│       │   ├── README.md
+│       │   ├── TODO.md
+│       │   ├── VERSION.txt
+│       │   ├── pyproject.toml
+│       │   ├── src
+│       │   │   └── twat_genai
+│       │   │       ├── __init__.py
+│       │   │       ├── __main__.py
+│       │   │       ├── __main___loras.json
+│       │   │       ├── __version__.py
+│       │   │       ├── cli.py
+│       │   │       ├── core
+│       │   │       │   ├── __init__.py
+│       │   │       │   ├── config.py
+│       │   │       │   ├── image.py
+│       │   │       │   ├── image_utils.py
+│       │   │       │   ├── lora.py
+│       │   │       │   └── prompt.py
+│       │   │       └── engines
+│       │   │           ├── __init__.py
+│       │   │           ├── base.py
+│       │   │           └── fal
+│       │   │               ├── __init__.py
+│       │   │               ├── client.py
+│       │   │               ├── config.py
+│       │   │               ├── lora.py
+│       │   │               └── models.py
+│       │   ├── test_outpaint.py
+│       │   └── tests
+│       │       ├── conftest.py
+│       │       ├── test_cli.py
+│       │       ├── test_fal_client.py
+│       │       ├── test_image_utils.py
+│       │       └── test_twat_genai.py
+│       ├── twat_hatch
+│       │   ├── PLAN.md
+│       │   ├── README.md
+│       │   ├── TODO.md
+│       │   ├── VERSION.txt
+│       │   ├── cleanup.py
+│       │   ├── pyproject.toml
+│       │   ├── src
+│       │   │   └── twat_hatch
+│       │   │       ├── __init__.py
+│       │   │       ├── __main__.py
+│       │   │       ├── __version__.py
+│       │   │       ├── config.py
+│       │   │       ├── hatch.py
+│       │   │       ├── themes
+│       │   │       │   ├── __init__.py
+│       │   │       │   ├── _shared
+│       │   │       │   │   ├── base.toml.j2
+│       │   │       │   │   └── snippets
+│       │   │       │   │       ├── author.toml.j2
+│       │   │       │   │       ├── dependencies.toml.j2
+│       │   │       │   │       ├── development.toml.j2
+│       │   │       │   │       ├── features.toml.j2
+│       │   │       │   │       ├── package.toml.j2
+│       │   │       │   │       └── tools.toml.j2
+│       │   │       │   ├── default
+│       │   │       │   │   ├── AGENT.md.j2
+│       │   │       │   │   ├── CLAUDE.md
+│       │   │       │   │   ├── CLAUDE.md.j2
+│       │   │       │   │   ├── LICENSE.j2
+│       │   │       │   │   ├── README.md.j2
+│       │   │       │   │   ├── hidden.gitignore.j2
+│       │   │       │   │   ├── pyproject.toml.j2
+│       │   │       │   │   └── tests
+│       │   │       │   │       └── test_package.py.j2
+│       │   │       │   ├── package
+│       │   │       │   │   ├── package.toml.j2
+│       │   │       │   │   └── src
+│       │   │       │   │       └── __package_name__
+│       │   │       │   │           └── __package_name__.py.j2
+│       │   │       │   ├── package.toml.j2
+│       │   │       │   ├── plugin
+│       │   │       │   │   ├── README.md.j2
+│       │   │       │   │   ├── pyproject.toml.j2
+│       │   │       │   │   └── src
+│       │   │       │   │       └── __package_name__
+│       │   │       │   │           └── __init__.py.j2
+│       │   │       │   ├── plugin.toml.j2
+│       │   │       │   ├── plugin_host
+│       │   │       │   │   ├── README.md.j2
+│       │   │       │   │   ├── pyproject.toml.j2
+│       │   │       │   │   └── src
+│       │   │       │   │       └── __init__.py.j2
+│       │   │       │   └── plugin_host.toml.j2
+│       │   │       └── utils.py
+│       │   └── tests
+│       │       └── test_twat_hatch.py
+│       ├── twat_image
+│       │   ├── CLAUDE.md
+│       │   ├── PLAN.md
+│       │   ├── README.md
+│       │   ├── TASK.md
+│       │   ├── TODO.md
+│       │   ├── VERSION.txt
+│       │   ├── cleanup.sh
+│       │   ├── old
+│       │   │   ├── imgproxyproc
+│       │   │   │   ├── CLAUDE.md
+│       │   │   │   ├── PROGRESS.md
+│       │   │   │   ├── README.md
+│       │   │   │   ├── SPEC.md
+│       │   │   │   ├── TODO.md
+│       │   │   │   ├── create_test_image.py
+│       │   │   │   ├── imgproxyproc.py
+│       │   │   │   ├── simulate_processing.py
+│       │   │   │   └── test_gradient_proxy_metadata.txt
+│       │   │   └── imgscale.py
+│       │   ├── pyproject.toml
+│       │   ├── src
+│       │   │   ├── image_alpha_utils
+│       │   │   │   ├── __init__.py
+│       │   │   │   └── gray2alpha.py
+│       │   │   └── twat_image
+│       │   │       └── __version__.py
+│       │   └── tests
+│       │       ├── test_alpha_creation.py
+│       │       ├── test_cli.py
+│       │       ├── test_color_parsing.py
+│       │       ├── test_core_processing.py
+│       │       ├── test_image_alpha_utils.py
+│       │       └── test_normalization.py
+│       ├── twat_labs
+│       │   ├── IMPLEMENTATION_SUMMARY.md
+│       │   ├── PLAN.md
+│       │   ├── README.md
+│       │   ├── TODO.md
+│       │   ├── VERSION.txt
+│       │   ├── cleanup.py
+│       │   ├── pyproject.toml
+│       │   ├── src
+│       │   │   └── twat_labs
+│       │   │       ├── __init__.py
+│       │   │       └── __version__.py
+│       │   └── tests
+│       │       └── test_twat_labs.py
+│       ├── twat_llm
+│       │   ├── DEVELOPMENT.md
+│       │   ├── LOG.md
+│       │   ├── README.md
+│       │   ├── TODO.md
+│       │   ├── cleanup.py
+│       │   ├── docs
+│       │   │   └── research
+│       │   │       ├── people-api.md
+│       │   │       └── web-search-api.md
+│       │   ├── examples
+│       │   │   ├── check_llm_plugins.py
+│       │   │   ├── example_people_script.py
+│       │   │   ├── example_serp_script.py
+│       │   │   ├── funchain_example.py
+│       │   │   └── run_action_config_example.py
+│       │   ├── pyproject.toml
+│       │   ├── scripts
+│       │   │   ├── build.sh
+│       │   │   ├── release.sh
+│       │   │   ├── setup.sh
+│       │   │   └── test.sh
+│       │   ├── src
+│       │   │   └── twat_llm
+│       │   │       ├── __init__.py
+│       │   │       ├── __version__.py
+│       │   │       ├── mallmo.py
+│       │   │       └── twat_llm.py
+│       │   └── tests
+│       │       ├── test_benchmark.py
+│       │       ├── test_integration.py
+│       │       ├── test_mallmo.py
+│       │       └── test_twat_llm.py
+│       ├── twat_mp
+│       │   ├── API_REFERENCE.md
+│       │   ├── PLAN.md
+│       │   ├── README.md
+│       │   ├── TODO.md
+│       │   ├── VERSION.txt
+│       │   ├── cleanup.py
+│       │   ├── docs
+│       │   │   └── architecture.md
+│       │   ├── pyproject.toml
+│       │   ├── src
+│       │   │   └── twat_mp
+│       │   │       ├── __init__.py
+│       │   │       ├── __version__.py
+│       │   │       ├── async_mp.py
+│       │   │       └── mp.py
+│       │   └── tests
+│       │       ├── test_async_mp.py
+│       │       ├── test_benchmark.py
+│       │       └── test_twat_mp.py
+│       ├── twat_os
+│       │   ├── DEVELOPMENT.md
+│       │   ├── LOG.md
+│       │   ├── PLAN.md
+│       │   ├── README.md
+│       │   ├── TODO.md
+│       │   ├── VERSION.txt
+│       │   ├── WORKFLOWS.md
+│       │   ├── cleanup.py
+│       │   ├── install.sh
+│       │   ├── pyproject.toml
+│       │   ├── scripts
+│       │   │   ├── build.py
+│       │   │   ├── check.py
+│       │   │   ├── release.py
+│       │   │   └── test.py
+│       │   ├── src
+│       │   │   └── twat_os
+│       │   │       ├── __init__.py
+│       │   │       ├── __main__.py
+│       │   │       ├── __version__.py
+│       │   │       ├── paths.py
+│       │   │       └── paths.toml
+│       │   └── tests
+│       │       ├── conftest.py
+│       │       ├── integration
+│       │       │   └── test_path_integration.py
+│       │       ├── test_config_loading.py
+│       │       ├── test_cross_platform.py
+│       │       ├── test_package.py
+│       │       └── unit
+│       │           ├── test_path_config.py
+│       │           └── test_path_manager.py
+│       ├── twat_search
+│       │   ├── README.md
+│       │   ├── SETUP_CI_CD.md
+│       │   ├── TODO.md
+│       │   ├── VERSION.txt
+│       │   ├── cleanup.py
+│       │   ├── debug_fetch.py
+│       │   ├── falla_search.py
+│       │   ├── google_debug_Python_programming_language.html
+│       │   ├── google_debug_test_query.html
+│       │   ├── pyproject.toml
+│       │   ├── pyproject_next.md
+│       │   ├── pyproject_next.toml
+│       │   ├── requirements.txt
+│       │   ├── resources
+│       │   │   ├── brave
+│       │   │   │   ├── brave.md
+│       │   │   │   ├── brave_image.md
+│       │   │   │   ├── brave_news.md
+│       │   │   │   └── brave_video.md
+│       │   │   ├── pplx
+│       │   │   │   ├── pplx.md
+│       │   │   │   └── pplx_urls.txt
+│       │   │   ├── pricing.md
+│       │   │   └── you
+│       │   │       ├── you.md
+│       │   │       ├── you.txt
+│       │   │       ├── you_news.md
+│       │   │       └── you_news.txt
+│       │   ├── scripts
+│       │   │   ├── build.sh
+│       │   │   ├── release.sh
+│       │   │   └── test.sh
+│       │   ├── src
+│       │   │   └── twat_search
+│       │   │       ├── __init__.py
+│       │   │       ├── __main__.py
+│       │   │       ├── __version__.py
+│       │   │       ├── paths.py
+│       │   │       └── web
+│       │   │           ├── __init__.py
+│       │   │           ├── api.py
+│       │   │           ├── cli.py
+│       │   │           ├── config.py
+│       │   │           ├── engine_constants.py
+│       │   │           ├── engines
+│       │   │           │   ├── __init__.py
+│       │   │           │   ├── base.py
+│       │   │           │   ├── bing_scraper.py
+│       │   │           │   ├── brave.py
+│       │   │           │   ├── critique.py
+│       │   │           │   ├── duckduckgo.py
+│       │   │           │   ├── falla.py
+│       │   │           │   ├── google_scraper.py
+│       │   │           │   ├── hasdata.py
+│       │   │           │   ├── lib_falla
+│       │   │           │   │   ├── __init__.py
+│       │   │           │   │   ├── core
+│       │   │           │   │   │   ├── __init__.py
+│       │   │           │   │   │   ├── aol.py
+│       │   │           │   │   │   ├── ask.py
+│       │   │           │   │   │   ├── bing.py
+│       │   │           │   │   │   ├── dogpile.py
+│       │   │           │   │   │   ├── duckduckgo.py
+│       │   │           │   │   │   ├── falla.py
+│       │   │           │   │   │   ├── fetch_page.py
+│       │   │           │   │   │   ├── gibiru.py
+│       │   │           │   │   │   ├── google.py
+│       │   │           │   │   │   ├── mojeek.py
+│       │   │           │   │   │   ├── qwant.py
+│       │   │           │   │   │   ├── searchencrypt.py
+│       │   │           │   │   │   ├── startpage.py
+│       │   │           │   │   │   ├── yahoo.py
+│       │   │           │   │   │   └── yandex.py
+│       │   │           │   │   ├── main.py
+│       │   │           │   │   ├── requirements.txt
+│       │   │           │   │   ├── settings.py
+│       │   │           │   │   └── utils.py
+│       │   │           │   ├── pplx.py
+│       │   │           │   ├── serpapi.py
+│       │   │           │   ├── tavily.py
+│       │   │           │   └── you.py
+│       │   │           ├── exceptions.py
+│       │   │           ├── models.py
+│       │   │           └── utils.py
+│       │   ├── test_async_falla.py
+│       │   ├── test_falla.py
+│       │   ├── test_google_falla_debug.py
+│       │   ├── test_simple.py
+│       │   ├── test_sync_falla.py
+│       │   └── tests
+│       │       ├── conftest.py
+│       │       ├── test_twat_search.py
+│       │       └── unit
+│       │           ├── __init__.py
+│       │           ├── mock_engine.py
+│       │           └── web
+│       │               ├── __init__.py
+│       │               ├── engines
+│       │               │   ├── __init__.py
+│       │               │   └── test_base.py
+│       │               ├── test_api.py
+│       │               ├── test_config.py
+│       │               ├── test_exceptions.py
+│       │               ├── test_models.py
+│       │               └── test_utils.py
+│       ├── twat_speech
+│       │   ├── LOG.md
+│       │   ├── PLAN.md
+│       │   ├── README.md
+│       │   ├── TODO.md
+│       │   ├── pyproject.toml
+│       │   ├── src
+│       │   │   └── twat_speech
+│       │   │       ├── __init__.py
+│       │   │       ├── __version__.py
+│       │   │       └── twat_speech.py
+│       │   └── tests
+│       │       └── test_twat_speech.py
+│       ├── twat_task
+│       │   ├── HISTORY.md
+│       │   ├── IMPLEMENTATION_SUMMARY.md
+│       │   ├── LOG.md
+│       │   ├── PLAN.md
+│       │   ├── README.md
+│       │   ├── REVIEW
+│       │   │   ├── FILES-cla.md
+│       │   │   ├── FILES-cod.md
+│       │   │   ├── TODO-cla.md
+│       │   │   └── TODO-cod.md
+│       │   ├── TODO.md
+│       │   ├── VERSION.txt
+│       │   ├── cleanup.py
+│       │   ├── examples
+│       │   │   └── testprefect_example.py
+│       │   ├── pyproject.toml
+│       │   ├── src
+│       │   │   └── twat_task
+│       │   │       ├── __init__.py
+│       │   │       ├── __version__.py
+│       │   │       └── task.py
+│       │   └── tests
+│       │       ├── test_flows.py
+│       │       ├── test_package.py
+│       │       ├── test_tasks.py
+│       │       └── test_video_transcript.py
+│       ├── twat_text
+│       │   ├── GITHUB_WORKFLOWS.md
+│       │   ├── LOG.md
+│       │   ├── README.md
+│       │   ├── VERSION.txt
+│       │   ├── cleanup.py
+│       │   ├── package.toml
+│       │   ├── pyproject.toml
+│       │   ├── scripts
+│       │   │   └── build.py
+│       │   ├── src
+│       │   │   └── twat_text
+│       │   │       ├── __init__.py
+│       │   │       ├── __version__.py
+│       │   │       └── twat_text.py
+│       │   └── tests
+│       │       └── test_twat_text.py
+│       └── twat_video
+│           ├── DEVELOPMENT.md
+│           ├── INSTALL.md
+│           ├── LOG.md
+│           ├── PLAN.md
+│           ├── README.md
+│           ├── TODO.md
+│           ├── VERSION.txt
+│           ├── cleanup.py
+│           ├── mkdocs.yml
+│           ├── pyproject.toml
+│           ├── scripts
+│           │   ├── build-binary.sh
+│           │   ├── build.sh
+│           │   ├── dev.sh
+│           │   ├── release.sh
+│           │   └── test.sh
+│           ├── src
+│           │   ├── font_organizer
+│           │   │   ├── __init__.py
+│           │   │   ├── cli.py
+│           │   │   ├── core
+│           │   │   │   ├── __init__.py
+│           │   │   │   ├── config.py
+│           │   │   │   ├── exceptions.py
+│           │   │   │   ├── font_info.py
+│           │   │   │   └── font_manager.py
+│           │   │   └── font_organizer.py
+│           │   └── twat_video
+│           │       └── __version__.py
+│           ├── src_docs
+│           │   └── index.md
+│           └── tests
+│               ├── test_cli.py
+│               ├── test_font_info.py
+│               ├── test_font_manager.py
+│               ├── test_font_organizer.py
+│               └── test_integration.py
+├── pyproject.toml
+├── src
+│   └── twat
+│       ├── __init__.py
+│       └── __version__.py
+└── tests
+    ├── VERSION.txt
+    └── test_twat.py
+
+</source-tree>
+
+<files>
+      <file path="README.md">
+        - Twat: Python plugin framework for modular applications using entry-point discovery, dynamic loading, and CLI dispatching.
+      </file>
+      <file path="VERSION.txt">
+        - Add VERSION.txt
+      </file>
+      <file path="plugins/pyproject.toml">
+        - Configures twat-ez package with hatchling build system, dependencies (loguru, rich, pydantic), and strict dev tooling (ruff, mypy, pytest).
+      </file>
+      <file path="plugins/repos/twat_audio/PLAN.md">
+        - Streamline twat-audio to MVP: fix errors, simplify scripts, implement core audio logic, test, document, and verify.
+      </file>
+      <file path="plugins/repos/twat_audio/README.md">
+        - Python audio processing package focusing on resampling via Pedalboard, part of TWAT ecosystem, offering simple API, Hatch management, and MIT licensing.
+      </file>
+      <file path="plugins/repos/twat_audio/TODO.md">
+        - Twat-audio MVP streamlined: cleanup, core pedalboard-based resampling logic, testing, and docs finalized; pending PLAN.md creation and submission.
+      </file>
+      <file path="plugins/repos/twat_audio/VERSION.txt">
+        - Version 0.1.0
+      </file>
+      <file path="plugins/repos/twat_audio/cleanup.py">
+        - Python script automating repository maintenance: status checks, uv venv/install, code quality checks, git commit/push, and logging.
+      </file>
+      <file path="plugins/repos/twat_audio/pyproject.toml">
+        - Hatchling-managed `twat-audio` package (TWAT plugin, Py 3.10+, deps: twat, pedalboard) configured with Ruff, MyPy, and Pytest for linting, typing, and benchmarking.
+      </file>
+      <file path="plugins/repos/twat_audio/src/twat_audio/__version__.py">
+        - setuptools-scm generated version file defining version 2.8.0.dev10+gdc69fb1f4.
+      </file>
+      <file path="plugins/repos/twat_audio/src/twat_audio/twat_audio.py">
+        - Python script uses Pedalboard to resample audio files and includes a dummy WAV generation demo.
+      </file>
+      <file path="plugins/repos/twat_audio/tests/test_twat_audio.py">
+        - Tests twat_audio version retrieval and audio resampling logic (mono/stereo, rate changes, error handling).
+      </file>
+      <file path="plugins/repos/twat_cache/NEXT.md">
+        - Strategy to optimize `twat_cache` by selecting optimal backends (e.g., joblib for NumPy, diskcache for large data) based on data characteristics (type, size, persistence) via automatic detection and smart defaults.
+      </file>
+      <file path="plugins/repos/twat_cache/PROMPT.txt">
+        - Verify rationale, minimize API via passthru, ensure specialized/universal decorators with fallback, update TODO/tests, run build/test loop frequently, and iterate.
+      </file>
+      <file path="plugins/repos/twat_cache/README.md">
+        - `twat-cache` Python library unifies caching via decorators (`mcache`, `bcache`, `acache`, `ucache`) for memory, disk, async backends with auto-fallback.
+      </file>
+      <file path="plugins/repos/twat_cache/TODO.md">
+        - Refactor library: remove legacy/Redis code, consolidate engine logic, fix bugs, simplify config for MVP backends, update docs/tests, finalize.
+      </file>
+      <file path="plugins/repos/twat_cache/VERSION.txt">
+        - Add VERSION.txt
+      </file>
+      <file path="plugins/repos/twat_cache/WORKFLOW_SETUP.md">
+        - Manually create `.github/workflows/ci.yml` and update `.github/workflows/release.yml` to enable automated CI/CD, or use local `make release` scripts as an alternative.
+      </file>
+      <file path="plugins/repos/twat_cache/cleanup.py">
+        - Repo maintenance tool automating status checks, venv setup, installation, git updates/pushes, logging, and repomix bundling.
+      </file>
+      <file path="plugins/repos/twat_cache/docs/BUILD_AND_RELEASE.md">
+        - Uses Hatch, git-tag semantic versioning, Make for local dev, GitHub Actions CI/CD for multi-platform testing and PyPI publishing.
+      </file>
+      <file path="plugins/repos/twat_cache/docs/context_management.md">
+        - `twat_cache` provides `engine_context` and `CacheContext` for automatic cache lifecycle management, resource cleanup, and flexible configuration across various backends.
+      </file>
+      <file path="plugins/repos/twat_cache/examples/backend_selection.py">
+        - Python script demonstrating twat_cache backend selection strategies: type-specific configuration, size-based hybrid caching, and automatic smart caching.
+      </file>
+      <file path="plugins/repos/twat_cache/pyproject.toml">
+        - Python 3.10+ caching library `twat-cache` built with Hatchling, depends on pydantic/diskcache/joblib, configured for strict linting (ruff/mypy), testing, and benchmarking.
+      </file>
+      <file path="plugins/repos/twat_cache/scripts/README.md">
+        - Contains `build.py`, `release.py`, `version.py`, and `setup-dev.sh` for managing twat-cache development, testing, building, and versioning, with Make integration.
+      </file>
+      <file path="plugins/repos/twat_cache/scripts/build.py">
+        - Python CLI build script for twat-cache handling clean, format, lint, test, coverage, build, install, benchmark, and full check sequence.
+      </file>
+      <file path="plugins/repos/twat_cache/scripts/release.py">
+        - Automates version bumping, git checks, tagging, PyPI publishing, and GitHub release creation for the twat-cache project.
+      </file>
+      <file path="plugins/repos/twat_cache/scripts/setup-dev.sh">
+        - Verifies Python and Git, installs dependencies and build tools, configures pre-commit hooks, creates directories, and validates the setup with tests and formatting checks.
+      </file>
+      <file path="plugins/repos/twat_cache/scripts/version.py">
+        - Python CLI tool for git tag-based semantic versioning operations (current, next, tag, push, list).
+      </file>
+      <file path="plugins/repos/twat_cache/src/twat_cache/__init__.py">
+        - Exports high-performance caching decorators, management utilities, context managers, and custom exceptions.
+      </file>
+      <file path="plugins/repos/twat_cache/src/twat_cache/__main__.py">
+        - Flexible Python caching utility `ucache` supporting memory, disk, and SQL backends with automatic directory management.
+      </file>
+      <file path="plugins/repos/twat_cache/src/twat_cache/__version__.py">
+        - Auto-generated version metadata defining version '2.6.6.dev0+g07263ad.d20250304'.
+      </file>
+      <file path="plugins/repos/twat_cache/src/twat_cache/cache.py">
+        - Manages a global registry for active caches, providing utilities for registration, clearing, and statistics tracking.
+      </file>
+      <file path="plugins/repos/twat_cache/src/twat_cache/config.py">
+        - Pydantic-based CacheConfig model defining cache settings (maxsize, ttl, policy), validating inputs, and providing a factory function for instantiation.
+      </file>
+      <file path="plugins/repos/twat_cache/src/twat_cache/context.py">
+        - Implements context managers and a factory function for creating and managing cache engine lifecycles with proper resource cleanup.
+      </file>
+      <file path="plugins/repos/twat_cache/src/twat_cache/decorators.py">
+        - Defines caching decorators (mcache, bcache, fcache, acache, ucache) with automatic backend selection and fallbacks for memory, disk, and async operations.
+      </file>
+      <file path="plugins/repos/twat_cache/src/twat_cache/engines/__init__.py">
+        - Package init exporting cache engine base class, manager, and availability utility.
+      </file>
+      <file path="plugins/repos/twat_cache/src/twat_cache/engines/aiocache.py">
+        - Defines AioCacheEngine using aiocache for Redis or in-memory caching with decorator and stats support.
+      </file>
+      <file path="plugins/repos/twat_cache/src/twat_cache/engines/base.py">
+        - Defines abstract BaseCacheEngine class enforcing cache protocol with stats, validation, path management, and TTL logic.
+      </file>
+      <file path="plugins/repos/twat_cache/src/twat_cache/engines/cachebox.py">
+        - Implements a high-performance CacheBox-based cache engine supporting configurable eviction policies (LRU, LFU, FIFO, RR), function decoration, and statistics.
+      </file>
+      <file path="plugins/repos/twat_cache/src/twat_cache/engines/cachetools.py">
+        - Implements flexible in-memory cache engine using cachetools supporting LRU, LFU, RR, TTL policies, caching decorators, and statistics.
+      </file>
+      <file path="plugins/repos/twat_cache/src/twat_cache/engines/common.py">
+        - Shared utilities for cache engines covering directory creation, safe serialization, temp file handling, and function-based cache key generation.
+      </file>
+      <file path="plugins/repos/twat_cache/src/twat_cache/engines/diskcache.py">
+        - DiskCacheEngine class providing persistent disk-based caching via the diskcache library with TTL and statistics support.
+      </file>
+      <file path="plugins/repos/twat_cache/src/twat_cache/engines/functools_engine.py">
+        - Implements dict-based in-memory cache engine with TTL, eviction policies, and exception handling.
+      </file>
+      <file path="plugins/repos/twat_cache/src/twat_cache/engines/joblib.py">
+        - Joblib disk cache engine wrapper with import fallback and decorator support.
+      </file>
+      <file path="plugins/repos/twat_cache/src/twat_cache/engines/klepto.py">
+        - KleptoEngine wrapper providing LRU/LFU/RR policies, SQL/file persistence, and TTL support.
+      </file>
+      <file path="plugins/repos/twat_cache/src/twat_cache/engines/manager.py">
+        - Registers and selects appropriate cache engine implementations based on availability and preference.
+      </file>
+      <file path="plugins/repos/twat_cache/src/twat_cache/engines/py.typed">
+        - 1
+      </file>
+      <file path="plugins/repos/twat_cache/src/twat_cache/exceptions.py">
+        - Defines custom exception hierarchy for twat_cache package covering configuration, engine, operation, and resource errors.
+      </file>
+      <file path="plugins/repos/twat_cache/src/twat_cache/logging.py">
+        - Configures centralized loguru logging with console and optional file handlers via environment variables.
+      </file>
+      <file path="plugins/repos/twat_cache/src/twat_cache/paths.py">
+        - Python utility for cross-platform cache directory management, handling path retrieval, validation, creation, and clearing using platformdirs or fallback.
+      </file>
+      <file path="plugins/repos/twat_cache/src/twat_cache/py.typed">
+        - 1
+      </file>
+      <file path="plugins/repos/twat_cache/src/twat_cache/type_defs.py">
+        - Defines core types, protocols (Config, KeyMaker, Serializer), and abstract base classes (Engine, Stats) for the twat-cache system.
+      </file>
+      <file path="plugins/repos/twat_cache/src/twat_cache/utils.py">
+        - Defines `get_cache_dir` for validated cache folder creation and `make_key` for generating stable JSON keys from arguments.
+      </file>
+      <file path="plugins/repos/twat_cache/tests/__init__.py">
+        - Test package for twat_cache.
+      </file>
+      <file path="plugins/repos/twat_cache/tests/conftest.py">
+        - Pytest conftest defining fixtures for auto-cleanup, temp directories, mock data/functions, performance timing, and dependency-based test skipping.
+      </file>
+      <file path="plugins/repos/twat_cache/tests/test_benchmark.py">
+        - Benchmark suite for twat-cache testing memory, disk, async, and context performance, engine comparisons, and regressions.
+      </file>
+      <file path="plugins/repos/twat_cache/tests/test_cache.py">
+        - Pytest suite validating twat_cache configuration, paths, security, backends (memory/disk/SQL), TTL, async support, kwargs, exceptions, and specific decorators.
+      </file>
+      <file path="plugins/repos/twat_cache/tests/test_config.py">
+        - Tests CacheConfig defaults, Pydantic validation, permissions, size limits, TTL, and compression.
+      </file>
+      <file path="plugins/repos/twat_cache/tests/test_constants.py">
+        - Defines test constants for cache sizes, TTLs, file permissions, timeouts, compression, and data values.
+      </file>
+      <file path="plugins/repos/twat_cache/tests/test_context.py">
+        - Tests `twat_cache` context manager lifecycle, error handling, invalid engines, class instantiation, utility retrieval, nested usage, and config application.
+      </file>
+      <file path="plugins/repos/twat_cache/tests/test_context_simple.py">
+        - Pytest suite for `CacheContext` initialization, context manager usage, and cleanup error handling.
+      </file>
+      <file path="plugins/repos/twat_cache/tests/test_decorators.py">
+        - Tests `ucache` and `acache` decorator caching behavior for synchronous and asynchronous functions, excluding removed `mcache`, `bcache`, and `fcache` tests.
+      </file>
+      <file path="plugins/repos/twat_cache/tests/test_engines.py">
+        - Tests FunctoolsCacheEngine initialization, key generation, caching operations, eviction, TTL, clearing, and statistics.
+      </file>
+      <file path="plugins/repos/twat_cache/tests/test_exceptions.py">
+        - Tests twat_cache exception hierarchy, serialization utilities, directory creation, and error handling mechanisms.
+      </file>
+      <file path="plugins/repos/twat_cache/tests/test_exceptions_simple.py">
+        - Tests twat_cache exception hierarchy inheritance and message instantiation.
+      </file>
+      <file path="plugins/repos/twat_cache/tests/test_fallback.py">
+        - Tests acache raises EngineNotAvailableError when aiocache missing and ucache falls back to functools when preferred engine unavailable.
+      </file>
+      <file path="plugins/repos/twat_cache/tests/test_integration.py">
+        - Integration tests for twat-cache covering real-world scenarios (API, DB, async, ML), concurrency, persistence, TTL, stats, and error handling.
+      </file>
+      <file path="plugins/repos/twat_cache/tests/test_twat_cache.py">
+        - Pytest suite validating core get/set/clear operations, persistence, maxsize eviction, and async support across twat_cache backends (Functools, DiskCache, Joblib, Klepto, AioCache, CacheBox, CacheTools).
+      </file>
+      <file path="plugins/repos/twat_coding/README.md">
+        - `twat-coding` toolkit features `pystubnik`, an AST-based tool generating "smart stubs" that condense Python code structure and docs for efficient LLM processing and analysis.
+      </file>
+      <file path="plugins/repos/twat_coding/TODO.md">
+        - Core Legacy/Njord APIs, client interface, and CLI implemented; remaining tasks focus on testing, security hardening, and code cleanup.
+      </file>
+      <file path="plugins/repos/twat_coding/VERSION.txt">
+        - Auto-merge successful
+      </file>
+      <file path="plugins/repos/twat_coding/cleanup.py">
+        - Repo maintenance script automating venv setup, installation, quality checks, git operations, logging to llms.txt, and repomix generation.
+      </file>
+      <file path="plugins/repos/twat_coding/pyproject.toml">
+        - `pyproject.toml` config for twat-coding type stub generator: metadata, hatchling build, pydantic/networkx dependencies, and ruff/mypy/pytest tooling.
+      </file>
+      <file path="plugins/repos/twat_coding/repomix-output.txt">
+        - `twat_coding`'s `pystubnik` toolkit generates "smart stubs" (hybrid source/type stubs) using AST/MyPy backends and processors (imports, docstrings, importance scoring) to optimize Python codebases for LLM analysis.- `twat_coding`'s `pystubnik` toolkit generates "smart stubs" (hybrid source/type stubs) using AST/MyPy backends and processors (imports, docstrings, importance scoring) to optimize Python codebases for LLM analysis.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/__init__.py">
+        - Initializes twat-coding package and exports version metadata.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/__version__.py">
+        - Auto-generated Python file defining version 2.1.2.post1+g3bc5c92.d20250304.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/_version.py">
+        - Auto-generated version: 0.0.1.dev0
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/py.typed">
+        - Marks 'twat_coding' package as PEP 561 compliant for type checking.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/README.md">
+        - Python package generating intelligent "smart stubs" (intermediate representations between source and type stubs) optimized for LLM code understanding via configurable verbosity, AST/MyPy backends, and processing options.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/__init__.py">
+        - Python tools for generating high-quality type stubs via AST or Mypy backends with intelligent import, docstring, and importance processing.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/backends/__init__.py">
+        - Defines StubBackend protocol and registry for managing backend implementations.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/backends/ast_backend.py">
+        - Implements an AST-based stub generation backend that parses Python files, extracts signatures and docstrings via AST transformation, and supports async execution, caching, and directory processing.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/backends/base.py">
+        - Defines abstract `StubBackend` base class interface for generating stubs from files, modules, and packages with config handling and cleanup.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/backends/mypy_backend.py">
+        - Unimplemented MypyBackend class for MyPy-based stub generation.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/cli.py">
+        - Fire-based CLI for pystubnik generating Python stubs for files or directories with Rich UI.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/config.py">
+        - Pydantic configuration classes for file locations, stub generation parameters (IO, backend, MyPy options), and runtime environment settings.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/core/__init__.py">
+        - Core data structures, config models, and utility functions for pystubnik.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/core/config.py">
+        - Defines enums and dataclasses for pystubnik stub generation configuration, including Backend, ImportanceLevel, ProcessingConfig, PathConfig, RuntimeConfig, and the main StubGenConfig aggregator.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/core/conversion.py">
+        - Converts StubConfig to StubGenConfig mapping fields and handling defaults/type conversions.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/core/shared_types.py">
+        - Frozen dataclass TruncationConfig defining max lengths for sequences (4), strings (17), docstrings (150), file size (3k), and marker "...".
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/core/types.py">
+        - Core dataclasses for modules, classes, functions, and protocols for stub generation, import/docstring processing, and importance scoring.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/core/utils.py">
+        - Utilities for parallel execution, file discovery, AST extraction, docstring/type normalization, import tracking, logging, source reading, and path resolution.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/errors.py">
+        - Defines ErrorCode enum and StubGenerationError hierarchy (AST, MyPy, Config) for structured stub generation error handling.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/processors/__init__.py">
+        - Defines Processor protocol and registry for stub generation.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/processors/docstring.py">
+        - DocstringProcessor parses docstrings to extract and apply type hints for functions and methods in stub generation.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/processors/file_importance.py">
+        - Analyzes and ranks Python files based on dependency centrality, code complexity, test coverage, and documentation quality.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/processors/importance.py">
+        - Scores code elements based on file context, patterns, and docstrings, modifying AST to simplify low-importance functions.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/processors/imports.py">
+        - Analyzes, categorizes, groups, and reformats imports in stub content by type using AST parsing.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/processors/stub_generation.py">
+        - AST-based stub generator traversing source code to format classes, functions, and imports into type stub files.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/processors/type_inference.py">
+        - `TypeInferenceProcessor` infers types from AST via assignments, usage, returns, and naming patterns, filtering by confidence threshold.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/read_imports.py">
+        - Python script using AST to extract import statements from files via Fire CLI.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/types/__init__.py">
+        - Marks 'types' directory as Python package.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/types/docstring.py">
+        - Parses AST docstrings to extract and resolve parameter, return, yield, and exception types, handling simple, union, and container formats via a TypeRegistry.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/types/type_system.py">
+        - Implements TypeRegistry for resolving, caching, merging advanced type features like TypeVars, Protocols, generics.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/utils/__init__.py">
+        - Makes 'utils' a Python package.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/utils/ast_utils.py">
+        - AST utilities for truncating literals, attaching parent references, extracting docstrings, and filtering members.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/utils/display.py">
+        - Rich utilities for displaying file trees and progress indicators.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/pystubnik/utils/memory.py">
+        - Python utilities for memory monitoring including a threaded MemoryMonitor class, context manager, async chunked AST processor, and profiling decorator.
+      </file>
+      <file path="plugins/repos/twat_coding/src/twat_coding/twat_coding.py">
+        - v0.1.0 Python module skeleton defining Config dataclass and process_data function with logging and input validation.
+      </file>
+      <file path="plugins/repos/twat_coding/tests/__init__.py">
+        - Unit and integration tests for twat-coding.
+      </file>
+      <file path="plugins/repos/twat_coding/tests/test_package.py">
+        - Tests pystubnik AST/Mypy backends, config conversion, type hints, docstrings, stub generation logic (imports, assignments, privacy), and literal truncation utilities.
+      </file>
+      <file path="plugins/repos/twat_ez/LOG.md">
+        - v1.7.5 initial release of twat-ez plugin featuring modern packaging, CI/CD workflows, comprehensive testing, linting, and documentation.
+      </file>
+      <file path="plugins/repos/twat_ez/README.md">
+        - Python library and `twat` plugin providing the `py_needs` module for automated dependency installation, robust executable discovery, and resilient URL downloading to streamline scripting tasks.
+      </file>
+      <file path="plugins/repos/twat_ez/VERSION.txt">
+        - Updated VERSION.txt
+      </file>
+      <file path="plugins/repos/twat_ez/cleanup.py">
+        - Python repo maintenance script using uv to automate venv, install, git workflow, quality checks, logging to llms.txt, and repomix generation.
+      </file>
+      <file path="plugins/repos/twat_ez/pyproject.toml">
+        - Python 3.10+ `twat-ez` plugin for twat ecosystem; Hatchling/VCS build; Ruff/Mypy/Pytest tooling.
+      </file>
+      <file path="plugins/repos/twat_ez/src/twat_ez/__init__.py">
+        - Sets `__version__` dynamically from package metadata.
+      </file>
+      <file path="plugins/repos/twat_ez/src/twat_ez/__version__.py">
+        - Defines version 2.8.0.dev10+gdc69fb1f4.
+      </file>
+      <file path="plugins/repos/twat_ez/src/twat_ez/py_needs.py">
+        - Python utility for path discovery, URL downloading, and a `needs` decorator to auto-install dependencies via UV.
+      </file>
+      <file path="plugins/repos/twat_ez/tests/test_twat_ez.py">
+        - Pytest suite for twat_ez.py_needs mocking path resolution, executable verification, URL downloads, tool installation, and dependency management logic.
+      </file>
+      <file path="plugins/repos/twat_fs/IDEAS.md">
+        - Expand `twat-fs` upload capabilities by integrating diverse providers (Google Drive, OneDrive, Azure, B2, etc.) using established protocols and shared utilities to enhance flexibility and robust fallback options.
+      </file>
+      <file path="plugins/repos/twat_fs/IMPLEMENTATION_SUMMARY.md">
+        - Implemented git tag-based semversioning, automated CI/CD pipeline, and multiplatform binary distribution for twat-fs.
+      </file>
+      <file path="plugins/repos/twat_fs/MANUAL_WORKFLOW_SETUP.md">
+        - Create CI workflow and update Release workflow to build PyPI packages and cross-platform PyInstaller binaries on version tags.
+      </file>
+      <file path="plugins/repos/twat_fs/PLAN.md">
+        - Plan to implement git tag-based semversioning, comprehensive testing, local dev scripts, GitHub Actions CI/CD, multiplatform binary releases, and easy installation for the twat-fs Python package.
+      </file>
+      <file path="plugins/repos/twat_fs/README.md">
+        - Python library and CLI for robust multi-provider file uploads featuring a unified API, automatic retries, and smart fallback mechanisms.
+      </file>
+      <file path="plugins/repos/twat_fs/TODO.md">
+        - Implement semversioning, CI/CD, and distribution; fix high-priority test deps, failing tests, linter/type errors, and code complexity; add docs and new providers.
+      </file>
+      <file path="plugins/repos/twat_fs/cleanup.py">
+        - Repo automation script managing uv venv setup, installation, code quality checks, git status/commit/push, and logging operations to llms.txt.
+      </file>
+      <file path="plugins/repos/twat_fs/examples/upload_example.py">
+        - Async Python CLI using uv/fire to upload files to services (bash, www0x0, uguu) and return URLs.
+      </file>
+      <file path="plugins/repos/twat_fs/install.ps1">
+        - PowerShell script fetching the latest twat-fs Windows binary from GitHub to install into a local bin directory, handling overwrites and PATH configuration.
+      </file>
+      <file path="plugins/repos/twat_fs/install.sh">
+        - Auto-detects OS, downloads latest twat-fs binary from GitHub, installs to ~/.local/bin, and verifies version.
+      </file>
+      <file path="plugins/repos/twat_fs/pyproject.toml">
+        - Python FS utility 'twat-fs' supports multi-provider uploads (S3, Dropbox, Fal), built with Hatchling, configured for strict linting, typing, and testing.
+      </file>
+      <file path="plugins/repos/twat_fs/scripts/build.py">
+        - Cleans dist, builds twat-fs package, lists artifacts, displays version.
+      </file>
+      <file path="plugins/repos/twat_fs/scripts/build_binary.py">
+        - Cleans previous builds, compiles a standalone twat-fs executable using PyInstaller and uv with hidden imports, and validates the result.
+      </file>
+      <file path="plugins/repos/twat_fs/scripts/dev.py">
+        - Dev CLI wrapper for build, test, lint, fix (ruff), release, setup, and all checks.
+      </file>
+      <file path="plugins/repos/twat_fs/scripts/lint.py">
+        - Python script using uv to run ruff and mypy linting checks on the twat-fs codebase with rich output.
+      </file>
+      <file path="plugins/repos/twat_fs/scripts/release.py">
+        - Python script building and validating twat-fs package, checking git status, and printing release instructions.
+      </file>
+      <file path="plugins/repos/twat_fs/scripts/test.py">
+        - Runs pytest with coverage for twat-fs, falling back to standard tests on failure.
+      </file>
+      <file path="plugins/repos/twat_fs/src/twat_fs/__init__.py">
+        - Initializes package, configures cache paths, exports CLI/upload utilities.
+      </file>
+      <file path="plugins/repos/twat_fs/src/twat_fs/__main__.py">
+        - CLI entry point for twat-fs package handling file uploads and provider setup.
+      </file>
+      <file path="plugins/repos/twat_fs/src/twat_fs/__version__.py">
+        - Auto-generated version 2.8.0.dev10+gdc69fb1f4
+      </file>
+      <file path="plugins/repos/twat_fs/src/twat_fs/cli.py">
+        - Python CLI for twat-fs package providing file upload commands and provider management utilities.
+      </file>
+      <file path="plugins/repos/twat_fs/src/twat_fs/paths.py">
+        - Manages twat-fs cache, config, and data directories using twat-os PathManager or platformdirs fallback.
+      </file>
+      <file path="plugins/repos/twat_fs/src/twat_fs/upload.py">
+        - Unified file upload module supporting multi-provider fallback, online verification, configuration checks, and performance timing.
+      </file>
+      <file path="plugins/repos/twat_fs/src/twat_fs/upload_providers/__init__.py">
+        - Upload provider registry defining preference order and exporting core types, errors, and backward-compatible factory wrappers.
+      </file>
+      <file path="plugins/repos/twat_fs/src/twat_fs/upload_providers/async_utils.py">
+        - Core async utilities for sync/async conversion, concurrency-limited gathering, timeouts, and context managers.
+      </file>
+      <file path="plugins/repos/twat_fs/src/twat_fs/upload_providers/bashupload.py">
+        - Python provider for uploading files to bashupload.com using aiohttp, requiring no credentials and parsing responses for download URLs.
+      </file>
+      <file path="plugins/repos/twat_fs/src/twat_fs/upload_providers/catbox.py">
+        - Implements CatboxProvider to upload files to catbox.moe via aiohttp without requiring credentials.
+      </file>
+      <file path="plugins/repos/twat_fs/src/twat_fs/upload_providers/core.py">
+        - Core upload provider utilities featuring retry logic, validation, timing metrics, and sync/async conversion.
+      </file>
+      <file path="plugins/repos/twat_fs/src/twat_fs/upload_providers/dropbox.py">
+        - Dropbox upload provider handling authentication, chunked file transfers, directory creation, and shareable URL generation.
+      </file>
+      <file path="plugins/repos/twat_fs/src/twat_fs/upload_providers/factory.py">
+        - `ProviderFactory` handles dynamic loading, validation, instantiation, help retrieval, and batch creation of upload providers with caching.
+      </file>
+      <file path="plugins/repos/twat_fs/src/twat_fs/upload_providers/fal.py">
+        - FalProvider class uploads files to FAL via fal_client, env credentials, and temp file handling.
+      </file>
+      <file path="plugins/repos/twat_fs/src/twat_fs/upload_providers/filebin.py">
+        - Uploads files to filebin.net via unique bins with retries; no credentials required.
+      </file>
+      <file path="plugins/repos/twat_fs/src/twat_fs/upload_providers/litterbox.py">
+        - Implements Litterbox.catbox.moe upload provider with configurable expiration, async/sync operations, and error handling.
+      </file>
+      <file path="plugins/repos/twat_fs/src/twat_fs/upload_providers/pixeldrain.py">
+        - PixeldrainProvider class handles file uploads to pixeldrain.com API with manual retry logic and no credentials.
+      </file>
+      <file path="plugins/repos/twat_fs/src/twat_fs/upload_providers/protocols.py">
+        - Defines ProviderClient and Provider protocols enforcing interfaces for upload modules, including sync/async file uploads, credential retrieval, and help documentation.
+      </file>
+      <file path="plugins/repos/twat_fs/src/twat_fs/upload_providers/s3.py">
+        - Python module implementing an AWS S3 upload provider using boto3 with environment-based credentials and retry logic.
+      </file>
+      <file path="plugins/repos/twat_fs/src/twat_fs/upload_providers/simple.py">
+        - Defines `BaseProvider`, `AsyncBaseProvider`, and `SyncBaseProvider` classes offering common upload logic, file validation, and sync/async bridging.
+      </file>
+      <file path="plugins/repos/twat_fs/src/twat_fs/upload_providers/types.py">
+        - Defines ExpirationTime enum and UploadResult class for upload providers.
+      </file>
+      <file path="plugins/repos/twat_fs/src/twat_fs/upload_providers/uguu.py">
+        - Implements UguuProvider for uploading files to uguu.se via HTTP POST with error handling and no credentials.
+      </file>
+      <file path="plugins/repos/twat_fs/src/twat_fs/upload_providers/utils.py">
+        - Shared utilities for upload providers covering file handling, HTTP error parsing, credential retrieval, provider instantiation, and standardized logging.
+      </file>
+      <file path="plugins/repos/twat_fs/src/twat_fs/upload_providers/www0x0.py">
+        - Python provider for 0x0.st file uploads using POST requests, standardized error handling, and no required credentials.
+      </file>
+      <file path="plugins/repos/twat_fs/templates/authenticated_provider_template.py">
+        - Template for authenticated file upload provider class handling credentials, upload implementation, and module wrappers.
+      </file>
+      <file path="plugins/repos/twat_fs/templates/simple_provider_template.py">
+        - Template for implementing simple, credential-less upload providers with sync/async support and standardized wrappers.
+      </file>
+      <file path="plugins/repos/twat_fs/tests/__init__.py">
+        - Test package for twat_fs.
+      </file>
+      <file path="plugins/repos/twat_fs/tests/data/test.txt">
+        - Test file containing sample content for upload testing.
+      </file>
+      <file path="plugins/repos/twat_fs/tests/test_async_utils.py">
+        - Unit tests for async_utils covering run_async execution, sync/async conversion, concurrency limiting, context management, and timeout handling.
+      </file>
+      <file path="plugins/repos/twat_fs/tests/test_filebin_pixeldrain.py">
+        - Pytest suite mocking filebin and pixeldrain upload success, failure, and initialization.
+      </file>
+      <file path="plugins/repos/twat_fs/tests/test_integration.py">
+        - Integration tests for upload functionality across S3, Dropbox, Fal, Catbox, and Litterbox providers, verifying setup, file uploads, and configuration.
+      </file>
+      <file path="plugins/repos/twat_fs/tests/test_s3_advanced.py">
+        - Tests S3 provider credential loading, configurations, and multipart uploads using pytest and mocks.
+      </file>
+      <file path="plugins/repos/twat_fs/tests/test_twat_fs.py">
+        - Tests twat_fs version attribute.
+      </file>
+      <file path="plugins/repos/twat_fs/tests/test_upload.py">
+        - Tests provider setup, auth, upload logic (fallbacks/retries), edge cases, and specific providers (S3, Dropbox, FAL, Catbox, Litterbox) via mocks.
+      </file>
+      <file path="plugins/repos/twat_fs/tests/test_utils.py">
+        - Unit tests for utils.py covering provider help, safe file handling, validation, HTTP status mapping, env credentials, provider instantiation, upload wrapping, and logging.
+      </file>
+      <file path="plugins/repos/twat_fs/update_providers.py">
+        - Script refactors provider files to use BaseProvider, updates imports, and modifies upload_file functions to return UploadResult.
+      </file>
+      <file path="plugins/repos/twat_genai/CHANGES.md">
+        - Fixed tilde path expansion and Pydantic `ImageInput` definition errors; added test script.
+      </file>
+      <file path="plugins/repos/twat_genai/CLAUDE.md">
+        - Challenge instincts, ensure accuracy, prioritize simplicity/verification, test-first, use packages, maintain docs, follow Python standards, avoid bloat, write impactful prose.
+      </file>
+      <file path="plugins/repos/twat_genai/PLAN.md">
+        - Setup project docs, remove duplicate/unused code, streamline configuration and CLI logic, update documentation, ensure tests pass, and finalize submission.
+      </file>
+      <file path="plugins/repos/twat_genai/README.md">
+        - Unified Python CLI/API toolkit for fal.ai generative image tasks (TTI, I2I, ControlNet, upscaling, outpainting) with LoRA support.
+      </file>
+      <file path="plugins/repos/twat_genai/TODO.md">
+        - Complete setup, refactor code, remove duplicates, streamline CLI, update docs, test, submit.
+      </file>
+      <file path="plugins/repos/twat_genai/VERSION.txt">
+        - v2.8.5
+      </file>
+      <file path="plugins/repos/twat_genai/pyproject.toml">
+        - Python 3.10+ Hatchling project `twat-genai` providing a GenAI plugin for the `twat` ecosystem with VCS versioning, `fal-client` dependencies, and strict tooling (pytest, ruff, mypy).
+      </file>
+      <file path="plugins/repos/twat_genai/src/twat_genai/__init__.py">
+        - Initializes twat-genai package, exporting CLI, core image types, base and FAL engines, specific configs, and version.
+      </file>
+      <file path="plugins/repos/twat_genai/src/twat_genai/__main__.py">
+        - Main entry point script using Fire to execute TwatGenAiCLI.
+      </file>
+      <file path="plugins/repos/twat_genai/src/twat_genai/__main___loras.json">
+        - gstdrw:Gesture-Draw; Smudge:Flux-Sketch-Smudge; 2color:2Color-Illustration; shou_xin:shou_xin; shou_xin+Pencil:shou_xin,Super-Pencil; shou_xin+gstdrw:shou_xin,Gesture-Draw; TOK tarot:flux-tarot; shou_xin+Smudge:shou_xin,Flux-Sketch-Smudge.
+      </file>
+      <file path="plugins/repos/twat_genai/src/twat_genai/__version__.py">
+        - Generated version file defines version 2.8.0.dev10+gdc69fb1f4 and commit_id None.
+      </file>
+      <file path="plugins/repos/twat_genai/src/twat_genai/cli.py">
+        - Fire-based CLI for twat-genai supporting text-to-image, image-to-image, controlnet, upscaling, and outpainting operations.
+      </file>
+      <file path="plugins/repos/twat_genai/src/twat_genai/core/__init__.py">
+        - Core twat-genai components.
+      </file>
+      <file path="plugins/repos/twat_genai/src/twat_genai/core/config.py">
+        - Defines core Pydantic models and type aliases for twat-genai image generation, including ImageSize, ImageInput, and ImageResult.
+      </file>
+      <file path="plugins/repos/twat_genai/src/twat_genai/core/image.py">
+        - Defines image size/format enums, imports ImageSizeWH, implements async image saving with error handling, and validates custom dimensions.
+      </file>
+      <file path="plugins/repos/twat_genai/src/twat_genai/core/image_utils.py">
+        - Image processing utilities for resizing, async downloading, and generating masks for Flux inpainting/outpainting and Bria GenFill.
+      </file>
+      <file path="plugins/repos/twat_genai/src/twat_genai/core/lora.py">
+        - Defines Pydantic models for LoRA records, libraries, and inference specifications.
+      </file>
+      <file path="plugins/repos/twat_genai/src/twat_genai/core/prompt.py">
+        - Pydantic-based parser for Midjourney prompts handling image URLs, weights, permutations, and parameters.
+      </file>
+      <file path="plugins/repos/twat_genai/src/twat_genai/engines/__init__.py">
+        - Engines for AI platform interaction.
+      </file>
+      <file path="plugins/repos/twat_genai/src/twat_genai/engines/base.py">
+        - Defines base config and abstract interface for async image generation engines with lifecycle management.
+      </file>
+      <file path="plugins/repos/twat_genai/src/twat_genai/engines/fal/__init__.py">
+        - FALEngine implements FAL API image generation for TTI, I2I, upscaling, outpainting, handling image preprocessing, resizing, uploading, and model-specific logic.
+      </file>
+      <file path="plugins/repos/twat_genai/src/twat_genai/engines/fal/client.py">
+        - Async FAL.ai API client for image generation tasks (upscaling, outpainting, TTI/I2I), handling job submission, result polling, and file downloading.
+      </file>
+      <file path="plugins/repos/twat_genai/src/twat_genai/engines/fal/config.py">
+        - Defines FAL model enums and Pydantic configurations for image-to-image, upscaling, and outpainting operations, including tool-specific parameters and max input size constants.
+      </file>
+      <file path="plugins/repos/twat_genai/src/twat_genai/engines/fal/lora.py">
+        - LoRA utilities: load library, parse phrases, normalize specs, build inference args and prompts.
+      </file>
+      <file path="plugins/repos/twat_genai/src/twat_genai/engines/fal/models.py">
+        - FAL-specific ImageInput class converting paths or PIL images to URLs via fal_client upload.
+      </file>
+      <file path="plugins/repos/twat_genai/test_outpaint.py">
+        - Test script verifying twat_genai outpaint command's image input preparation and directory path management.
+      </file>
+      <file path="plugins/repos/twat_genai/tests/conftest.py">
+        - Pytest fixture mocking FalApiClient and its async methods.
+      </file>
+      <file path="plugins/repos/twat_genai/tests/test_cli.py">
+        - Tests CLI text-to-image generation mocking FALEngine, validating basic/custom calls, config parsing, and error handling for prompts/sizes.
+      </file>
+      <file path="plugins/repos/twat_genai/tests/test_fal_client.py">
+        - Tests FalApiClient covering image info extraction, uploads, job submission, and upscaling, I2I, outpainting, TTI workflows with mocks and error handling.
+      </file>
+      <file path="plugins/repos/twat_genai/tests/test_image_utils.py">
+        - Tests image download to temp/specific paths mocking httpx, and resizing logic based on upscaler model constraints.
+      </file>
+      <file path="plugins/repos/twat_genai/tests/test_twat_genai.py">
+        - Verifies twat_genai package exposes version.
+      </file>
+      <file path="plugins/repos/twat_hatch/PLAN.md">
+        - Streamline twat-hatch MVP v1.0: simplified PyVer parsing and .gitignore, cleaned template comments, retained CLI/PackageConfig logic, pending documentation updates and final review.
+      </file>
+      <file path="plugins/repos/twat_hatch/README.md">
+        - CLI tool for scaffolding modern Python packages (standalone/plugins) with PEP 621 best practices, Git integration, and programmatic API support.
+      </file>
+      <file path="plugins/repos/twat_hatch/TODO.md">
+        - Completed code simplifications and documentation updates; pending final review, linting, and commit.
+      </file>
+      <file path="plugins/repos/twat_hatch/VERSION.txt">
+        - Auto-commit local changes
+      </file>
+      <file path="plugins/repos/twat_hatch/cleanup.py">
+        - Python repository maintenance script automating venv setup, dependency installation, code quality checks, git operations, logging to llms.txt, and repomix execution.
+      </file>
+      <file path="plugins/repos/twat_hatch/pyproject.toml">
+        - Hatch-managed pyproject.toml for twat-hatch plugin (Python 3.10+) with VCS versioning, dependencies on twat/pydantic/jinja2, strict Ruff/MyPy linting, pytest benchmarking, and pip-compile integration.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/__init__.py">
+        - Initializes twat package, exporting PackageInitializer and __version__.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/__main__.py">
+        - CLI for twat-hatch using Fire to provide init, config, and create commands for package scaffolding.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/__version__.py">
+        - setuptools-scm generated version definitions: 2.7.5.post7+g09affa326.d20251126, commit_id None.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/config.py">
+        - Generates and writes Python package configuration files using Jinja2 templates with default settings.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/hatch.py">
+        - Core module for Python package scaffolding featuring Jinja2 template rendering, Pydantic configuration management, and automated Git/GitHub repository initialization.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/__init__.py">
+        - Package generation theme templates.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/_shared/base.toml.j2">
+        - Jinja2 template for base TOML configuration covering packages, plugin/host logic, dependencies, and metadata.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/_shared/snippets/author.toml.j2">
+        - Author metadata template with placeholders for name, email, and GitHub.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/_shared/snippets/dependencies.toml.j2">
+        - Jinja2 template for conditional package, plugin, and dev dependencies.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/_shared/snippets/development.toml.j2">
+        - Configures development dependencies including testing, linting, and dynamic extras.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/_shared/snippets/features.toml.j2">
+        - Defines feature flags for MkDocs and VCS integration.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/_shared/snippets/package.toml.j2">
+        - Defines package metadata including Python version constraints, license, and development status.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/_shared/snippets/tools.toml.j2">
+        - Ruff strict linting/formatting, Mypy strict type checking, optional Pydantic plugin.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/default/AGENT.md.j2">
+        - Iterate gradually, preserve code, constants, explanatory docs, handle failures, modularize, flat, track paths, uv/PEP/verbose, CLI headers, PLAN/TODO rounds, update docs, reflect, lint/test.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/default/CLAUDE.md">
+        - Challenge instincts with CoT; reject sycophancy; verify via test-first dev and existing packages; maintain strict docs; use `uv` for Python; avoid complexity/bloat; execute /plan, /work, /test commands.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/default/CLAUDE.md.j2">
+        - Iterate minimally, preserve structure, document why, handle errors, track paths, use `uv`/PEP/logging, maintain PLAN/TODO/CHANGELOG, reflect via Ideot/Critin, run linting/tests, be relentless.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/default/LICENSE.j2">
+        - Freely use, modify, and distribute provided the license and copyright notice are included; software is provided "as is" without warranty.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/default/README.md.j2">
+        - Modern Python project template with PEP 621 packaging, type hints, CI/CD, pip installation, and Hatch-based development workflow.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/default/hidden.gitignore.j2">
+        - Comprehensive gitignore excluding build artifacts, dependencies, IDE configs, OS files, caches, and test reports.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/default/pyproject.toml.j2">
+        - Python package `pyproject.toml` template defining metadata, Hatchling build system, dependencies, dev environments, and tool configurations (Ruff, MyPy, Pytest, Coverage).
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/default/tests/test_package.py.j2">
+        - Tests package exposes version.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/package.toml.j2">
+        - Python package config for {{ name }} (Py 3.10+, MIT) enabling CLI, logging, Pydantic, Rich, Git, and GitHub Actions.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/package/package.toml.j2">
+        - CLI, logging, Pydantic, Rich, VCS, GitHub Actions enabled; MkDocs disabled.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/package/src/__package_name__/__package_name__.py.j2">
+        - Python script template implementing logging, a Config dataclass, a data processing stub, and a main entry point.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/plugin.toml.j2">
+        - Jinja2 template for Python plugin configuration including metadata, options, and feature flags.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/plugin/README.md.j2">
+        - Jinja2 template for a modern Python plugin README featuring PEP 621 packaging, type hints, testing, and CI/CD.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/plugin/pyproject.toml.j2">
+        - Jinja template extends base pyproject.toml to configure plugin dependencies and entry points.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/plugin/src/__package_name__/__init__.py.j2">
+        - Sets plugin version via importlib.metadata.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/plugin_host.toml.j2">
+        - Jinja2 template for a Python plugin host package configuration including metadata, plugin options, and build features.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/plugin_host/README.md.j2">
+        - Jinja2 template for Python plugin system README: dynamic loading, PEP 621, type hints, CI/CD, entry point usage.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/plugin_host/pyproject.toml.j2">
+        - Jinja2 template extending base pyproject.toml defining specific and dynamic dependencies.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/themes/plugin_host/src/__init__.py.j2">
+        - Enables plugin loading via package-style imports and dynamic attributes using entry points.
+      </file>
+      <file path="plugins/repos/twat_hatch/src/twat_hatch/utils.py">
+        - PyVer dataclass handles parsing, validating, and formatting Python versions from strings/tuples, defaulting to 3.10.
+      </file>
+      <file path="plugins/repos/twat_hatch/tests/test_twat_hatch.py">
+        - Verifies twat_hatch exposes version attribute.
+      </file>
+      <file path="plugins/repos/twat_image/CLAUDE.md">
+        - Challenge instincts with CoT, ensure accuracy, use test-first minimal code, buy over build, verify everything, maintain project docs, follow Python standards, and ruthlessly avoid enterprise bloat.
+      </file>
+      <file path="plugins/repos/twat_image/PLAN.md">
+        - Rename src directory, create project docs, review white point logic, verify build/CI, lint/test, finalize docs, and commit.
+      </file>
+      <file path="plugins/repos/twat_image/README.md">
+        - Python CLI and library for generating content-aware alpha channels from image grayscale data, enabling precise transparency control via customizable thresholds and colors.
+      </file>
+      <file path="plugins/repos/twat_image/TASK.md">
+        - Develop Fire CLI any2gray.py to convert images to perceptual grayscale, normalize levels, clean noise, apply Gauss quantization, optionally integrate gray2alpha, and write output.
+      </file>
+      <file path="plugins/repos/twat_image/TODO.md">
+        - Develop `any2gray.py` CLI: setup script, load/convert images to grayscale, apply normalization/noise reduction, integrate optional `gray2alpha` masking, handle saving, and test.
+      </file>
+      <file path="plugins/repos/twat_image/VERSION.txt">
+        - Auto-commit local changes.
+      </file>
+      <file path="plugins/repos/twat_image/cleanup.sh">
+        - Runs app, cleans/lints/formats Python files, bundles repo, and executes tests.
+      </file>
+      <file path="plugins/repos/twat_image/old/imgproxyproc/CLAUDE.md">
+        - Prioritize accuracy, challenge instincts, verify everything, test-first, prefer packages, avoid bloat, maintain docs.
+      </file>
+      <file path="plugins/repos/twat_image/old/imgproxyproc/PROGRESS.md">
+        - Project complete and production-ready (2025-01-06); progress tracked in CHANGELOG/TODO/README.
+      </file>
+      <file path="plugins/repos/twat_image/old/imgproxyproc/README.md">
+        - `imgproxyproc` enables high-resolution image processing through low-resolution models using delta-based reconstruction to preserve original quality.
+      </file>
+      <file path="plugins/repos/twat_image/old/imgproxyproc/SPEC.md">
+        - Python CLI tool `imgproxyproc` enables high-res image processing via delta-based split/merge operations, supporting batch workflows, external upscalers, and 16-bit precision for lossless reconstruction through resolution-limited models.
+      </file>
+      <file path="plugins/repos/twat_image/old/imgproxyproc/TODO.md">
+        - imgproxyproc v1.0.0 roadmap prioritizing RGBA/HDR/GPU support, quality metrics, modern formats, AI integration, API/GUI infrastructure, async/stream architecture, ecosystem plugins, and experimental research.
+      </file>
+      <file path="plugins/repos/twat_image/old/imgproxyproc/create_test_image.py">
+        - Generates a 2000x1500 test PNG with red/green gradients, blue squares, and white lines.
+      </file>
+      <file path="plugins/repos/twat_image/old/imgproxyproc/imgproxyproc.py">
+        - CLI tool processes high-res images via low-res proxies by downsampling inputs, calculating change deltas, and merging upscaled deltas back to original resolution.
+      </file>
+      <file path="plugins/repos/twat_image/old/imgproxyproc/simulate_processing.py">
+        - Python script loads an image, enhances brightness and contrast, applies a blur, and saves it as "_processed.png".
+      </file>
+      <file path="plugins/repos/twat_image/old/imgproxyproc/test_gradient_proxy_metadata.txt">
+        - Resize 2000x1500 test_gradient.png to 512x512 proxy.
+      </file>
+      <file path="plugins/repos/twat_image/old/imgscale.py">
+        - Multi-engine Python CLI script to proportionally scale images using Pillow, OpenCV, Wand, or Sips with quality settings and benchmarking.
+      </file>
+      <file path="plugins/repos/twat_image/pyproject.toml">
+        - Hatchling-built Py3.10+ image-alpha utility with Pillow/Numpy deps, CLI/plugin entry points, strict Ruff/Mypy linting, and Pytest benchmarking.
+      </file>
+      <file path="plugins/repos/twat_image/src/image_alpha_utils/__init__.py">
+        - Exposes image alpha conversion utilities and version metadata.
+      </file>
+      <file path="plugins/repos/twat_image/src/image_alpha_utils/gray2alpha.py">
+        - Python CLI converts images to colored PNGs with alpha masks derived from normalized grayscale thresholds, supporting stdin/stdout.
+      </file>
+      <file path="plugins/repos/twat_image/src/twat_image/__version__.py">
+        - Version 2.8.0.dev10+gdc69fb1f4 defined.
+      </file>
+      <file path="plugins/repos/twat_image/tests/test_alpha_creation.py">
+        - Tests `create_alpha_image` verifying mask-to-alpha conversion (inverted/direct), color parsing (string/hex/tuple), error handling, and input immutability.
+      </file>
+      <file path="plugins/repos/twat_image/tests/test_cli.py">
+        - Unit tests for the gray2alpha CLI verifying file I/O, argument parsing, error handling, and stdin/stdout using pytest and mocks.
+      </file>
+      <file path="plugins/repos/twat_image/tests/test_color_parsing.py">
+        - Pytest suite for `parse_color` verifying valid/invalid RGB conversions from strings and tuples, whitespace handling, case insensitivity, and error messages.
+      </file>
+      <file path="plugins/repos/twat_image/tests/test_core_processing.py">
+        - Unit tests for `igray2alpha` verifying default/custom parameters, negative inversion, flat image edge cases, input immutability, and alpha channel handling.
+      </file>
+      <file path="plugins/repos/twat_image/tests/test_image_alpha_utils.py">
+        - Tests package version exposure.
+      </file>
+      <file path="plugins/repos/twat_image/tests/test_normalization.py">
+        - Tests `normalize_grayscale` behavior covering threshold scaling, percentage inputs, edge cases like flat images, and invalid input validation.
+      </file>
+      <file path="plugins/repos/twat_labs/IMPLEMENTATION_SUMMARY.md">
+        - Implemented git-tag semversioning, 18 tests/95% coverage, automated build/release scripts, enhanced CI/CD, and multiplatform binaries; project is production-ready.
+      </file>
+      <file path="plugins/repos/twat_labs/PLAN.md">
+        - Refactor twat-labs for elegance and efficiency via code review, testing, documentation, and CI/CD verification.
+      </file>
+      <file path="plugins/repos/twat_labs/README.md">
+        - `twat-labs`: experimental plugin for the `twat` ecosystem hosting new features/extensions; installable via pip, currently exposing versioning and plugin structure with modern Python tooling.
+      </file>
+      <file path="plugins/repos/twat_labs/TODO.md">
+        - Completed initial setup and linting fixes; currently reviewing codebase and defining project purpose; pending tasks include functionality enhancement, testing, documentation, and resolving versioning conflicts between `VERSION.txt`, `CHANGELOG.md`, and `hatch-vcs`.
+      </file>
+      <file path="plugins/repos/twat_labs/VERSION.txt">
+        - Merged main branch with conflict in VERSION.txt
+      </file>
+      <file path="plugins/repos/twat_labs/cleanup.py">
+        - Python script using uv to automate repo maintenance tasks (status, venv, install, git update/push), log operations to CLEANUP.txt, and pack repository content via repomix.
+      </file>
+      <file path="plugins/repos/twat_labs/pyproject.toml">
+        - Hatchling-built `twat` plugin with Ruff, MyPy, and Pytest/benchmarking for Python 3.10+.
+      </file>
+      <file path="plugins/repos/twat_labs/src/twat_labs/__init__.py">
+        - Twat labs plugin initialization exporting version.
+      </file>
+      <file path="plugins/repos/twat_labs/src/twat_labs/__version__.py">
+        - Version 2.8.0.dev10+gdc69fb1f4; commit_id None.
+      </file>
+      <file path="plugins/repos/twat_labs/tests/test_twat_labs.py">
+        - Test twat_labs version attribute.
+      </file>
+      <file path="plugins/repos/twat_llm/DEVELOPMENT.md">
+        - `twat-llm` dev guide: setup with `uv`, use `make` for formatting/linting/testing, build with Hatch, release via Git tags, automate CI/CD with GitHub Actions.
+      </file>
+      <file path="plugins/repos/twat_llm/LOG.md">
+        - v0.0.1 release adds LLM interaction functions (ask, batch, chain) with media support and CLI, improves code structure, and outlines future plans for core logic and testing.
+      </file>
+      <file path="plugins/repos/twat_llm/README.md">
+        - Python library `twat-llm` integrates LLMs with external data sources (Proxycurl, Brave), enabling data enrichment, web search, chaining, batching, and media handling via CLI or programmatic API.
+      </file>
+      <file path="plugins/repos/twat_llm/TODO.md">
+        - Clean docs, refine core code/examples, verify dependencies, run tests, and submit v1.0 MVP.
+      </file>
+      <file path="plugins/repos/twat_llm/cleanup.py">
+        - Python script automating repo maintenance (venv, install, git ops, checks) and repomix, logging to llms.txt.
+      </file>
+      <file path="plugins/repos/twat_llm/docs/research/people-api.md">
+        - `twat-llm` integrates Proxycurl for LinkedIn profile enrichment via `enrich_person`, requiring API key and LLM summarization; future plans include multi-provider support and custom prompts.
+      </file>
+      <file path="plugins/repos/twat_llm/docs/research/web-search-api.md">
+        - `twat-llm` integrates web search APIs (e.g., Brave) via `search_web` to fetch and LLM-summarize results; requires API keys, plans multi-provider support.
+      </file>
+      <file path="plugins/repos/twat_llm/examples/check_llm_plugins.py">
+        - Checks if LLM plugins can be imported and displays status/timing in a table.
+      </file>
+      <file path="plugins/repos/twat_llm/examples/example_people_script.py">
+        - Demonstrates LinkedIn profile enrichment and summarization via twat_llm, Proxycurl API, and LLM.
+      </file>
+      <file path="plugins/repos/twat_llm/examples/example_serp_script.py">
+        - Script demonstrating `twat_llm` web search (Brave API) and LLM summarization using `ActionConfig` and `WebSearchParams`.
+      </file>
+      <file path="plugins/repos/twat_llm/examples/funchain_example.py">
+        - Demonstrates `twat_llm.mallmo.ask_chain` chaining LLM prompts and Python callables to transform text (caps, translate, lowercase).
+      </file>
+      <file path="plugins/repos/twat_llm/examples/run_action_config_example.py">
+        - Demonstrates twat_llm ActionConfig usage for person enrichment and web search via process_data, handling API keys via environment variables.
+      </file>
+      <file path="plugins/repos/twat_llm/pyproject.toml">
+        - Hatchling-built Python 3.10+ `twat-llm` package integrating LLMs via `twat`/`pydantic`/`httpx`/`llm` dependencies, configured for strict `pytest`/`ruff`/`mypy` development.
+      </file>
+      <file path="plugins/repos/twat_llm/scripts/build.sh">
+        - Cleans project, installs dependencies via uv, runs linting/type-checks/tests, builds package, verifies distributions, and tests wheel installation.
+      </file>
+      <file path="plugins/repos/twat_llm/scripts/release.sh">
+        - Automates Python package release by checking git state, calculating versions, running tests/builds, updating the changelog, and pushing tags to trigger CI/CD.
+      </file>
+      <file path="plugins/repos/twat_llm/scripts/setup.sh">
+        - Installs uv, sets up dev environment with dependencies, configures pre-commit hooks, verifies tooling, and checks git status.
+      </file>
+      <file path="plugins/repos/twat_llm/scripts/test.sh">
+        - Bash script orchestrating uv/pytest execution with optional coverage, benchmarks, parallelism, and code quality checks.
+      </file>
+      <file path="plugins/repos/twat_llm/src/twat_llm/__init__.py">
+        - Exposes version, data processing configs, and LLM interaction functions/errors for the twat_llm package.
+      </file>
+      <file path="plugins/repos/twat_llm/src/twat_llm/__version__.py">
+        - setuptools-scm generated version file defines version 2.8.0.dev10+gdc69fb1f4 and commit_id None.
+      </file>
+      <file path="plugins/repos/twat_llm/src/twat_llm/mallmo.py">
+        - Python CLI wrapper for LLM interactions supporting single/batch prompts, image attachments, model fallbacks, retries, and processing chains.
+      </file>
+      <file path="plugins/repos/twat_llm/src/twat_llm/twat_llm.py">
+        - Pydantic-driven Python module orchestrating LinkedIn enrichment and web search actions with LLM summarization.
+      </file>
+      <file path="plugins/repos/twat_llm/tests/test_benchmark.py">
+        - Pytest benchmarks for twat_llm performance, scalability, memory, throughput, latency, and resource utilization.
+      </file>
+      <file path="plugins/repos/twat_llm/tests/test_integration.py">
+        - Integration test suite covering versioning, CLI functionality, end-to-end workflows, error handling, performance scaling, configuration settings, and security validation.
+      </file>
+      <file path="plugins/repos/twat_llm/tests/test_mallmo.py">
+        - Pytest suite for `twat_llm.mallmo` covering image processing, model invocation fallbacks, prompt chaining, batch processing, and CLI behavior.
+      </file>
+      <file path="plugins/repos/twat_llm/tests/test_twat_llm.py">
+        - Pytest suite for twat_llm validating Pydantic models, env settings, and process_data for enrich_person/search_web covering success, missing inputs, and API/LLM error handling.
+      </file>
+      <file path="plugins/repos/twat_mp/API_REFERENCE.md">
+        - `twat-mp` provides Pathos-wrapped ProcessPool, ThreadPool, experimental AsyncMultiPool context managers, plus pmap, imap, amap, apmap decorators for parallel execution.
+      </file>
+      <file path="plugins/repos/twat_mp/PLAN.md">
+        - Streamline twat-mp for v1.0 MVP by isolating async features, focusing documentation and code on synchronous processing, removing redundant files, making aiomultiprocess optional, and finalizing tests and changelog.
+      </file>
+      <file path="plugins/repos/twat_mp/README.md">
+        - Python library simplifying parallel processing via Pathos-backed `ProcessPool`/`ThreadPool` context managers and decorators (`@pmap`), plus experimental `aiomultiprocess` async support.
+      </file>
+      <file path="plugins/repos/twat_mp/TODO.md">
+        - MVP streamlining checklist completed scoping, documentation, codebase refactoring, and test adjustments, pending final changelog update and review.
+      </file>
+      <file path="plugins/repos/twat_mp/VERSION.txt">
+        - Auto-merged.
+      </file>
+      <file path="plugins/repos/twat_mp/cleanup.py">
+        - Repo maintenance script managing venv, installation, status checks, git workflow, and logging via uv.
+      </file>
+      <file path="plugins/repos/twat_mp/docs/architecture.md">
+        - `twat-mp` architecture features core Process/Thread pools (`pathos`), experimental Async pools (`aiomultiprocess`), `MultiPool` hierarchy, and decorators (`pmap`, `imap`, `apmap`) for parallel task distribution and execution.
+      </file>
+      <file path="plugins/repos/twat_mp/pyproject.toml">
+        - Hatchling-built Python project twat-mp provides Pathos-based parallel processing utilities, depends on pathos/twat, and configures ruff, mypy, pytest benchmarks, and optional aio dependencies.
+      </file>
+      <file path="plugins/repos/twat_mp/src/twat_mp/__init__.py">
+        - Exports parallel processing pools and maps for twat-mp; async features disabled for MVP.
+      </file>
+      <file path="plugins/repos/twat_mp/src/twat_mp/__version__.py">
+        - Sets version to 1.8.1.post2+gba50f5f.
+      </file>
+      <file path="plugins/repos/twat_mp/src/twat_mp/async_mp.py">
+        - Implements AsyncMultiPool context manager and apmap decorator for parallel async task execution using aiomultiprocess.
+      </file>
+      <file path="plugins/repos/twat_mp/src/twat_mp/mp.py">
+        - Pathos-based parallel processing utilities providing MultiPool context managers and pmap/imap/amap decorators with enhanced error handling and automatic resource management.
+      </file>
+      <file path="plugins/repos/twat_mp/tests/test_async_mp.py">
+        - Tests AsyncMultiPool (map, imap, starmap), apmap decorator, error handling, and context management.
+      </file>
+      <file path="plugins/repos/twat_mp/tests/test_benchmark.py">
+        - Benchmark suite comparing twat_mp's process/thread pools, map variants, worker scaling, and composed operations on CPU/I/O tasks.
+      </file>
+      <file path="plugins/repos/twat_mp/tests/test_twat_mp.py">
+        - Tests ProcessPool/ThreadPool contexts, decorators (amap/pmap/imap/mmap), composition, error handling (WorkerError/custom), performance, debug mode, and edge cases including empty iterables, nested pools, and resource cleanup.
+      </file>
+      <file path="plugins/repos/twat_os/DEVELOPMENT.md">
+        - Install via uv; develop via scripts/Makefile; test with pytest; lint with ruff/mypy; build with pyinstaller; automate via GitHub Actions; release via git tags.
+      </file>
+      <file path="plugins/repos/twat_os/LOG.md">
+        - Manual log file; automated logs in CLEANUP.txt.
+      </file>
+      <file path="plugins/repos/twat_os/PLAN.md">
+        - Transform twat-os to git-tag semversioning via Hatch VCS, comprehensive pytest suite, local automation scripts, multi-OS CI/CD matrix, and cross-platform PyInstaller binaries.
+      </file>
+      <file path="plugins/repos/twat_os/README.md">
+        - `twat-os` provides cross-platform path management (cache, config, data, logs, GenAI) for the "twat" ecosystem via `platformdirs`, featuring automatic directory creation and TOML configuration.
+      </file>
+      <file path="plugins/repos/twat_os/TODO.md">
+        - Establish comprehensive testing, build/release automation, multi-OS CI/CD, cross-platform binary distribution, and rigorous QA standards.
+      </file>
+      <file path="plugins/repos/twat_os/VERSION.txt">
+        - Merge conflict in VERSION.txt.
+      </file>
+      <file path="plugins/repos/twat_os/WORKFLOWS.md">
+        - Manually commit and push staged GitHub Actions workflows to enable multi-platform CI/CD and automated release pipelines.
+      </file>
+      <file path="plugins/repos/twat_os/cleanup.py">
+        - Repo maintenance tool automating status checks, venv setup, installs, git updates/pushes, logging, and repomix generation.
+      </file>
+      <file path="plugins/repos/twat_os/install.sh">
+        - Installs uv, creates Python 3.12 venv, and installs project dependencies.
+      </file>
+      <file path="plugins/repos/twat_os/pyproject.toml">
+        - Configuration for twat-os package (OS utilities for twat framework) defining metadata, dependencies, hatchling build system, and development environments (pytest, ruff, mypy).
+      </file>
+      <file path="plugins/repos/twat_os/scripts/build.py">
+        - Python build automation script for twat-os using Fire CLI to clean, build, check, and install distributions.
+      </file>
+      <file path="plugins/repos/twat_os/scripts/check.py">
+        - Python pre-commit CLI via Fire/Rich to run, fix, and report code quality checks (format, lint, type, test, security, build).
+      </file>
+      <file path="plugins/repos/twat_os/scripts/release.py">
+        - Python release automation script handling git version bumping, repo checks, changelog generation, and tagging via CLI.
+      </file>
+      <file path="plugins/repos/twat_os/scripts/test.py">
+        - Fire-based CLI automating pytest, linting, type-checking, and coverage.
+      </file>
+      <file path="plugins/repos/twat_os/src/twat_os/__init__.py">
+        - Sets `__version__` from package metadata.
+      </file>
+      <file path="plugins/repos/twat_os/src/twat_os/__main__.py">
+        - CLI tool for managing twat-os file paths (list, get, create, clean, info) using Fire and Rich tables.
+      </file>
+      <file path="plugins/repos/twat_os/src/twat_os/__version__.py">
+        - Auto-generated version file defining package version 2.8.0.dev10+gdc69fb1f4.
+      </file>
+      <file path="plugins/repos/twat_os/src/twat_os/paths.py">
+        - Pydantic-based path manager using platformdirs and TOML to resolve, validate, and auto-create OS-specific directories for cache, data, config, logs, and GenAI assets.
+      </file>
+      <file path="plugins/repos/twat_os/src/twat_os/paths.toml">
+        - Defines directory paths for twat's cache, config, data, temp, logs, and genai components.
+      </file>
+      <file path="plugins/repos/twat_os/tests/conftest.py">
+        - Pytest fixtures for temporary directory, sample TOML configuration, and mocked platformdirs.
+      </file>
+      <file path="plugins/repos/twat_os/tests/integration/test_path_integration.py">
+        - Integration tests verify PathManager path creation, file operations, package isolation, defaults, GenAI paths, env expansion, and conditional directory creation.
+      </file>
+      <file path="plugins/repos/twat_os/tests/test_config_loading.py">
+        - Tests path configuration loading, validation, custom overrides, error handling, and edge cases like Unicode and spaces.
+      </file>
+      <file path="plugins/repos/twat_os/tests/test_cross_platform.py">
+        - Tests PathManager cross-platform compatibility covering Windows/Unix separators, normalization, home/env expansion, case sensitivity, long/special paths, permissions, symlinks, UNC paths, and drive letters.
+      </file>
+      <file path="plugins/repos/twat_os/tests/test_package.py">
+        - Test suite verifying twat_os exposes version attribute.
+      </file>
+      <file path="plugins/repos/twat_os/tests/unit/test_path_config.py">
+        - Tests PathConfig and subclasses (Cache, Config, Data, Temp, GenAI, Log) for path expansion, conditional directory creation, and default/custom path resolution.
+      </file>
+      <file path="plugins/repos/twat_os/tests/unit/test_path_manager.py">
+        - Unit tests for PathManager covering initialization, path configurations, retrieval, expansion, and directory creation.
+      </file>
+      <file path="plugins/repos/twat_search/README.md">
+        - Async multi-engine web search aggregator providing CLI and Python API for unified querying, flexible configuration, and standardized JSON results.
+      </file>
+      <file path="plugins/repos/twat_search/SETUP_CI_CD.md">
+        - Install enhanced GitHub Actions workflows, configure PyPI secrets and environments, utilize local build/test/release scripts, and trigger automated multiplatform releases via git tags.
+      </file>
+      <file path="plugins/repos/twat_search/TODO.md">
+        - Fix Falla engines (Playwright, selectors, type errors), standardize JSON output, refactor CLI, improve testing, add caching, and implement new search engines.
+      </file>
+      <file path="plugins/repos/twat_search/VERSION.txt">
+        - Auto-commit local changes pre-merge
+      </file>
+      <file path="plugins/repos/twat_search/cleanup.py">
+        - Repo maintenance script automating uv venv setup, installs, code quality checks, git status/update/push, and repomix logging.
+      </file>
+      <file path="plugins/repos/twat_search/debug_fetch.py">
+        - Async Playwright script fetching search engine HTML/screenshots and analyzing DOM for CSS selector patterns.
+      </file>
+      <file path="plugins/repos/twat_search/falla_search.py">
+        - Async Python search scraper using Playwright and BeautifulSoup to fetch and parse results from Google, DuckDuckGo, Bing, Yahoo, and Qwant.
+      </file>
+      <file path="plugins/repos/twat_search/google_debug_Python_programming_language.html">
+        - Google detected unusual traffic from your network; solve CAPTCHA to continue.
+      </file>
+      <file path="plugins/repos/twat_search/google_debug_test_query.html">
+        - Google unusual traffic detection page requiring reCAPTCHA verification to proceed.
+      </file>
+      <file path="plugins/repos/twat_search/pyproject.toml">
+        - Configures twat-search web plugin: dependencies, search backends, CLI scripts, Hatch build, dev tools.
+      </file>
+      <file path="plugins/repos/twat_search/pyproject_next.md">
+        - Update Python to 3.13, adopt SPDX licensing, replace scrapers with APIs, modernize Ruff/Mypy configs, and optimize Hatch environments.
+      </file>
+      <file path="plugins/repos/twat_search/pyproject_next.toml">
+        - Configures twat-search plugin: metadata, dependencies, optional search backends (DuckDuckGo, Google, Tavily), Hatchling build system, and dev tooling.
+      </file>
+      <file path="plugins/repos/twat_search/requirements.txt">
+        - Python 3.12 dependency lock file listing web scraping, search API, and development tooling packages.
+      </file>
+      <file path="plugins/repos/twat_search/resources/brave/brave.md">
+        - Brave Web and Local Search API documentation covering endpoints, query parameters, headers, and response objects for web results, local POIs, AI descriptions, and media, authenticated via subscription token.
+      </file>
+      <file path="plugins/repos/twat_search/resources/brave/brave_image.md">
+        - Brave Search Image Search API documentation detailing the REST endpoint, query parameters, authentication headers, JSON response models, supported codes, and a Node.js guide for handling image dimensions.
+      </file>
+      <file path="plugins/repos/twat_search/resources/brave/brave_news.md">
+        - Brave News Search API documentation detailing endpoint `/res/v1/news/search`, query parameters (q, country, freshness), request headers, JSON response objects, and rate limits.
+      </file>
+      <file path="plugins/repos/twat_search/resources/brave/brave_video.md">
+        - Brave Video Search API provides a REST endpoint to query web videos and return JSON results with metadata.
+      </file>
+      <file path="plugins/repos/twat_search/resources/pplx/pplx.md">
+        - Perplexity API documentation covering initial setup, supported models (sonar series), pricing tiers, structured outputs (JSON/Regex), prompt guidelines, crawler details, and the chat completions endpoint specification.
+      </file>
+      <file path="plugins/repos/twat_search/resources/pplx/pplx_urls.txt">
+        - Perplexity AI documentation covering API setup, models, pricing, structured outputs, prompts, and bots.
+      </file>
+      <file path="plugins/repos/twat_search/resources/pricing.md">
+        - HasData cheapest at $0.99 (prorated, web scraping), Brave Base lowest traditional search at $3, You.com ~$8, others vary with fixed monthly fees.
+      </file>
+      <file path="plugins/repos/twat_search/resources/you/you.md">
+        - Get You.com API key to access Smart/Research/Search/News endpoints for real-time answers with citations; Search API specifically provides direct web snippets and trusted URLs via GET requests.
+      </file>
+      <file path="plugins/repos/twat_search/resources/you/you.txt">
+        - You.com Search API documentation, quickstart guide, modes, and reference links.
+      </file>
+      <file path="plugins/repos/twat_search/resources/you/you_news.md">
+        - You.com News API provides real-time global news with long snippets, customizable recency/region filtering, and JSON results via GET requests.
+      </file>
+      <file path="plugins/repos/twat_search/resources/you/you_news.txt">
+        - You.com News API documentation covering modes and reference.
+      </file>
+      <file path="plugins/repos/twat_search/scripts/build.sh">
+        - Bash build pipeline for twat-search automating uv environment setup, dependency installation, ruff/mypy quality checks, pytest execution, and package building/validation.
+      </file>
+      <file path="plugins/repos/twat_search/scripts/release.sh">
+        - Bash release script automating version validation, testing, building, changelog updates, git tagging, and remote pushing.
+      </file>
+      <file path="plugins/repos/twat_search/scripts/test.sh">
+        - Bash test harness for twat-search using uv/pytest to manage venvs, run unit/integration/benchmark tests with coverage/parallel support, and generate reports.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/__init__.py">
+        - Initializes TwAT Search package handling version, optional cache config, and web submodule imports.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/__main__.py">
+        - Entry point script using uv/fire/rich to expose TwatSearchCLI, wrapping web search and handling errors/versioning.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/__version__.py">
+        - Sets version to 2.7.8.dev0+g870804dbf.d20251126 and commit ID to None.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/paths.py">
+        - Manages twat-search cache, config, and data directories using twat-os PathManager or platformdirs fallback.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/__init__.py">
+        - Unified web search API aggregating multiple engines via graceful optional imports.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/api.py">
+        - Implements helpers for parameter merging/engine initialization and an async `search` function for concurrent multi-engine querying with fallbacks and result aggregation.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/cli.py">
+        - Python CLI tool using Fire and Rich for multi-engine web searches (Brave, Google, Tavily, etc.), supporting async execution, engine selection, and JSON/plain output.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/config.py">
+        - Manages web search configuration via Pydantic models, merging defaults, JSON files, and environment variables for multiple engines.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engine_constants.py">
+        - Defines search engine name constants, friendly mappings, and standardization utilities.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/__init__.py">
+        - Imports and registers various search engine implementations (Brave, Google, Tavily, etc.) with error handling, exposing helper functions to check availability and retrieve engine logic.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/base.py">
+        - Defines abstract `SearchEngine` base class with HTTP retry/API key logic and factory functions for registering/instantiating search engine implementations.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/bing_scraper.py">
+        - Implements Bing search engine using scrape-bing library to fetch results without API key.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/brave.py">
+        - Implements async Brave web and news search engines using Pydantic models and httpx, providing helper functions for querying the API.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/critique.py">
+        - Implements CritiqueSearchEngine integrating the Critique Labs AI API, supporting text/image queries, source filtering, and async result parsing.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/duckduckgo.py">
+        - Implements a DuckDuckGo search engine wrapper using the `duckduckgo_search` library for async querying and Pydantic-based result normalization.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/falla.py">
+        - Implements Falla-based search engine wrappers (Google, Bing, etc.) with async search and result conversion.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/google_scraper.py">
+        - Python module implementing a Google Scraper engine using googlesearch-python for API-free searching, result validation, and configuration.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/hasdata.py">
+        - Implements HasData Google SERP (full/light) search engines via async API integration and result parsing.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/lib_falla/__init__.py">
+        - Embedded Falla scraper package init defining version, path, and supported engines.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/lib_falla/core/__init__.py">
+        - Core module exporting base Falla class and search engine implementations.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/lib_falla/core/aol.py">
+        - Class Aol extends Falla to fetch and parse AOL search results via requests.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/lib_falla/core/ask.py">
+        - `Ask` class inherits from `Falla` to scrape `ask.com` search results using specific selectors.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/lib_falla/core/bing.py">
+        - Python class Bing extends Falla to scrape search results via Playwright, extracting titles, links, and snippets using BeautifulSoup.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/lib_falla/core/dogpile.py">
+        - Python class DogPile inherits from Falla to scrape search results using configured selectors.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/lib_falla/core/duckduckgo.py">
+        - DuckDuckGo search engine class using Playwright to fetch HTML and BeautifulSoup to extract titles, links, and snippets.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/lib_falla/core/falla.py">
+        - Base class for search engine scrapers supporting requests, Playwright, and Splash fetching methods with async/sync capabilities.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/lib_falla/core/fetch_page.py">
+        - Standalone Playwright script fetches web pages via CLI with optional selector waiting to avoid asyncio subprocess issues.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/lib_falla/core/gibiru.py">
+        - Gibiru scraper inheriting Falla to fetch and parse search results.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/lib_falla/core/google.py">
+        - Implements an async Google scraper using Playwright and BeautifulSoup to extract titles, links, and snippets, featuring CAPTCHA detection, HTML debugging, and fallback selectors for robust parsing.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/lib_falla/core/mojeek.py">
+        - Python Mojeek scraper class inheriting Falla with XPath configuration.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/lib_falla/core/qwant.py">
+        - Python `Qwant` class extends `Falla` using Playwright to handle consent popups and scrape search results via BeautifulSoup.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/lib_falla/core/searchencrypt.py">
+        - SearchEncrypt class inherits Falla to define selectors and fetch searchencrypt.com results.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/lib_falla/core/startpage.py">
+        - Python StartPage scraper class inheriting from Falla framework.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/lib_falla/core/yahoo.py">
+        - Falla-based Yahoo search engine implementation using Playwright for fetching/consent handling and BeautifulSoup for result extraction.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/lib_falla/core/yandex.py">
+        - Yandex search engine implementation extending Falla class to scrape results via Playwright using specific CSS selectors for title, link, and snippet extraction.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/lib_falla/main.py">
+        - CLI for Falla search engine scraper supporting sync/async execution, argument parsing, and result formatting.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/lib_falla/requirements.txt">
+        - Falla scraper dependencies: requests, beautifulsoup, lxml, playwright.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/lib_falla/settings.py">
+        - Falla scraper configuration defining Splash URL and directory path.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/lib_falla/utils.py">
+        - Utility module centralizing engine imports, mapping names to classes, and providing sync/async result retrieval helpers.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/pplx.py">
+        - Implements Perplexity AI search engine wrapper handling API requests, authentication, and result parsing.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/serpapi.py">
+        - Implements SerpApi Google search engine with Pydantic validation and async httpx fetching.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/tavily.py">
+        - Defines `TavilySearchEngine` class and `tavily` helper function to fetch, validate, and convert search results from the Tavily API.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/engines/you.py">
+        - Implements Pydantic models and async engines for You.com web and news search APIs, handling requests and parsing responses.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/exceptions.py">
+        - Defines base SearchError and specific EngineError classes for web search API error handling.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/models.py">
+        - Defines Pydantic `SearchResult` model for web search API data with validation.
+      </file>
+      <file path="plugins/repos/twat_search/src/twat_search/web/utils.py">
+        - Utilities for environment loading, rate limiting, and URL parsing.
+      </file>
+      <file path="plugins/repos/twat_search/test_async_falla.py">
+        - Async DuckDuckGo search for "FontLab" with silent exception handling.
+      </file>
+      <file path="plugins/repos/twat_search/test_falla.py">
+        - Async script initializes DuckDuckGo browser, fetches "FontLab" search page, then closes it.
+      </file>
+      <file path="plugins/repos/twat_search/test_google_falla_debug.py">
+        - Async test script executes Google Falla search, logs config/results, checks debug HTML files, handles cleanup.
+      </file>
+      <file path="plugins/repos/twat_search/test_simple.py">
+        - Async Playwright web scraper with synchronous wrapper.
+      </file>
+      <file path="plugins/repos/twat_search/test_sync_falla.py">
+        - Python script tests DuckDuckGo search for "FontLab".
+      </file>
+      <file path="plugins/repos/twat_search/tests/conftest.py">
+        - Pytest conftest forces DummyCache, auto-isolates env vars, and mocks Brave search config.
+      </file>
+      <file path="plugins/repos/twat_search/tests/test_twat_search.py">
+        - Tests twat_search package version attribute.
+      </file>
+      <file path="plugins/repos/twat_search/tests/unit/__init__.py">
+        - Unit tests for twat_search package.
+      </file>
+      <file path="plugins/repos/twat_search/tests/unit/mock_engine.py">
+        - Implements and registers a test MockSearchEngine returning configurable dummy results or raising exceptions.
+      </file>
+      <file path="plugins/repos/twat_search/tests/unit/web/__init__.py">
+        - Tests for twat_search.web.
+      </file>
+      <file path="plugins/repos/twat_search/tests/unit/web/engines/__init__.py">
+        - Unit tests for search engines.
+      </file>
+      <file path="plugins/repos/twat_search/tests/unit/web/engines/test_base.py">
+        - Tests base search engine ABC, registration, retrieval, config/kwargs handling, and error states.
+      </file>
+      <file path="plugins/repos/twat_search/tests/unit/web/test_api.py">
+        - Unit tests for `twat_search.web.api.search` using a MockSearchEngine to verify results, parameters, error handling, and engine configuration.
+      </file>
+      <file path="plugins/repos/twat_search/tests/unit/web/test_config.py">
+        - Tests EngineConfig and Config defaults, initialization, environment variable loading, and configuration precedence.
+      </file>
+      <file path="plugins/repos/twat_search/tests/unit/web/test_exceptions.py">
+        - Unit tests for SearchError and EngineError verifying instantiation, formatting, inheritance, and polymorphic catching.
+      </file>
+      <file path="plugins/repos/twat_search/tests/unit/web/test_models.py">
+        - Tests SearchResult model validation, optional fields, empty string handling, serialization, and deserialization.
+      </file>
+      <file path="plugins/repos/twat_search/tests/unit/web/test_utils.py">
+        - Unit tests for RateLimiter verifying initialization, wait logic, timestamp cleanup, and varying rate limits.
+      </file>
+      <file path="plugins/repos/twat_speech/LOG.md">
+        - v0.0.1 initial release: modern Python packaging, Hatch workflow, CI/CD, tests, docs, and code restructuring.
+      </file>
+      <file path="plugins/repos/twat_speech/PLAN.md">
+        - Initialize docs, fix tests/mypy, streamline cleanup.py, remove obsolete files, refine MVP code, update configs, verify tests/linting, and regenerate llms.txt.
+      </file>
+      <file path="plugins/repos/twat_speech/README.md">
+        - Modern Python library `twat-speech` provides extensible foundation and template for speech processing using Hatch, Ruff, and Mypy tooling with placeholder core logic.
+      </file>
+      <file path="plugins/repos/twat_speech/TODO.md">
+        - Initialized project/MVP, fixed tests/types, removed obsolete files, refined code/docs, passed QA, pending changelog/submission.
+      </file>
+      <file path="plugins/repos/twat_speech/pyproject.toml">
+        - Hatchling-built Python 3.10+ plugin "twat-speech" depends on "twat", configures strict Ruff/MyPy linting and Pytest benchmarking/coverage.
+      </file>
+      <file path="plugins/repos/twat_speech/src/twat_speech/__init__.py">
+        - Initializes twat-speech package exposing Config, process_data, and version.
+      </file>
+      <file path="plugins/repos/twat_speech/src/twat_speech/__version__.py">
+        - Generated setuptools-scm version file defining version='2.8.0.dev10+gdc69fb1f4' and commit_id=None.
+      </file>
+      <file path="plugins/repos/twat_speech/src/twat_speech/twat_speech.py">
+        - Python 3 script defining a Config dataclass and a process_data function with logging, validation, and stub processing, demonstrated by a main function with three usage examples.
+      </file>
+      <file path="plugins/repos/twat_speech/tests/test_twat_speech.py">
+        - Pytest suite for twat_speech verifying version, process_data logic/config handling, debug logging, and Config dataclass instantiation.
+      </file>
+      <file path="plugins/repos/twat_task/HISTORY.md">
+        - Feb-Aug 2025 human-LLM collaboration yielded `twat-task`: a mock-first, Prefect/Pydantic video transcription pipeline featuring rigorous tooling and docs, establishing a robust architecture ready for real implementation.
+      </file>
+      <file path="plugins/repos/twat_task/IMPLEMENTATION_SUMMARY.md">
+        - Successfully implemented git-tag-based semversioning using hatch-vcs with automated PyPI publishing and CI/CD, adding comprehensive build/release scripts pending manual integration.
+      </file>
+      <file path="plugins/repos/twat_task/LOG.md">
+        - Tracks `twat-task` progress from v1.0.0 init to v1.7.5, detailing pipeline features, CLI updates, Prefect integration, and documentation refinements.
+      </file>
+      <file path="plugins/repos/twat_task/PLAN.md">
+        - Create plan/docs, remove project definition file, consolidate core logic, streamline `cleanup.py`, update linters/fix errors, review/remove examples, update `.gitignore`, finalize documentation, and commit changes.
+      </file>
+      <file path="plugins/repos/twat_task/README.md">
+        - Python package `twat-task` leverages Prefect for orchestrating video processing pipelines (audio extraction, transcription) via Pydantic models with lazy evaluation, caching, and mock implementations.
+      </file>
+      <file path="plugins/repos/twat_task/REVIEW/FILES-cla.md">
+        - Catalog of `twat-task`: Python package for mock video processing via Prefect/Pydantic, including CI/CD, tests, docs, and dev scripts.
+      </file>
+      <file path="plugins/repos/twat_task/REVIEW/FILES-cod.md">
+        - Catalogs the `twat_task` repository structure, covering Prefect video processing logic, CI/CD workflows, tests, documentation, and maintenance scripts.
+      </file>
+      <file path="plugins/repos/twat_task/REVIEW/TODO-cla.md">
+        - Fix .gitignore/cleanup script, replace example, modernize type hints, add config/error handling, enhance VideoTranscript, improve testing/docs/CI/CD, reorganize artifacts.
+      </file>
+      <file path="plugins/repos/twat_task/REVIEW/TODO-cod.md">
+        - Plan improves repo hygiene, DX, and docs via cleanup fixes, CI alignment, version fallback, and optional backend design across small mergeable PRs.
+      </file>
+      <file path="plugins/repos/twat_task/TODO.md">
+        - Setup docs, cleanup project, consolidate core logic, fix linting, review examples, update gitignore, finalize documentation, and submit changes.
+      </file>
+      <file path="plugins/repos/twat_task/VERSION.txt">
+        - Auto-merged accepting remote changes.
+      </file>
+      <file path="plugins/repos/twat_task/cleanup.py">
+        - Python repo manager using uv/ruff/pytest/git for status/venv/install/update/push, logging ops to llms.txt and running repomix.
+      </file>
+      <file path="plugins/repos/twat_task/examples/testprefect_example.py">
+        - Serves Prefect flow "my-first-deployment" every 60 seconds.
+      </file>
+      <file path="plugins/repos/twat_task/pyproject.toml">
+        - Hatchling-built Python package for Prefect video/audio processing workflows (twat-task), requiring Python 3.10+, configured with strict Ruff/MyPy linting and Pytest/Coverage testing.
+      </file>
+      <file path="plugins/repos/twat_task/src/twat_task/__init__.py">
+        - Prefect video processing utilities for audio extraction and transcription.
+      </file>
+      <file path="plugins/repos/twat_task/src/twat_task/__version__.py">
+        - Generated version file defining version '2.8.0.dev10+gdc69fb1f4'.
+      </file>
+      <file path="plugins/repos/twat_task/src/twat_task/task.py">
+        - Defines Prefect tasks for mock audio extraction and transcription, an orchestration flow, and a Pydantic model for lazy video processing.
+      </file>
+      <file path="plugins/repos/twat_task/tests/test_flows.py">
+        - Unit tests for process_video_flow mocking sub-tasks to verify conditional audio extraction, transcript generation, and return values.
+      </file>
+      <file path="plugins/repos/twat_task/tests/test_package.py">
+        - Tests twat_task version attribute.
+      </file>
+      <file path="plugins/repos/twat_task/tests/test_tasks.py">
+        - Unit tests for extract_audio_task and generate_transcript_task verifying output file creation, JSON content, return types, and simulated processing delays.
+      </file>
+      <file path="plugins/repos/twat_task/tests/test_video_transcript.py">
+        - Tests VideoTranscript model instantiation, Path validation, lazy evaluation of audio/text properties, and ensures process flow executes only once via caching.
+      </file>
+      <file path="plugins/repos/twat_text/GITHUB_WORKFLOWS.md">
+        - Update push/release workflows for multiplatform CI/CD with testing, PyInstaller binaries, automated GitHub releases, and PyPI publishing.
+      </file>
+      <file path="plugins/repos/twat_text/LOG.md">
+        - v0.0.1 initial release adds modern Python packaging structure, basic typed implementation skeleton, Hatch workflow, tests, and MIT license.
+      </file>
+      <file path="plugins/repos/twat_text/README.md">
+        - `twat-text`: Python text processing plugin for `twat` ecosystem; active development, placeholder logic, modern typing, Hatch-managed, MIT licensed.
+      </file>
+      <file path="plugins/repos/twat_text/VERSION.txt">
+        - Update VERSION.txt with local changes
+      </file>
+      <file path="plugins/repos/twat_text/cleanup.py">
+        - Repo maintenance script managing status checks, venv setup, installation, git updates/pushing, logging to llms.txt and running repomix.
+      </file>
+      <file path="plugins/repos/twat_text/package.toml">
+        - Package enables CLI, logging, Pydantic, Rich; features enable VCS and GitHub Actions, disable MkDocs.
+      </file>
+      <file path="plugins/repos/twat_text/pyproject.toml">
+        - Hatchling py3.10-3.12 project twat-text depends on twat, defines CLI/plugin, configures ruff/mypy/pytest.
+      </file>
+      <file path="plugins/repos/twat_text/scripts/build.py">
+        - Cross-platform Python build script automating cleaning, linting, testing, packaging, and release tagging for the twat-text project.
+      </file>
+      <file path="plugins/repos/twat_text/src/twat_text/__init__.py">
+        - Imports version with fallback and exports Config, process_data, and main.
+      </file>
+      <file path="plugins/repos/twat_text/src/twat_text/__version__.py">
+        - setuptools-scm generated file defining version 2.8.0.dev10+gdc69fb1f4.
+      </file>
+      <file path="plugins/repos/twat_text/src/twat_text/twat_text.py">
+        - Python CLI script defining a Config dataclass, a placeholder data processor, and an argparse main function handling version, debug, and configuration arguments.
+      </file>
+      <file path="plugins/repos/twat_text/tests/test_twat_text.py">
+        - Pytest suite validates version, Config dataclass types, process_data logic/errors/debug, main CLI handling, integration workflows, and performance benchmarks.
+      </file>
+      <file path="plugins/repos/twat_video/DEVELOPMENT.md">
+        - Use ./scripts/ for setup, testing, and building; enforce code quality with Ruff/MyPy; create binaries via PyInstaller; and automate releases via GitHub Actions.
+      </file>
+      <file path="plugins/repos/twat_video/INSTALL.md">
+        - Install via `pip install twat-video` or binary releases; use CLI `twat-video` or Python API; requires Python 3.10+.
+      </file>
+      <file path="plugins/repos/twat_video/LOG.md">
+        - v0.0.1 release of twat-video Python package featuring data processing module and AI-powered video continuation prompt generator script.
+      </file>
+      <file path="plugins/repos/twat_video/PLAN.md">
+        - Develop modular Python font management CLI using fonttools for detection, organization, subsetting, and analysis; features Fire interface, SQLite caching, rich output, high performance, and comprehensive testing.
+      </file>
+      <file path="plugins/repos/twat_video/README.md">
+        - Python CLI/API tool for font management: organize, subset, analyze, detect duplicates.
+      </file>
+      <file path="plugins/repos/twat_video/TODO.md">
+        - Rename and structure project, implement core font modules (detection, organization, analysis, subsetting), build Fire-based CLI, establish testing and documentation, add advanced features (DB, plugins), ensure code quality, and prepare for distribution.
+      </file>
+      <file path="plugins/repos/twat_video/VERSION.txt">
+        - Added local changes
+      </file>
+      <file path="plugins/repos/twat_video/cleanup.py">
+        - Python script using uv to automate repository maintenance (venv, install, git ops), run code quality checks, log operations, and pack repo files via repomix.
+      </file>
+      <file path="plugins/repos/twat_video/mkdocs.yml">
+        - Mkdocs configuration for Font Organizer using Material theme, mkdocstrings for Python API docs, and structured navigation.
+      </file>
+      <file path="plugins/repos/twat_video/pyproject.toml">
+        - Python 3.12 font manager "font-organizer" built with Hatchling/VCS; uses FontTools, Click, Rich; tooling: Ruff, Mypy, Pytest; includes optional test/dev/docs dependencies.
+      </file>
+      <file path="plugins/repos/twat_video/scripts/build-binary.sh">
+        - Bash script building `twat-video` standalone binaries using PyInstaller or cx_Freeze with options for single-file, windowed, and clean builds.
+      </file>
+      <file path="plugins/repos/twat_video/scripts/build.sh">
+        - Cleans build artifacts, installs build tools via uv, builds Python package, verifies artifacts, and validates with twine.
+      </file>
+      <file path="plugins/repos/twat_video/scripts/dev.sh">
+        - Bash dev CLI for twat-video project automating setup, clean, lint, format, type-check, test/watch/coverage, build, install, pre-commit, deps, and version commands.
+      </file>
+      <file path="plugins/repos/twat_video/scripts/release.sh">
+        - Validates git state, runs tests, builds distributions, creates/pushes git tag, and optionally publishes to PyPI.
+      </file>
+      <file path="plugins/repos/twat_video/scripts/test.sh">
+        - Installs test dependencies, runs Ruff linting/formatting, MyPy type checking, and Pytest with coverage for the twat-video project.
+      </file>
+      <file path="plugins/repos/twat_video/src/font_organizer/__init__.py">
+        - Initializes package exposing version, legacy, and core components (Config, FontManager, FontInfo, exceptions) via __all__.
+      </file>
+      <file path="plugins/repos/twat_video/src/font_organizer/cli.py">
+        - Click-based CLI module for font_organizer exposing version, process, demo, and config commands with logging controls.
+      </file>
+      <file path="plugins/repos/twat_video/src/font_organizer/core/__init__.py">
+        - Core module exporting config, exceptions, font info, and manager.
+      </file>
+      <file path="plugins/repos/twat_video/src/font_organizer/core/config.py">
+        - Manages font organizer configuration via dataclasses for organize/scan/subset settings, supporting YAML/JSON I/O, validation, and default path handling.
+      </file>
+      <file path="plugins/repos/twat_video/src/font_organizer/core/exceptions.py">
+        - Defines custom exceptions for font organizer operations including base, not found, parse, config, duplicate, organization, and subset errors.
+      </file>
+      <file path="plugins/repos/twat_video/src/font_organizer/core/font_info.py">
+        - Module defines FontInfo class extracting comprehensive font metadata (names, weights, glyphs, features, hash) using fontTools and providing character support checks.
+      </file>
+      <file path="plugins/repos/twat_video/src/font_organizer/core/font_manager.py">
+        - FontManager class centralizes font operations: config/logging setup, recursive/system scanning, metadata caching, statistical analysis, duplicate detection, and platform-specific directory handling.
+      </file>
+      <file path="plugins/repos/twat_video/src/font_organizer/font_organizer.py">
+        - Python module defining Config dataclass, placeholder process_data function with logging, and main entry point for font_organizer application.
+      </file>
+      <file path="plugins/repos/twat_video/src/twat_video/__version__.py">
+        - Auto-generated file defining package version 2.8.0.dev10+gdc69fb1f4.
+      </file>
+      <file path="plugins/repos/twat_video/src_docs/index.md">
+        - Python tool for smart font detection, organization, subsetting, analysis, and duplicate removal.
+      </file>
+      <file path="plugins/repos/twat_video/tests/test_cli.py">
+        - Pytest suite validating CLI commands, flags, error handling, and file output using CliRunner.
+      </file>
+      <file path="plugins/repos/twat_video/tests/test_font_info.py">
+        - Tests font weight parsing, FontInfo instantiation/metadata/coverage, and FontMetadata defaults.
+      </file>
+      <file path="plugins/repos/twat_video/tests/test_font_manager.py">
+        - Tests FontManager initialization, caching, directory scanning, font analysis, duplicate detection, and OS-specific system font directory retrieval.
+      </file>
+      <file path="plugins/repos/twat_video/tests/test_font_organizer.py">
+        - Test suite for font_organizer covering Config, process_data, main, versioning, logging, and edge cases.
+      </file>
+      <file path="plugins/repos/twat_video/tests/test_integration.py">
+        - Integration tests verifying font_organizer package imports, CLI execution, structure, configuration, error handling, concurrency, performance, and Unix permissions.
+      </file>
+      <file path="pyproject.toml">
+        - Hatchling-built Python 3.10+ CLI "twat" configured for strict Ruff/MyPy linting, Pytest benchmarking, and extensive optional plugin dependencies.
+      </file>
+      <file path="src/twat/__init__.py">
+        - Core "twat" plugin system enabling dynamic discovery, lazy loading via entry points, and CLI execution.
+      </file>
+      <file path="src/twat/__version__.py">
+        - setuptools-scm generated version file: version 2.8.0.dev10+gdc69fb1f4.
+      </file>
+      <file path="tests/VERSION.txt">
+        - v1.7.12
+      </file>
+      <file path="tests/test_twat.py">
+        - Pytest suite for `twat` verifying version, dynamic plugin loading via entry points (handling success, errors, and sys.modules caching), and CLI execution logic including sys.argv manipulation and exit status handling.
+      </file>
+</files>

@@ -1,0 +1,50 @@
+{
+  "request_id": "9920c8dd-047d-4068-b616-e9322f7ad096",
+  "timestamp": "20250206_041845",
+  "result": {
+    "images": [
+      {
+        "url": "https://v3.fal.media/files/elephant/7zp0uTMo1wSIV413HMduU_c86084a06b334ed8b80e6375bb62a22d.jpg",
+        "width": 1536,
+        "height": 864,
+        "content_type": "image/jpeg"
+      }
+    ],
+    "timings": {
+      "inference": 7.657199804671109
+    },
+    "seed": 2447707325136293529,
+    "has_nsfw_concepts": [
+      false
+    ],
+    "prompt": "shou_xin, pencil sketch of graphic design software UI, dark mode interface with minimalistic tool icons, sleek dark gray background with white text and subtle gradients. The central canvas displays a detailed, realistic close-up of a human eye with intricate vector crosshatching lines overlaid, showcasing black curved strokes, circular gradients, and realistic reflections in the iris. On the left, a vertical layers panel with grouped layers, icons, and a preview section showing a black-and-white vector eye. The right sidebar features properties sliders, toggles, and vector editing options with clean typography. Symmetrical layout, pencil sketch"
+  },
+  "image_info": {
+    "path": "generated_images/image_20250206_041845-9920c8dd.jpg",
+    "url": "https://v3.fal.media/files/elephant/7zp0uTMo1wSIV413HMduU_c86084a06b334ed8b80e6375bb62a22d.jpg",
+    "index": 0,
+    "suffix": null,
+    "metadata_path": "generated_images/image_20250206_041845-9920c8dd.json",
+    "original_prompt": "pencil sketch of graphic design software UI, dark mode interface with minimalistic tool icons, sleek dark gray background with white text and subtle gradients. The central canvas displays a detailed, realistic close-up of a human eye with intricate vector crosshatching lines overlaid, showcasing black curved strokes, circular gradients, and realistic reflections in the iris. On the left, a vertical layers panel with grouped layers, icons, and a preview section showing a black-and-white vector eye. The right sidebar features properties sliders, toggles, and vector editing options with clean typography. Symmetrical layout, pencil sketch"
+  },
+  "image": null,
+  "original_prompt": "pencil sketch of graphic design software UI, dark mode interface with minimalistic tool icons, sleek dark gray background with white text and subtle gradients. The central canvas displays a detailed, realistic close-up of a human eye with intricate vector crosshatching lines overlaid, showcasing black curved strokes, circular gradients, and realistic reflections in the iris. On the left, a vertical layers panel with grouped layers, icons, and a preview section showing a black-and-white vector eye. The right sidebar features properties sliders, toggles, and vector editing options with clean typography. Symmetrical layout, pencil sketch",
+  "job_params": {
+    "prompt": "pencil sketch of graphic design software UI, dark mode interface with minimalistic tool icons, sleek dark gray background with white text and subtle gradients. The central canvas displays a detailed, realistic close-up of a human eye with intricate vector crosshatching lines overlaid, showcasing black curved strokes, circular gradients, and realistic reflections in the iris. On the left, a vertical layers panel with grouped layers, icons, and a preview section showing a black-and-white vector eye. The right sidebar features properties sliders, toggles, and vector editing options with clean typography. Symmetrical layout, pencil sketch",
+    "model": "fal-ai/flux-lora/image-to-image",
+    "lora_spec": "shou_xin",
+    "image_size": "landscape_16_9",
+    "guidance_scale": 0.85,
+    "num_inference_steps": 28,
+    "image_config": {
+      "model_type": "fal-ai/flux-lora/image-to-image",
+      "input_image": {
+        "url": null,
+        "path": "screenshot.jpg",
+        "pil_image": null
+      },
+      "strength": 0.75,
+      "negative_prompt": ""
+    }
+  }
+}

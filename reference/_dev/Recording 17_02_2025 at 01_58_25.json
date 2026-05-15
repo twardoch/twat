@@ -1,0 +1,87 @@
+{
+    "title": "Recording 17/02/2025 at 01:58:25",
+    "steps": [
+        {
+            "type": "setViewport",
+            "width": 1843,
+            "height": 696,
+            "deviceScaleFactor": 1,
+            "isMobile": false,
+            "hasTouch": false,
+            "isLandscape": false
+        },
+        {
+            "type": "navigate",
+            "url": "vscode-file://vscode-app/Applications/Cursor.app/Contents/Resources/app/out/vs/code/electron-sandbox/workbench/workbench.html",
+            "assertedEvents": [
+                {
+                    "type": "navigation",
+                    "url": "vscode-file://vscode-app/Applications/Cursor.app/Contents/Resources/app/out/vs/code/electron-sandbox/workbench/workbench.html",
+                    "title": "Running Extensions — volante_lokalnie"
+                }
+            ]
+        },
+        {
+            "type": "click",
+            "target": "main",
+            "selectors": [
+                [
+                    "div.full-input-box > div:nth-of-type(2) > div.scrollable-div-container > div > div:nth-of-type(1) > div > div"
+                ],
+                [
+                    "xpath///*[@id=\"workbench.panel.composerViewPane2\"]/div/div/div[2]/div[1]/div/div/div[2]/div/div/div[2]/div[2]/div[2]/div[1]/div/div[1]/div/div"
+                ],
+                [
+                    "pierce/div.full-input-box > div:nth-of-type(2) > div.scrollable-div-container > div > div:nth-of-type(1) > div > div"
+                ]
+            ],
+            "offsetY": 19.5843505859375,
+            "offsetX": 137.8125
+        },
+        {
+            "type": "change",
+            "value": "I ",
+            "selectors": [
+                [
+                    "aria/ Checkpoint created. Restore Image preview  volante_lokalnie.tcss Kid of works. The save notifications aren't needed. THe layout of the right side is ugly, It should be Title [old] [new] Descrption [old] — Markdown [new] One under the other When I click the sorting keys: [02/17/25 01:47:50] INFO 2025-02-17 01:47:50,458 [INFO] ================================================================================ volante_lokalnie.py:247 INFO 2025-02-17 01:47:50,462 [INFO] [DB] Database Status: volante_lokalnie.toml volante_lokalnie.py:248 INFO 2025-02-17 01:47:50,463 [INFO] -------------------------------------------------------------------------------- volante_lokalnie.py:249 INFO 2025-02-17 01:47:50,464 [INFO] [DB] Total Active Offers: 285 volante_lokalnie.py:250 INFO 2025-02-17 01:47:50,466 [INFO] [DB] Total Value: 16516.00 zł volante_lokalnie.py:251 INFO 2025-02-17 01:47:50,467 [INFO] [DB] Total Views: 11634 volante_lokalnie.py:252 INFO 2025-02-17 01:47:50,468 [INFO] [DB] Pending Changes: 0 volante_lokalnie.py:253 INFO 2025-02-17 01:47:50,469 [INFO] -------------------------------------------------------------------------------- volante_lokalnie.py:280 INFO 2025-02-17 01:47:50,471 [INFO] [DB] Most Recent Offer: volante_lokalnie.py:281 INFO 2025-02-17 01:47:50,472 [INFO] • Title: Ola Mońko Wherever You Are FOLIA volante_lokalnie.py:282 INFO 2025-02-17 01:47:50,473 [INFO] • Price: 3.00 zł volante_lokalnie.py:283 INFO 2025-02-17 01:47:50,474 [INFO] • Views: 131 volante_lokalnie.py:284 INFO 2025-02-17 01:47:50,475 [INFO] • Type: Kup teraz volante_lokalnie.py:285 INFO 2025-02-17 01:47:50,477 [INFO] • Listed: 2025-02-16 23:16 volante_lokalnie.py:286 INFO 2025-02-17 01:47:50,478 [INFO] ================================================================================ volante_lokalnie.py:287 WARNING 2025-02-17 01:47:50,479 [WARNING] [DB] Database volante_lokalnie.py:292 /Users/adam/Developer/vcs/github.twardoch/pub/volante_lokalnie/src/volante_lokalnie/volante_lokalnie.toml not found, started empty. INFO 2025-02-17 01:47:50,499 [INFO] ================================================================================ volante_lokalnie.py:247 INFO 2025-02-17 01:47:50,500 [INFO] [DB] Database Status: volante_lokalnie.toml volante_lokalnie.py:248",
+                    "aria/[role=\"textbox\"]"
+                ],
+                [
+                    "div.aislash-editor-input"
+                ],
+                [
+                    "xpath///*[@id=\"workbench.panel.composerViewPane2\"]/div/div/div[2]/div[1]/div/div/div[2]/div/div/div[2]/div[2]/div[2]/div[1]/div/div[1]/div/div/div/div[1]"
+                ],
+                [
+                    "pierce/div.aislash-editor-input"
+                ]
+            ],
+            "target": "main"
+        },
+        {
+            "type": "keyUp",
+            "key": "i",
+            "target": "main"
+        },
+        {
+            "type": "change",
+            "value": "I am typing one two three ",
+            "selectors": [
+                [
+                    "aria/ Checkpoint created. Restore Image preview  volante_lokalnie.tcss Kid of works. The save notifications aren't needed. THe layout of the right side is ugly, It should be Title [old] [new] Descrption [old] — Markdown [new] One under the other When I click the sorting keys: [02/17/25 01:47:50] INFO 2025-02-17 01:47:50,458 [INFO] ================================================================================ volante_lokalnie.py:247 INFO 2025-02-17 01:47:50,462 [INFO] [DB] Database Status: volante_lokalnie.toml volante_lokalnie.py:248 INFO 2025-02-17 01:47:50,463 [INFO] -------------------------------------------------------------------------------- volante_lokalnie.py:249 INFO 2025-02-17 01:47:50,464 [INFO] [DB] Total Active Offers: 285 volante_lokalnie.py:250 INFO 2025-02-17 01:47:50,466 [INFO] [DB] Total Value: 16516.00 zł volante_lokalnie.py:251 INFO 2025-02-17 01:47:50,467 [INFO] [DB] Total Views: 11634 volante_lokalnie.py:252 INFO 2025-02-17 01:47:50,468 [INFO] [DB] Pending Changes: 0 volante_lokalnie.py:253 INFO 2025-02-17 01:47:50,469 [INFO] -------------------------------------------------------------------------------- volante_lokalnie.py:280 INFO 2025-02-17 01:47:50,471 [INFO] [DB] Most Recent Offer: volante_lokalnie.py:281 INFO 2025-02-17 01:47:50,472 [INFO] • Title: Ola Mońko Wherever You Are FOLIA volante_lokalnie.py:282 INFO 2025-02-17 01:47:50,473 [INFO] • Price: 3.00 zł volante_lokalnie.py:283 INFO 2025-02-17 01:47:50,474 [INFO] • Views: 131 volante_lokalnie.py:284 INFO 2025-02-17 01:47:50,475 [INFO] • Type: Kup teraz volante_lokalnie.py:285 INFO 2025-02-17 01:47:50,477 [INFO] • Listed: 2025-02-16 23:16 volante_lokalnie.py:286 INFO 2025-02-17 01:47:50,478 [INFO] ================================================================================ volante_lokalnie.py:287 WARNING 2025-02-17 01:47:50,479 [WARNING] [DB] Database volante_lokalnie.py:292 /Users/adam/Developer/vcs/github.twardoch/pub/volante_lokalnie/src/volante_lokalnie/volante_lokalnie.toml not found, started empty. INFO 2025-02-17 01:47:50,499 [INFO] ================================================================================ volante_lokalnie.py:247 INFO 2025-02-17 01:47:50,500 [INFO] [DB] Database Status: volante_lokalnie.toml volante_lokalnie.py:248",
+                    "aria/[role=\"textbox\"]"
+                ],
+                [
+                    "div.aislash-editor-input"
+                ],
+                [
+                    "xpath///*[@id=\"workbench.panel.composerViewPane2\"]/div/div/div[2]/div[1]/div/div/div[2]/div/div/div[2]/div[2]/div[2]/div[1]/div/div[1]/div/div/div/div[1]"
+                ],
+                [
+                    "pierce/div.aislash-editor-input"
+                ]
+            ],
+            "target": "main"
+        }
+    ]
+}

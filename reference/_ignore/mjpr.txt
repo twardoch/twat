@@ -1,0 +1,20 @@
+https://docs.midjourney.com/docs/prompts-2
+https://docs.midjourney.com/docs/no-1
+https://docs.midjourney.com/docs/image-prompts
+https://docs.midjourney.com/docs/multi-prompts
+https://docs.midjourney.com/docs/image-prompts-1
+https://docs.midjourney.com/docs/stylize-1
+https://docs.midjourney.com/docs/style-1
+https://docs.midjourney.com/docs/style-tuner
+https://docs.midjourney.com/docs/chaos-1
+https://docs.midjourney.com/docs/weird-1
+https://docs.midjourney.com/docs/aspect-ratios-1
+https://docs.midjourney.com/docs/permutations
+https://docs.midjourney.com/docs/repeat-1
+https://docs.midjourney.com/docs/seeds-1
+https://docs.midjourney.com/docs/model-version-5
+https://docs.midjourney.com/docs/model-version-4
+https://docs.midjourney.com/docs/tile-2
+
+
+/team Make the spec extensive and detailed. All pydantic models should have constraints and validation. The tool should be annotated with Annotated[] type hints, docstrings and comments.  

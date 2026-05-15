@@ -39,6 +39,7 @@ dependencies = [
 
 [project.scripts]
 twat = "twat:main"
+twat-cleanup = "twat.dev.cleanup:main"
 
 [[project.authors]]
 name = "Adam Twardoch"

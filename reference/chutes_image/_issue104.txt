@@ -1,0 +1,28 @@
+```
+$ ./chutes_wan_vid.py video muscular_basketball_player_bouncing_a_ball.jpg "#ffffff" "muscular basketball player bouncing a ball, shot against pure minimalistic white background, ultra-sharp 8k stock footage, uniform lighting"
+2025-08-15 01:47:56.113 | INFO     | __main__:__init__:472 - WanClient initialized with timeout=600s
+✅ First frame: Using image file muscular_basketball_player_bouncing_a_ball.jpg
+2025-08-15 01:47:56.114 | DEBUG    | __main__:create_color_image:309 - Creating 1x1 solid color image with RGB(255, 255, 255)
+✅ Last frame: Using hex color #ffffff
+2025-08-15 01:47:56.590 | DEBUG    | __main__:create_color_image:309 - Creating 1280x720 solid color image with RGB(255, 255, 255)
+2025-08-15 01:47:56.599 | DEBUG    | __main__:encode_image_to_base64:360 - Created solid color image from hex: #ffffff
+2025-08-15 01:47:56.614 | DEBUG    | __main__:image_to_video_sync:664 - Encoded and resized first and last frame images to 1280*720
+2025-08-15 01:47:56.616 | INFO     | __main__:image_to_video_sync:689 - Generating WAN image-to-video
+2025-08-15 01:47:56.616 | DEBUG    | __main__:_make_request_sync:506 - Making sync request to https://kikakkz-wan2-1-14b-flf2v.chutes.ai/flf2video
+2025-08-15 01:47:56.616 | DEBUG    | __main__:_make_request_sync:507 - Request headers: {'Authorization': 'Bearer cpk_25d11186c1f54d7b93820f57a38e3529.c3f5409ea9535f9385a55f4785011038.B1vxekQJkiAhDTUwhaeeKKmDoddE8wDL', 'Content-Type': 'application/json'}
+2025-08-15 01:47:56.616 | DEBUG    | __main__:_make_request_sync:508 - Request payload keys: ['prompt', 'first_image_b64', 'last_image_b64', 'negative_prompt', 'resolution', 'fps', 'frames', 'guidance_scale', 'steps', 'seed', 'sample_shift', 'single_frame']
+2025-08-15 01:47:58.937 | DEBUG    | __main__:_make_request_sync:514 - Response status: 503
+2025-08-15 01:47:58.937 | DEBUG    | __main__:_make_request_sync:515 - Response headers: {'server': 'nginx', 'date': 'Thu, 14 Aug 2025 23:47:59 GMT', 'content-type': 'application/json', 'Content-Length': '93', 'access-control-allow-origin': '*', 'access-control-allow-methods': 'GET, POST, OPTIONS, PUT, DELETE, PATCH', 'via': '1.1 google', 'Alt-Svc': 'clear'}
+2025-08-15 01:47:58.937 | ERROR    | __main__:_make_request_sync:547 - Request failed: 503 Server Error: Service Unavailable for url: https://kikakkz-wan2-1-14b-flf2v.chutes.ai/flf2video
+2025-08-15 01:47:58.937 | ERROR    | __main__:_make_request_sync:548 - Request URL: https://kikakkz-wan2-1-14b-flf2v.chutes.ai/flf2video
+2025-08-15 01:47:58.937 | ERROR    | __main__:_make_request_sync:549 - Request timeout: 600s
+2025-08-15 01:47:58.937 | ERROR    | __main__:image_to_video_sync:726 - WAN image-to-video generation failed: Request failed: 503 Server Error: Service Unavailable for url: https://kikakkz-wan2-1-14b-flf2v.chutes.ai/flf2video
+❌ Video generation failed: WAN image-to-video generation failed: Request failed: 503 Server Error: Service Unavailable for url: https://kikakkz-wan2-1-14b-flf2v.chutes.ai/flf2video
+```
+
+Check @wan2.1-14b-flf2v folder for the source of the API server, then edit @chutes_wan_vid.py to fix the problem and then test with 
+
+```
+./chutes_wan_vid.py video --first_frame muscular_basketball_player_bouncing_a_ball.jpg --last_frame "#ffffff" --prompt "muscular basketball player bouncing a ball, shot against pure minimalistic white background, ultra-sharp 8k stock footage, uniform lighting"
+```
+

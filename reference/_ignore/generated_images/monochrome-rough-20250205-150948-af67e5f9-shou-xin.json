@@ -1,0 +1,41 @@
+{
+  "request_id": "af67e5f9-6a94-4ac6-82db-bc9bb86a3fca",
+  "timestamp": "20250205_150948",
+  "result": {
+    "seed": 13692650575620961079,
+    "images": [
+      {
+        "url": "https://fal.media/files/kangaroo/f3Wg1D6_6IJS1EQ-9K-T4_ab3a533c958a4cddb1d76f25d6c20ab7.jpg",
+        "width": 1024,
+        "height": 1024,
+        "content_type": "image/jpeg"
+      }
+    ],
+    "prompt": "shou_xin, Simple Pencil sketch, shou_xin, Simple Pencil sketch, monochrome rough pencil sketch portrait of older Polish politician Kaczynski, on white background",
+    "timings": {
+      "inference": 5.339725487981923
+    },
+    "has_nsfw_concepts": [
+      false
+    ]
+  },
+  "image_info": {
+    "path": "generated_images/monochrome-rough-20250205-150948-af67e5f9-shou-xin.jpg",
+    "url": "https://fal.media/files/kangaroo/f3Wg1D6_6IJS1EQ-9K-T4_ab3a533c958a4cddb1d76f25d6c20ab7.jpg",
+    "index": 0,
+    "suffix": "shou-xin",
+    "metadata_path": "generated_images/monochrome-rough-20250205-150948-af67e5f9-shou-xin.json",
+    "original_prompt": "monochrome rough pencil sketch portrait of older Polish politician Kaczynski, on white background"
+  },
+  "image": null,
+  "original_prompt": "monochrome rough pencil sketch portrait of older Polish politician Kaczynski, on white background",
+  "job_params": {
+    "prompt": "monochrome rough pencil sketch portrait of older Polish politician Kaczynski, on white background",
+    "original_prompt": "monochrome rough pencil sketch portrait of older Polish politician Kaczynski, on white background",
+    "model": "fal-ai/flux-lora-depth",
+    "lora_spec": "shou_xin, Simple Pencil sketch",
+    "image_size": "square_hd",
+    "guidance_scale": 3.5,
+    "num_inference_steps": 28
+  }
+}
