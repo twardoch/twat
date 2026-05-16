@@ -20,6 +20,23 @@ commands. See `SPEC.md` and `.omc/plans/fire-cli-rollout.md`.
 - New: `src/twat/common/cli.py` with shared helpers
   (`make_version_callable`, `error`, `print_data`, `emit_completions`).
 
+### Verification-pass fixes (post-rollout)
+
+- `twat-search` 2.7.11 — restrictive `[tool.hatch.build] include` had stripped
+  all `.py` files from the wheel; wheel rebuilt with a clean exclude list.
+- `twat-coding` 2.7.12 — `dependencies = [...]` had been placed *after*
+  `[[project.authors]]`, so TOML attached it to the author entry rather than
+  `[project]` and the wheel METADATA had **zero** core `Requires-Dist`
+  lines (radon, fire, pydantic, ... all missing at install). Moved `dependencies`
+  before `[[project.authors]]`.
+- `twat-video` 2.7.6 — an orphan 2.7.5 was already on PyPI from an earlier
+  unrelated release; my 2.1.9 was below it and pip preferred the orphan.
+  Force-tagged v2.7.6 to supersede.
+- `twat-fs` 2.7.16 — added dashed leaf entry points (`twat-fs-version`,
+  `twat-fs-upload`, `twat-fs-upload-provider`); Phase 1 was hotfix-only.
+- `twat` (host) 2.7.17 — released the Phase 0 changes so end users get the
+  updated `twat --help` / `--completions` behaviour.
+
 ### Plugins (all 17, released to PyPI)
 
 Every plugin now follows the canonical pattern from `SPEC.md` §4.2: a
@@ -30,23 +47,28 @@ Every leaf and group is also registered as a dashed
 
 | Plugin | Version | Dashed scripts |
 |--------|---------|---------------:|
-| twat-fs | 2.7.15 | 1 (hotfix: `from __future__` ordering SyntaxError) |
+| twat (host) | 2.7.17 | — |
+| twat-fs | 2.7.16 | 4 (3 dashed + base) |
 | twat-image | 2.7.9 | 10 |
-| twat-video | 2.1.9 | 14 |
+| twat-video | 2.7.6 | 14 |
 | twat-audio | 2.7.10 | 9 |
 | twat-speech | 2.7.9 | 7 |
 | twat-llm | 2.7.9 | 7 |
 | twat-genai | 2.7.8 | 5 |
-| twat-search | 2.7.10 | 4 (incl. preserved `twat-search-web`) |
+| twat-search | 2.7.11 | 4 (incl. preserved `twat-search-web`) |
 | twat-text | 2.7.10 | 7 |
 | twat-os | 2.7.8 | 5 |
 | twat-font | 2.7.10 | 4 |
 | twat-hatch | 2.7.8 | 5 |
-| twat-coding | 2.7.10 | 4 |
+| twat-coding | 2.7.12 | 4 |
 | twat-mp | 2.6.5 | 4 |
 | twat-task | 2.7.10 | 2 (others gated on Prefect deployment layer) |
 | twat-ez | 2.7.9 | 3 |
 | twat-labs | 2.7.9 | 3 |
+
+Across the ecosystem: **106 `twat-*` console scripts** on PATH after `uv pip
+install --system -U 'twat[all]'`. Acceptance contract from SPEC §9 verified
+end-to-end against framework Python 3.13.
 
 `argparse` removed from every plugin that used it; lazy imports for heavy
 dependencies (Pillow, ffmpeg-python, fal_client, litellm, ...) so
