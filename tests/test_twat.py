@@ -91,7 +91,7 @@ def test_cli_help(argv: list[str], capsys: pytest.CaptureFixture[str]) -> None:
     output = capsys.readouterr().out
     assert "Usage: twat <plugin_name> [args...]" in output
     assert "twat --list" in output
-    assert "twat.plugins" in output
+    assert "--completions" in output
 
 
 def test_cli_list_does_not_import_plugins(

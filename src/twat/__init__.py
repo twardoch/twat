@@ -45,17 +45,26 @@ def _get_plugin_entry_point(name: str) -> metadata.EntryPoint | None:
 
 def _usage() -> str:
     """Return CLI usage text for the host dispatcher."""
+    plugins = iter_plugins()
+    plugin_block = (
+        "Installed plugins:\n  " + "  ".join(plugins) + "\n\n" if plugins else ""
+    )
     return (
         "Usage: twat <plugin_name> [args...]\n"
         "       twat --list\n"
+        "       twat --completions {bash,zsh,fish}\n"
         "       twat --help\n\n"
         "Options:\n"
-        "  --list     List installed twat plugin entry point names without importing them.\n"
-        "  --help     Show this help message.\n\n"
-        "Dispatch:\n"
-        "  twat <plugin_name> [args...] loads the matching entry point from the\n"
-        "  'twat.plugins' group, rewrites argv to 'twat.<plugin_name>', and calls\n"
-        "  the plugin module's callable main()."
+        "  --list                       List installed twat plugins.\n"
+        "  --completions SHELL          Emit a shell completion script for installed\n"
+        "                               twat-* console scripts. SHELL is bash, zsh, or fish.\n"
+        "  --help, -h                   Show this help message.\n\n"
+        f"{plugin_block}"
+        "Discovery:\n"
+        "  Every installed plugin also registers dashed leaf scripts, e.g.\n"
+        "  twat-image-gray2alpha, so that 'twat-<TAB>' in your shell lists\n"
+        "  dozens of commands. Run `twat --completions zsh > ~/.zfunc/_twat` to\n"
+        "  install completions for the dispatcher itself.\n"
     )
 
 
@@ -189,8 +198,9 @@ def main() -> NoReturn:
     thinks it was called directly, and passes control to the plugin's `main()`.
     """
     if len(sys.argv) < 2:
-        print(_usage(), file=sys.stderr)
-        sys.exit(1)
+        # No args = treat as `--help`: print to stdout, exit 0.
+        print(_usage())
+        sys.exit(0)
 
     plugin_name = sys.argv[1]
     if plugin_name in {"--help", "-h"}:
@@ -200,6 +210,19 @@ def main() -> NoReturn:
     if plugin_name == "--list":
         for name in iter_plugins():
             print(name)
+        sys.exit(0)
+
+    if plugin_name == "--completions":
+        from twat.common.cli import emit_completions
+
+        shell = sys.argv[2] if len(sys.argv) > 2 else ""
+        if shell not in {"bash", "zsh", "fish"}:
+            print(
+                "Error: --completions requires SHELL in {bash,zsh,fish}.",
+                file=sys.stderr,
+            )
+            sys.exit(2)
+        sys.stdout.write(emit_completions(shell))
         sys.exit(0)
 
     # Prepare sys.argv for the plugin:

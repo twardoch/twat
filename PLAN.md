@@ -1,5 +1,12 @@
 # twat Ecosystem Modernization Plan
 
+> **Active initiative (2026-05):** Comprehensive Fire CLIs across every
+> `twat-*` plugin + dashed leaf/group entry points for shell autocomplete.
+> See [SPEC.md](SPEC.md) and [.omc/plans/fire-cli-rollout.md](.omc/plans/fire-cli-rollout.md).
+> Acceptance: `twat-<TAB>` lists dozens of installed commands; `twat-fs --help`
+> and `twat --help` both work; every plugin exposes a Fire dispatcher at
+> `twat_X.__main__:main`.
+
 This plan indexes the issue set created for `issues/101.md` and defines the execution order.
 
 ## Current State
