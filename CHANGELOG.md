@@ -5,6 +5,53 @@ All notable changes to the `twat` project are documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and the project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased] — Fire CLI rollout (2026-05)
+
+Comprehensive Fire-based CLIs for every `twat-*` plugin, with dashed
+per-leaf entry-point scripts so `twat-<TAB>` completions surface dozens of
+commands. See `SPEC.md` and `.omc/plans/fire-cli-rollout.md`.
+
+### Host (`twat`)
+
+- Fix: `twat` / `twat --help` now print usage to stdout and exit `0`
+  (previously stderr + exit `1`, invisible to most shells).
+- New: `twat --completions {bash,zsh,fish}` emits a completion script for the
+  installed `twat-*` console scripts.
+- New: `src/twat/common/cli.py` with shared helpers
+  (`make_version_callable`, `error`, `print_data`, `emit_completions`).
+
+### Plugins (all 17, released to PyPI)
+
+Every plugin now follows the canonical pattern from `SPEC.md` §4.2: a
+`twat_X/__main__.py` Fire dispatcher with an explicit `COMMANDS` allow-list,
+a `main()` entry point, and one `cmd_<leaf>()` helper per leaf and group.
+Every leaf and group is also registered as a dashed
+`twat-<plugin>-<leaf>` script in `[project.scripts]`.
+
+| Plugin | Version | Dashed scripts |
+|--------|---------|---------------:|
+| twat-fs | 2.7.15 | 1 (hotfix: `from __future__` ordering SyntaxError) |
+| twat-image | 2.7.9 | 10 |
+| twat-video | 2.1.9 | 14 |
+| twat-audio | 2.7.10 | 9 |
+| twat-speech | 2.7.9 | 7 |
+| twat-llm | 2.7.9 | 7 |
+| twat-genai | 2.7.8 | 5 |
+| twat-search | 2.7.10 | 4 (incl. preserved `twat-search-web`) |
+| twat-text | 2.7.10 | 7 |
+| twat-os | 2.7.8 | 5 |
+| twat-font | 2.7.10 | 4 |
+| twat-hatch | 2.7.8 | 5 |
+| twat-coding | 2.7.10 | 4 |
+| twat-mp | 2.6.5 | 4 |
+| twat-task | 2.7.10 | 2 (others gated on Prefect deployment layer) |
+| twat-ez | 2.7.9 | 3 |
+| twat-labs | 2.7.9 | 3 |
+
+`argparse` removed from every plugin that used it; lazy imports for heavy
+dependencies (Pillow, ffmpeg-python, fal_client, litellm, ...) so
+`--help` is instant.
+
 ## [Unreleased] — Ecosystem cleanup (issues/101.md)
 
 Multi-session ecosystem audit, gap-fix, and verification pass covering the host package and all 17 plugin repos.

@@ -22,6 +22,34 @@ def expensive():
 
 The CLI works the same way. `twat fs list /tmp` finds the `fs` plugin, rewrites `sys.argv` so the plugin thinks it was called directly, and calls `twat_fs.main()`.
 
+## Discovering commands
+
+Every plugin ships a Fire-based CLI with two access shapes:
+
+```bash
+twat-image gray2alpha input.png output.png   # subcommand form
+twat-image-gray2alpha input.png output.png   # dashed form (one script per leaf)
+```
+
+Each leaf (and each command group) is registered as a real `console_scripts`
+entry point, so typing `twat-<TAB>` in your shell offers dozens of completions
+once you have `twat[all]` installed:
+
+```
+twat-audio              twat-image-gray2alpha       twat-search-web
+twat-audio-normalize    twat-llm-ask                twat-speech-transcribe
+twat-fs-upload          twat-os-clipboard           twat-video-probe
+... (~90 more)
+```
+
+To wire completion of the `twat` dispatcher itself:
+
+```bash
+twat --completions zsh  > ~/.zfunc/_twat       # zsh
+twat --completions bash > ~/.local/share/bash-completion/completions/twat
+twat --completions fish > ~/.config/fish/completions/twat.fish
+```
+
 ## Install
 
 ```bash
