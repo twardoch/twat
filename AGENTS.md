@@ -44,6 +44,13 @@ twat/                          # Host package repo
 - **Plugin registration**: Each plugin's `pyproject.toml` declares an entry point under `[project.entry-points."twat.plugins"]`.
 - **CLI dispatch**: `twat <plugin_name> [args...]` calls `plugin.main()`. Plugins must expose a `main()` function.
 - **Dynamic loading**: `import twat; twat.fs` triggers `__getattr__("fs")` → entry point lookup → `ep.load()` → `sys.modules["twat.fs"]`.
+- **Host introspection** (public API, all in `src/twat/__init__.py`):
+  - `iter_plugins()` / `twat --list` — registered plugin names (no import).
+  - `iter_available_plugins()` / `twat --available` — installed `twat-*`
+    distributions + the plugin each registers (no import).
+  - `doctor()` / `twat --doctor` — import every plugin and report load health
+    (exits non-zero on any failure).
+  - `PLUGIN_GROUP` constant holds the `"twat.plugins"` group name.
 
 ## 2. Plugin Complexity Tiers
 

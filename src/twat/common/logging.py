@@ -26,8 +26,11 @@ from typing import Any
 
 try:
     from loguru import logger as _loguru_logger
+
+    _HAS_LOGURU = True
 except ImportError:  # pragma: no cover
     _loguru_logger = None  # type: ignore[assignment]
+    _HAS_LOGURU = False
 
 _DEFAULT_FORMAT = (
     "<green>{time:HH:mm:ss}</green> | "
@@ -74,7 +77,7 @@ def configure_logging(
     """
     global _configured  # noqa: PLW0603
 
-    if _loguru_logger is None:
+    if not _HAS_LOGURU or _loguru_logger is None:
         _configured = True
         return
 
@@ -126,7 +129,7 @@ def get_logger(name: str) -> Any:
 
     plugin_name = _extract_plugin_name(name)
 
-    if _loguru_logger is None:
+    if not _HAS_LOGURU or _loguru_logger is None:
         return _NoOpLogger()
 
     bound = _loguru_logger.bind(plugin=plugin_name)

@@ -36,6 +36,20 @@ def test_list_subcommand() -> None:
     assert res.returncode == 0
 
 
+def test_available_subcommand() -> None:
+    # The host package itself is installed in the test env, so --available
+    # lists at least the `twat` distribution.
+    res = _run("--available")
+    assert res.returncode == 0
+    assert "twat" in res.stdout
+
+
+def test_doctor_subcommand() -> None:
+    # No plugins installed in the isolated test env -> all healthy, exit 0.
+    res = _run("--doctor")
+    assert res.returncode == 0
+
+
 def test_completions_zsh() -> None:
     res = _run("--completions", "zsh")
     assert res.returncode == 0

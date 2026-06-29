@@ -65,8 +65,11 @@ pip install twat-fs twat-cache twat-os
 ## CLI
 
 ```bash
-twat --help          # show host usage
-twat --list          # list installed plugin entry point names
+twat --help              # show host usage
+twat --list              # list installed plugin entry point names
+twat --list --available  # list installed twat-* distributions + their plugin
+twat --available         # same as `--list --available`
+twat --doctor            # import each plugin and report load health
 twat <plugin_name> [args...]
 
 # Examples:
@@ -75,10 +78,18 @@ twat fs list /tmp
 twat cache clear
 ```
 
-`twat --list` reads only plugin entry point metadata, so it does not import
-plugin modules just to show what is installed. Dispatch still works by loading
-the selected plugin, rewriting `sys.argv` so the plugin sees `twat.<plugin>` as
-its executable name, and calling the plugin module's callable `main()`.
+`twat --list` and `twat --available` read only distribution/entry-point
+metadata, so they do not import plugin modules just to show what is installed.
+`twat --available` also surfaces `twat-*` packages that are installed but
+register no plugin (their plugin column shows `-`).
+
+`twat --doctor` is the deliberate exception: it imports every registered plugin
+to verify it loads, prints one `[OK]`/`[FAIL]` line per plugin, and exits
+non-zero if any plugin is broken — handy in CI after `pip install twat[all]`.
+
+Dispatch works by loading the selected plugin, rewriting `sys.argv` so the
+plugin sees `twat.<plugin>` as its executable name, and calling the plugin
+module's callable `main()`.
 
 ## Writing a plugin
 
@@ -160,6 +171,24 @@ If no plugin matches, a `PluginError` is raised with a clear message.
 
 The CLI entry point (`twat.main`) intercepts `sys.argv`, pulls out the plugin name, rewrites `sys.argv[0]` to `twat.<plugin>` and `sys.argv[1:]` to the remaining arguments, then calls the plugin's `main()`. The plugin never knows it was dispatched through `twat`.
 
+## Documentation
+
+Full documentation (MaterialX/MkDocs) lives in `src_docs/md/` and builds to
+`docs/`:
+
+- **Architecture** — how entry points turn `twat.fs` into a live module.
+- **Writing a plugin** — the one line of config that makes any package a plugin.
+- **CLI & shell completion** — `--list`, `--available`, `--doctor`, and `twat-<TAB>` setup.
+- **The plugins** — the full table of `twat-*` packages.
+
+Build it locally:
+
+```bash
+cd src_docs && mkdocs build -f mkdocs.yaml   # writes ../docs
+```
+
+Prose follows `STYLE_GUIDE.md` (hook fast, show don't gesture).
+
 ## Development
 
 ```bash
@@ -167,6 +196,11 @@ git clone https://github.com/twardoch/twat
 cd twat
 uv venv && uv sync
 pytest -xvs
+
+# or the self-contained hatch path:
+uvx hatch test                 # run the test suite
+uvx hatch run type-check       # mypy
+uvx hatch run lint             # ruff check + format
 ```
 
 ## License

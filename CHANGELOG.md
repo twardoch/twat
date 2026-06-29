@@ -5,6 +5,39 @@ All notable changes to the `twat` project are documented in this file.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and the project uses [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased] — Modernization pass (2026-06)
+
+### Added
+
+- **`twat --available` / `twat --list --available`** — list installed
+  `twat` / `twat-*` distributions with their version and the plugin each one
+  registers (`name<TAB>version<TAB>plugin`). Reads distribution metadata only;
+  imports no plugins. Backed by the new public `iter_available_plugins()` and
+  `AvailablePlugin` dataclass.
+- **`twat --doctor`** — import every registered plugin and print a
+  `[OK]`/`[FAIL]` health line per plugin; exits non-zero if any plugin fails to
+  load. Backed by the new public `doctor()` and `PluginHealth` dataclass.
+- **`PLUGIN_GROUP`** constant (`"twat.plugins"`) — the single entry-point group
+  the host scans, replacing the scattered string literal.
+- **MkDocs (Material) documentation** under `src_docs/` (builds to `docs/`):
+  entry-points architecture diagram, plugin authoring guide, shell-completion
+  setup, and an all-plugins table. Plus `STYLE_GUIDE.md` for documentation prose.
+- **mypy step in CI** (`.github/workflows/push.yml` quality job) alongside the
+  existing ruff lint/format checks.
+- Plugin entry-point **registry tests** plus tests for `--available` and
+  `--doctor` (host suite: 16 → 24 tests).
+
+### Changed
+
+- Typed and documented the namespace proxy / entry-point loader; added an
+  explanatory comment to the shell-completion enumeration in
+  `src/twat/common/cli.py`.
+- `common/logging.py` — gated the loguru fallback on an explicit `_HAS_LOGURU`
+  flag so the no-op path is type-checkable (clears mypy `unreachable` errors;
+  runtime behaviour unchanged).
+- `pyproject.toml` — ignore ruff `PLC0415` to permit the codebase's deliberate
+  lazy imports (keeps `twat --help` / `--list` instant).
+
 ## [Unreleased] — Fire CLI rollout (2026-05)
 
 Comprehensive Fire-based CLIs for every `twat-*` plugin, with dashed

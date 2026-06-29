@@ -38,6 +38,23 @@ jobs:
           version: "latest"
           args: "format --check --respect-gitignore"
 
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install UV
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: "latest"
+          python-version: "3.12"
+          enable-cache: true
+
+      - name: Run Mypy type check
+        run: |
+          uv pip install --system ".[dev,test]"
+          mypy src/twat tests
+
   test:
     name: Run Tests
     needs: quality

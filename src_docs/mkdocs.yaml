@@ -1,0 +1,92 @@
+# this_file: src_docs/mkdocs.yaml
+site_name: twat Documentation
+site_url: https://twardoch.github.io/twat/
+site_author: Adam Twardoch
+site_description: >-
+  twat — a minimal Python plugin host. Install small twat-* packages and reach
+  them all through one namespace and one CLI.
+
+repo_name: twardoch/twat
+repo_url: https://github.com/twardoch/twat
+edit_uri: edit/main/src_docs/md/
+
+copyright: Copyright &copy; 2026 Adam Twardoch
+
+theme:
+  name: material
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+  features:
+    - content.action.edit
+    - content.code.annotate
+    - content.code.copy
+    - content.tabs.link
+    - navigation.expand
+    - navigation.footer
+    - navigation.indexes
+    - navigation.sections
+    - navigation.top
+    - navigation.tracking
+    - search.highlight
+    - search.suggest
+    - toc.follow
+
+plugins:
+  - search
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/twardoch
+    - icon: fontawesome/brands/python
+      link: https://pypi.org/project/twat/
+
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+nav:
+  - Home: index.md
+  - Architecture: 01-architecture.md
+  - Writing a plugin: 02-plugin-authoring.md
+  - CLI & shell completion: 03-cli-and-completions.md
+  - The plugins: 04-plugins.md
+
+docs_dir: md
+site_dir: ../docs

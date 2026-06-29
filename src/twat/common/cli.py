@@ -41,7 +41,14 @@ def print_data(value: Any) -> None:
 
 
 def _twat_console_scripts() -> list[str]:
-    """All installed console-script entry-point names starting with 'twat-' or 'twat'."""
+    """All installed console-script entry-point names starting with 'twat-' or 'twat'.
+
+    Enumerates the ``console_scripts`` entry-point group (not ``twat.plugins``):
+    every plugin registers one dashed script per CLI leaf (e.g.
+    ``twat-image-gray2alpha``), so this is what shell completion offers after
+    ``twat-<TAB>``. The host's own ``twat`` script is always seeded so completion
+    works even with no plugins installed. Reads metadata only — nothing imported.
+    """
     names: set[str] = {"twat"}
     for ep in metadata.entry_points(group="console_scripts"):
         if ep.name == "twat" or ep.name.startswith("twat-"):
@@ -71,12 +78,10 @@ def emit_completions(shell: str) -> str:
             f"  local -a _twat_cmds=({words})\n"
             "  _describe 'twat plugin' _twat_cmds\n"
             "}\n"
-            "_twat \"$@\"\n"
+            '_twat "$@"\n'
         )
     if shell == "fish":
-        lines = [
-            f"complete -c twat -f -a '{c}'" for c in cmds if c != "twat"
-        ]
+        lines = [f"complete -c twat -f -a '{c}'" for c in cmds if c != "twat"]
         return "\n".join(lines) + "\n"
     msg = f"unsupported shell: {shell}"
     raise ValueError(msg)
